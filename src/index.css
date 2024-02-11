@@ -1,15 +1,17 @@
 /* ESTILOS PARA TODA LA WEB */
+@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap')
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 /* :root {
 } */
 
-/* body {
-  margin: 0;
+body{
+  /* margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
-} */
- 
+  min-height: 100vh; */
+  font-family: Blinker
+} 
