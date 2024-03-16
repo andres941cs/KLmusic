@@ -1,8 +1,9 @@
 // Definición del componente funcional
 const Header = () => {
     return (
-        <header className="fixed top-0 w-full text-gray-700">
-        <nav className="bg-blue-500 lg:bg-green-500 xl:bg-red-500 py-3">
+        // fixed top-0
+        <header className=" w-full dark:bg-[#1C1917] dark:text-white text-gray-700 border-b dark:border-none">
+        <nav className="p-3">
             <div className="flex flex-wrap justify-between lg:justify-center xl:justify-between items-center mx-auto max-w-screen-xl">
                 {/* <!-- LOGO --> */}
                 <a href="/" className="flex lg:hidden xl:flex items-center">
@@ -16,13 +17,13 @@ const Header = () => {
                             <a href="/" className="" aria-current="page">Home</a>
                         </li>
                         <li>
-                            <a href="#" className="">Company</a>
+                            <a href="#" className="">Songs</a>
                         </li>
                         <li>
-                            <a href="#" className="">Marketplace</a>
+                            <a href="#" className="">Artists</a>
                         </li>
                         <li>
-                            <a href="#" className="">Features</a>
+                            <a href="#" className="">Albums</a>
                         </li>
                         <li>
                             <a href="#" className="">Team</a>

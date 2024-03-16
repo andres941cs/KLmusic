@@ -44,7 +44,7 @@ function RegisterPage(){
 
     return (
       
-      <div className="flex flex-col items-center justify-center h-screen px-4 md:px-0">
+      <div className="flex flex-col items-center justify-center px-4 md:px-0">
         <Form title="Registro" inputs={registerFields} onSubmit={handleRegister} />
         </div>
       
