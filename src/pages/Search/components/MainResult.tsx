@@ -1,10 +1,10 @@
 // import { Card } from "../../../components/UI/Card";
-
+import { useState } from "react";
 import { StackLayout } from "../../../components/Layouts/StackLayout";
 import { Badge } from "../../../components/UI/Badge";
 import Result from "./Results";
 import Tabs from "./Tabs";
-
+import { SubmitHandler, useForm } from "react-hook-form";
 
 // function MainResult() {
 //     function clear(){
@@ -37,12 +37,44 @@ import Tabs from "./Tabs";
 
 // export default MainResult;
 
+/* COMPOPNENTE MOVIL */
 function MainResult() {
-    function clear(){
-        
+    // VALUES
+    const [data, setData] = useState([]);
+    // INTERFACES
+    interface FormData {
+        [key: string]: string;
+      }
+    // CONSTANTES
+    const { register, reset, handleSubmit} = useForm<FormData>()
+    const onSubmit: SubmitHandler<FormData> = (data) => {
+        // FACTORIZAR => SEPARAR A OTRO ARCHIVO
+      const URL ="http://127.0.0.1:8000/api/song/search";
+        const PARAMS = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body:JSON.stringify(data)
+        }
+        fetch(URL,PARAMS)
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error("Network response was not ok");
+              }
+              return response.json();
+          })
+          .then(data => {
+              console.log(data);
+              setData(data);
+          })
+          .catch(error => {
+              console.error("Error during fetch operation:", error);
+          });
+      
     }
     const tabs = [
-        { label: 'Best Results', content: <Result/> },
+        { label: 'Best Results', content: <Result songs={data} /> },
         { label: 'Artists', content: <Badge variant="outline">Artists</Badge> },
         { label: 'Songs', content: <Badge variant="outline">Songs</Badge> },
         { label: 'Albums', content: <Badge variant="outline">Songs</Badge> },
@@ -52,11 +84,11 @@ function MainResult() {
         <StackLayout>
             {/* VERSION MOVIL */}
             {/* INPUT */}
-            <div className="flex items-center w-full bg-[#f7f7f7] dark:bg-[#585858] py-1">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex items-center w-full bg-[#f7f7f7] dark:bg-[#585858] py-1">
                 <span className="material-symbols-outlined font-thin dark:text-white mx-2">arrow_left_alt</span>
-                <input className="w-full h-10 bg-transparent text-foreground border-none focus:outline-none"></input>
-                <span className="material-symbols-outlined font-thin dark:text-white mx-2">close</span>
-            </div>
+                <input  {...register('search')} className="w-full h-10 bg-transparent text-foreground border-none focus:outline-none"></input>
+                <span onClick={() => reset()} className="material-symbols-outlined font-thin dark:text-white mx-2">close</span>
+            </form>
             {/* RESULTADOS */}
             {/* <StackLayout orientation="row" className="gap-2 overflow-x-auto">
                 <Badge variant="outline">Best Results</Badge>

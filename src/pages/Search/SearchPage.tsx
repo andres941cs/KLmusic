@@ -14,7 +14,7 @@ function SearchPage(){
   function showResults(){
     setComponent('Searching')
   }
-    
+
   return (
     <Card className="p-0">
       
