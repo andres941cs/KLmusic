@@ -86,7 +86,7 @@ function MainResult() {
             {/* INPUT */}
             <form onSubmit={handleSubmit(onSubmit)} className="flex items-center w-full bg-[#f7f7f7] dark:bg-[#585858] py-1">
                 <span className="material-symbols-outlined font-thin dark:text-white mx-2">arrow_left_alt</span>
-                <input  {...register('search')} className="w-full h-10 bg-transparent text-foreground border-none focus:outline-none"></input>
+                <input  {...register('search')} autoFocus className="w-full h-10 bg-transparent text-foreground border-none focus:outline-none"></input>
                 <span onClick={() => reset()} className="material-symbols-outlined font-thin dark:text-white mx-2">close</span>
             </form>
             {/* RESULTADOS */}

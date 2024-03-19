@@ -23,8 +23,10 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
   };
 
   return (
+    // TAB COMPONENT
     <StackLayout className='w-full h-full'>
-      <StackLayout orientation="row" className="gap-2">
+      {/* TAB HEADER */}
+      <StackLayout orientation="row" className="gap-2 my-3">
         {tabs.map((tab, index) => (
           <Badge variant='outline'
             key={index}
@@ -35,6 +37,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
           </Badge>
         ))}
       </StackLayout>
+      {/* TAB CONTENT */}
       <StackLayout className='w-full h-full'>
         {tabs[activeTabIndex].content}
       </StackLayout>
