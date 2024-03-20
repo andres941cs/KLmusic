@@ -1,4 +1,5 @@
 import { StackLayout } from "../../../components/Layouts/StackLayout";
+import { AlbumCard, ArtistCard } from "./Cards";
 
 interface Song{
     id:number
@@ -37,3 +38,48 @@ function Result({songs}:myProps) {
 }
 
 export default Result;
+
+interface Artist{
+    id:number
+    name:string
+    artist:string
+    image:string
+}
+
+
+interface myProps  {
+    artists:Artist[],
+    className?: 'my-custom-class' // Optional HTML attribute
+  }
+export function ResultArtist({artists}:myProps) {
+    const listItems =  artists.map((artist) => {return(
+        <ArtistCard data={artist}></ArtistCard>
+    )})
+    return ( 
+        <StackLayout orientation="column" className="w-full h-full gap-2">
+            {listItems}
+        </StackLayout>
+     );
+}
+
+
+interface Album{
+    id:number
+    name:string
+    release_date:Date
+    artist:string
+    image:string
+}
+interface myProps  {
+    albums:Album[],
+    className?: 'my-custom-class' // Optional HTML attribute
+  }
+export function ResultAlbum({albums}:myProps) {
+    return ( 
+        <StackLayout orientation="column" className="w-full h-full gap-2">
+            {albums.map((album) => 
+                <AlbumCard  album={album}/>)
+            }
+        </StackLayout>
+     );
+}

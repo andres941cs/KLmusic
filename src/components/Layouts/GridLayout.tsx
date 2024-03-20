@@ -5,6 +5,8 @@
 //     className?:string;
 //     children: React.ReactNode;
 //   }
+
+
   
 //   export const GridLayout: React.FC<GridProps> = ({ columns = 2, gap = 10,className, children }) => {
 //     const classNames = [
@@ -21,24 +23,22 @@
 //     );
 //   };
 
-interface GridProps {
-  columns?: number;
-  gap?: number;
-  className?: string;
+interface GridLayoutProps {
+  rows: number;
+  cols: number;
+  className:string;
   children: React.ReactNode;
 }
 
-// export const GridLayout: React.FC<GridProps> = ({ columns = 2, gap = 2, className, children }) => {
-  export const GridLayout: React.FC<GridProps> = ({
-    columns, gap, className, children
-  }) => {
-  const baseClasses = 'grid';
-  // const classNames = ;
+const GridLayout: React.FC<GridLayoutProps> = ({ rows, cols, className, children }) => {
+  const gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+  const gridTemplateRows = `repeat(${rows}, minmax(0, 1fr))`;
 
   return (
-    <div className={`${baseClasses} ${columns ? `grid-cols-${columns}` : ''} ${gap ? `gap-${gap}` : ''} ${className|| ''}` }>
+    <div className={"grid "+className} style={{ gridTemplateColumns, gridTemplateRows }}>
       {children}
     </div>
   );
 };
 
+export default GridLayout;

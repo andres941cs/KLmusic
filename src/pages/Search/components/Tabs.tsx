@@ -12,14 +12,21 @@ interface Tab {
 
 interface TabsProps {
   tabs: Tab[];
+  setFilter: (newFilter: string) => void;
 }
 
 
-const Tabs: React.FC<TabsProps> = ({ tabs }) => {
+const Tabs: React.FC<TabsProps> = ({ tabs,setFilter }) => {
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
 
   const handleTabClick = (index: number) => {
     setActiveTabIndex(index);
+    switch(index){
+      case 1: { 
+        setFilter('artist')
+        break; 
+     } 
+    }
   };
 
   return (

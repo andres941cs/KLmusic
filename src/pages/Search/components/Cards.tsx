@@ -29,36 +29,46 @@ interface Artist{
     artist:string
     image:string
 }
-
-function ArtistCard(artists:Artist[]) {
-    artists.map((artist) => {return(
-        <StackLayout key={artist.id} orientation="row" className="w-full justify-between  hover:bg-accent p-2">
+interface ArtistCardProps {
+    data: Artist;
+    // Other necessary props
+  }
+export function ArtistCard({data}:ArtistCardProps) {
+    // data.map((artist) => {return(
+        return(
+            <StackLayout key={data.id} orientation="row" className="w-full justify-between  hover:bg-accent p-2">
             <StackLayout orientation="row" className="gap-2 ">
-                <img src={artist.image}  className="h-12 w-12 rounded-full"></img>
-                <p>{artist.name}</p>
+                <img src={data.image}  className="h-12 w-12 rounded-full"></img>
+                <p>{data.name}</p>
             </StackLayout>
             <span className="material-symbols-outlined">navigate_next</span>
-        </StackLayout>
-    )})
+            </StackLayout>
+        )
+    // )})
 }
 
 interface Album{
     id:number
     name:string
+    release_date:Date
     artist:string
     image:string
 }
 
-function AlbumCard(albums:Album[]) {
-    albums.map((album) => {return(
+export function AlbumCard(album:Album) {
+
+        // return albums.map((album) => {
+            return(
         <StackLayout key={album.id} orientation="row" className="w-full justify-between  hover:bg-accent p-2">
             <StackLayout orientation="row" className="gap-2 ">
                 <img src={album.image}  className="h-12 w-12 rounded-full"></img>
                 <p className="font-bold">{album.name}</p>
                 <p>{album.artist}</p>
-                <p>{album.release_date}</p>
+                <p>{album.release_date.getFullYear()}</p>
             </StackLayout>
             <span className="material-symbols-outlined">navigate_next</span>
         </StackLayout>
-    )})
+            )
+    // )})
+
 }

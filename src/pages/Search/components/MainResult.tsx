@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { StackLayout } from "../../../components/Layouts/StackLayout";
 import { Badge } from "../../../components/UI/Badge";
-import Result from "./Results";
+import Result, { ResultAlbum, ResultArtist } from "./Results";
 import Tabs from "./Tabs";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -41,6 +41,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 function MainResult() {
     // VALUES
     const [data, setData] = useState([]);
+    const [filter, setFilter] = useState('song');
     // INTERFACES
     interface FormData {
         [key: string]: string;
@@ -49,7 +50,30 @@ function MainResult() {
     const { register, reset, handleSubmit} = useForm<FormData>()
     const onSubmit: SubmitHandler<FormData> = (data) => {
         // FACTORIZAR => SEPARAR A OTRO ARCHIVO
-      const URL ="http://127.0.0.1:8000/api/song/search";
+    //   const URL ="http://127.0.0.1:8000/api/song/search";
+    //     const PARAMS = {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body:JSON.stringify(data)
+    //     }
+    //     fetch(URL,PARAMS)
+    //       .then(response => {
+    //           if (!response.ok) {
+    //               throw new Error("Network response was not ok");
+    //           }
+    //           return response.json();
+    //       })
+    //       .then(data => {
+    //           console.log(data);
+    //           setData(data);
+    //       })
+    //       .catch(error => {
+    //           console.error("Error during fetch operation:", error);
+    //       });
+    
+      const URL =`http://127.0.0.1:8000/api/${filter}/search`;
         const PARAMS = {
           method: 'POST',
           headers: {
@@ -73,10 +97,11 @@ function MainResult() {
           });
       
     }
+    console.log(filter)
     const tabs = [
         { label: 'Best Results', content: <Result songs={data} /> },
-        { label: 'Artists', content: <Badge variant="outline">Artists</Badge> },
-        { label: 'Songs', content: <Badge variant="outline">Songs</Badge> },
+        { label: 'Artists', content: <ResultArtist artists={data} />},
+        { label: 'Songs', content: <ResultAlbum albums={data}/>},
         { label: 'Albums', content: <Badge variant="outline">Songs</Badge> },
     ];
     return ( 
@@ -97,7 +122,7 @@ function MainResult() {
                 <Badge variant="outline">Albums</Badge>
             </StackLayout> */}
 
-            <Tabs tabs={tabs} />
+            <Tabs setFilter={setFilter} tabs={tabs} />
 
         </StackLayout>
         // </Card>
