@@ -7,15 +7,15 @@ interface Song{
     artist:string
     image:string
 }
-
-function SongCard(songs:Song[]) {
+// 
+export function SongCard(songs:Song[]) {
     songs.map((song) => {return(
         <StackLayout key={song.id} orientation="row" className="w-full justify-between  hover:bg-accent p-2">
             <StackLayout orientation="row" className="gap-2 ">
                 <img src={song.image}  className="h-12 w-12 rounded-full"></img>
                 <StackLayout>
                 <p>{song.name}</p>
-                <p>{song.id_artist}</p>
+                <p>{song.artist}</p>
                 </StackLayout>
             </StackLayout>
             <span className="material-symbols-outlined">navigate_next</span>
