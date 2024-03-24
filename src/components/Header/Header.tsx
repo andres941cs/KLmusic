@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 // Definición del componente funcional
 const Header = () => {
     return (
@@ -17,7 +19,7 @@ const Header = () => {
                             <a href="/" className="" aria-current="page">Home</a>
                         </li>
                         <li>
-                            <a href="#" className="">Songs</a>
+                            <Link to={''} className="">Songs</Link>
                         </li>
                         <li>
                             <a href="#" className="">Artists</a>
@@ -26,7 +28,7 @@ const Header = () => {
                             <a href="#" className="">Albums</a>
                         </li>
                         <li>
-                            <a href="#" className="">Team</a>
+                            <Link to={'/karaoke'} className="">Karaoke</Link>
                         </li>
                     </ul>
                     

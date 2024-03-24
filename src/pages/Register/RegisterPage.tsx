@@ -1,6 +1,6 @@
 /* IMPORTACIONES */
 import { SubmitHandler } from "react-hook-form";
-import Form from "../../components/UI/Form";
+import Form from "../../components/UI/Form";//@/components/UI/Form
 import { redirect } from "react-router-dom";
 
 /* COMPONENTE */

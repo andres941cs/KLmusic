@@ -1,10 +1,13 @@
 
 import { useState } from "react";
 
-import { Card } from "../../components/UI/Card"
+//../../components/UI/Card
 import MainResult from "./components/MainResult"
 import GridLayout from "../../components/Layouts/GridLayout";
 import { FiltersProvider } from "../../context/filter";
+import { Card } from "@components/UI/Card";
+
+
 
 
 function SearchPage(){
