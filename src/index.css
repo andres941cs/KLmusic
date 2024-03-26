@@ -55,7 +55,8 @@
 
 
 *{
-  font-family: Blinker
+  font-family: Blinker;
+  scrollbar-width: thin;
 }
 body{
   /* margin: 0;

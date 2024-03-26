@@ -10,6 +10,7 @@ import SearchPage from './pages/Search/SearchPage.tsx';
 import PlayerPage from './pages/Player/PlayerPage.tsx';
 import ArtistPage, { loaderArtist } from './pages/Artist/ArtistPage.tsx';
 import KaraokePage from './pages/Karaoke/KaraokePage.tsx';
+import SongPage from './pages/Song/SongPage.tsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <SearchPage></SearchPage>,
+      },
+      {
+        path: "/song",
+        element: <SongPage></SongPage>,
       },
       {
         path: "/artist/:id",
