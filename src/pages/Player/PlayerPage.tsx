@@ -1,4 +1,5 @@
 import { Card } from "../../components/UI/Card";
+import Player from "./Player";
 
 // Componente Player
 interface Karaoke{
@@ -9,7 +10,7 @@ interface Karaoke{
 }
 /*
 EL REPRODUCTO TIENE QUE REPRODUCIR EL VIDEO DE FONDO
-BOTON PLAY => INICIA EL VIDEO Y INICIA EL KARAOKE
+BOTON PLAY => INICIA EL VIDEO Y INICIA EL KARAOKE HECHO
 
 */
 // function PlayerPage(data:Karaoke){
@@ -22,9 +23,9 @@ BOTON PLAY => INICIA EL VIDEO Y INICIA EL KARAOKE
     return(
         <Card>
             {/* <video src={data.url}></video> */}
-            <iframe src={data.url}></iframe>
-            {/* <iframe src={data.url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe> */}
-            {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/pYNYhSsR8EE" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe> */}
+            {/* <iframe src={data.url}></iframe> */}
+            <Player/>
+            
         </Card>
     )
 }
