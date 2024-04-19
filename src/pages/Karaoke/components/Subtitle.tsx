@@ -16,6 +16,10 @@ function Subtitle() {
             // endTime: (event.target as HTMLFormElement).endTime.value,
         }
         console.log(settings)
+        elements.forEach(element => {
+            element.props.child;
+            console.log(element)
+        });
     };
 
     interface FormSettings {
@@ -23,20 +27,24 @@ function Subtitle() {
         // startTime: string;
         // endTime: string;
     }
-    const [duplicados, setDuplicados] = useState(0);
-
+    // const [duplicados, setDuplicados] = useState(0);
+    const [elements, setElements] = useState<JSX.Element[]>([]);
     const duplicarComponente = () => {
-        setDuplicados(duplicados + 1);
+        // setDuplicados(duplicados + 1);
+        const newElement = <Setting key={elements.length}/>;
+        setElements(prevElements => [...prevElements, newElement]);
     };
 
-    const componentesDuplicados = [];
-    for (let i = 0; i < duplicados; i++) {
-        componentesDuplicados.push(<Setting key={i} />);
-    }
+    
+    // const componentesDuplicados = [];
+    // for (let i = 0; i < duplicados; i++) {
+    //     // elements.push(<Setting key={i} />);
+        
+    // }
     return ( 
         // <form {...props} onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm space-y-8">
-        <form onSubmit={handleSubmit} className="h-full w-full">
-        <StackLayout className="h-full w-full border-r  overflow-x-auto">
+        <form onSubmit={handleSubmit} className="h-full w-full border-r pr-5">
+        <StackLayout className="h-full w-full   overflow-x-auto">
             {/* ACTIONS */}
             <StackLayout orientation="row">Options
                 <button onClick={duplicarComponente}>Duplicar Componente</button>
@@ -44,11 +52,11 @@ function Subtitle() {
             </StackLayout>
             {/* LYRICS */}
             {/* <StackLayout className="w-[900px] h-[110px] border"> */}
-            <StackLayout className="w-full h-[110px] border">
+            <StackLayout className="w-full h-[110px]">
                 {/* <div className="w-full h-24 border">
 
                 </div> */}
-                <StackLayout gap={3} orientation="row" className="w-full px-5 py-1">
+                <StackLayout gap={3} orientation="row" className="w-full py-1 px-2">
                     <div className="w-full h-[100px] border"> 
                         <Textarea id="lyric" className="h-full resize-none"></Textarea>
                     </div>
@@ -60,7 +68,7 @@ function Subtitle() {
                 </StackLayout>
             </StackLayout>
             
-            {componentesDuplicados}
+            {elements}
         </StackLayout>
         </form>
      );
