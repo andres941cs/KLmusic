@@ -19,13 +19,13 @@ const Header = () => {
                             <a href="/" className="" aria-current="page">Home</a>
                         </li>
                         <li>
-                            <Link to={''} className="">Songs</Link>
+                            <Link to={'songs'} className="">Songs</Link>
                         </li>
                         <li>
-                            <a href="#" className="">Artists</a>
+                            <Link to={'artists'} className="">Artists</Link>
                         </li>
                         <li>
-                            <a href="#" className="">Albums</a>
+                            <Link to={'albums'} className="">Albums</Link>
                         </li>
                         <li>
                             <Link to={'/karaoke'} className="">Karaoke</Link>

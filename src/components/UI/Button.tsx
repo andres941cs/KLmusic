@@ -14,11 +14,11 @@
     export const Button = ({variant,children,...props}:Props) => {
     // Define base classes for button
     // let baseClasses = "px-4 py-2 rounded";
-    let baseClasses = "flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+    let baseClasses = "flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-foreground shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
     /* COLORS => Backgroun - Hover - Focus Text  */
     switch (variant) {
       case "primary":
-        baseClasses += " bg-blue-500 text-white";
+        baseClasses += " bg-background text-white";
         break;
       case "secondary":
         baseClasses += " bg-gray-500 text-white";
@@ -30,7 +30,7 @@
         baseClasses += " bg-red-500 text-white";
         break;
       default:
-        baseClasses += " bg-black hover:bg-[hsl(240,3.7%,15.9%)] focus-visible:outline-black text-white";
+        baseClasses += " bg-black dark:bg-white hover:bg-[hsl(240,3.7%,15.9%)] focus-visible:outline-black text-white dark:text-black";
         break;
     }
     

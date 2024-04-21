@@ -1,89 +1,30 @@
-import { Card } from '@components/UI/Card';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from './components/Table'
-function SongPage() {
-  const invoices = [
-    {
-      invoice: "INV001",
-      paymentStatus: "Paid",
-      totalAmount: "$250.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV002",
-      paymentStatus: "Pending",
-      totalAmount: "$150.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Paid",
-      totalAmount: "$450.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV006",
-      paymentStatus: "Pending",
-      totalAmount: "$200.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV007",
-      paymentStatus: "Unpaid",
-      totalAmount: "$300.00",
-      paymentMethod: "Credit Card",
-    },
-  ]
-    return ( 
-        <Card className="p-0">
-          <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Invoice</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
-        </Card>
-          
-     );
-}
+import { Card } from "@components/UI/Card";
+import { useLoaderData } from "react-router-dom";
+import { Song } from "src/models/songs";
 
+const SongPage = () => {
+    const song = useLoaderData() as Song;
+    console.log(song);
+    return (
+        <Card className="flex flex-col">
+            {/* CARD HEADER */}
+            <div className="bg-purple-300 h-72 flex items-end gap-3 p-3">
+            <img src={song.image} alt={song.title} className="w-32 h-32 rounded"/>
+                <div className="flex flex-col justify-center items-start">
+                    <span>Song</span>
+                    <h1 className="text-4xl font-bold text-foreground">{song.name}</h1>
+                    <div className="flex flex-col">
+                        <span>{song.id_artist} {song.id_album}</span>
+                        <span>{song.release_date} {song.duration}</span>
+                    </div>
+                </div>
+            </div>
+            {/* CARD BODY */}
+            <div className="bg-black h-full">
+                <h2 className="text-2xl font-bold text-foreground">Lyrics</h2>
+                <p className="text-foreground">{song.lyrics}</p>
+            </div>
+        </Card>
+    );
+}
 export default SongPage;
