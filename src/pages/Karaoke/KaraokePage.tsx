@@ -1,6 +1,7 @@
 import { Card } from "@components/UI/Card";
 import Subtitle from "./components/Subtitle";
 import { StackLayout } from "@components/Layouts/StackLayout";
+import { letraPrueba } from "../Player/LetraPrueba";
 
 function KaraokePage() {
     return ( 
@@ -13,7 +14,7 @@ function KaraokePage() {
                     <Subtitle></Subtitle>
                     {/* PREVIEW */}
                     {/* <Subtitle></Subtitle> */}
-                    <Subtitle></Subtitle>
+                    <div className="h-full w-full overflow-x-scroll">{letraPrueba}</div>
                 </StackLayout>
                 {/* LINETIME */}
                 <div className="w-full h-1/3">
