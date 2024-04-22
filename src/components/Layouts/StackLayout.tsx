@@ -1,4 +1,4 @@
-interface StackProps {
+interface StackProps extends React.HTMLAttributes<HTMLDivElement>{
   className?: string;
   orientation?: 'row' | 'column';
   alignContent?: 'start' | 'center' | 'end' | 'between' | 'around' | 'stretch';
@@ -15,6 +15,7 @@ export const StackLayout: React.FC<StackProps> = ({
   alignItems = 'center',
   gap,
   children,
+  ...props
 }) => {
   const baseClasses = 'flex';
   const classNames = `${baseClasses}
@@ -25,7 +26,7 @@ export const StackLayout: React.FC<StackProps> = ({
     ${className || ''}`;
 
   return (
-    <div className={classNames}>
+    <div className={classNames} {...props}>
       {children}
     </div>
   );
