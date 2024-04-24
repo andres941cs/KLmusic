@@ -17,6 +17,7 @@ import AlbumsPage from './pages/Album/AlbumsPage.tsx';
 import { loaderAlbums } from './services/Album.services.ts';
 import ArtistsPage from './pages/Artist/ArtistsPage.tsx';
 import { loaderArtists } from './services/Artist.services.ts';
+import ProfilePage from './pages/Profile/ProfilePage.tsx';
 
 
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage></RegisterPage>,
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage></ProfilePage>,
       },
       {
         path: "/search",
