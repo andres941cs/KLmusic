@@ -22,6 +22,17 @@ export const loaderSong = async ({params}:any) => {
     console.error(error);
   };
 }
+// POST /songs/search
+export async function searchSongs(name:string){
+    try {
+      const response = await axios.post(API_URL+'song/search', {'name':name});
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  
+}
+
 // export  async function loaderSong ({params}:any)  {
 //   try{
 //     const res = await axios.get(`${API_URL}song/${params.id}`);

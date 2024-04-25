@@ -3,6 +3,7 @@ import { Textarea } from "./Textarea";
 import InputTime from "./InputTime";
 import { Button } from "@components/UI";
 import { forwardRef, useRef, useState } from "react";
+import { searchSongs } from "../../../services/Songs.services";
 
 function Subtitle() {
     const elementsRefs = useRef([])
@@ -10,12 +11,6 @@ function Subtitle() {
         event.preventDefault();
         console.log("BOTON SAVE...")
         //CREAR UN OBJETO CON LOS DATOS DEL FORMULARIO
-        // const settings: FormSettings = {
-        //     lyrics: (event.target as HTMLFormElement).lyric.value,
-        //     // delay: (event.target as HTMLFormElement).delay.value,
-        //     // startTime: (event.target as HTMLFormElement).startTime.value,
-        //     // endTime: (event.target as HTMLFormElement).endTime.value,
-        // }
         console.log(elements)
         let settings = []
         const mySubtitles = elementsRefs.current;
@@ -54,18 +49,25 @@ function Subtitle() {
         elementsRefs.current[index] = element;
     };
     
-    // const componentesDuplicados = [];
-    // for (let i = 0; i < duplicados; i++) {
-    //     // elements.push(<Setting key={i} />);
-        
-    // }
+    // Función para obtener los resultados de las canciones
+    const [value, setValue] = useState('');
+    const getSuggestions  = (event) => {
+        setValue(event.target.value);
+        if(value.length >= 2) {
+            searchSongs(value).then((data) => {
+                console.log(data)
+            })
+        }
+    }
     return ( 
         // <form {...props} onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm space-y-8">
         <form onSubmit={handleSubmit} className="h-full w-full border-r pr-5">
         <StackLayout className="h-full w-full overflow-x-auto">
             {/* ACTIONS */}
-            <StackLayout orientation="row">Options
-                <button onClick={duplicarComponente}>Duplicar Componente</button>
+            <StackLayout orientation="row" gap={5}>
+                Options
+                <button onClick={duplicarComponente}><span className="material-symbols-outlined">add_circle</span></button>
+                <input value={value} onChange={getSuggestions} className="text-black" placeholder="Song" />
                 <Button>Save</Button>
             </StackLayout>
             {/* LYRICS */}
