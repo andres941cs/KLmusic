@@ -22,9 +22,12 @@ function HomePage(){
                         <span className="material-symbols-outlined dark:text-white">search</span>
                         <input className="w-full px-3 bg-transparent dark:text-white border-none focus:outline-none" type="text" id="search-bar"/>
                     </div>
-                    {/* <div className="search-bar__buttons-container">
-                        <input className="search-bar__button" type="submit" value="Buscar una Cancion"/>
-                        <input className="search-bar__button" type="submit" value="Cancion Aleatoria"/>
+                    {/* IMPLEMENTANDO */}
+                    {/* <div className='border border-gray-200 border-t-0 rounded-b-3xl '>
+                        <ul className=''>
+                            <li className='text-foreground px-6 hover:bg-gray-700'>Un resuldato</li>
+                            <li className='text-foreground px-6'>Otro resultado</li>
+                        </ul>
                     </div> */}
                     <div className='flex gap-3 my-3'>
                         <Button>Search Song</Button>
