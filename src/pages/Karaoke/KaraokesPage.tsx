@@ -29,7 +29,10 @@ const KaraokesPage = () => {
     ]
     return (
         <Card>
-        <h1>My Karaokes</h1>
+          <div className="flex gap-3">
+            <h1>My Karaokes</h1>
+            <span className="material-symbols-outlined hover:bg-muted-foreground rounded-full">add</span>
+          </div>
         <Table>
         <TableHeader>
         <TableRow>

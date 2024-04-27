@@ -4,15 +4,21 @@ import InputTime from "./InputTime";
 import { Button } from "@components/UI";
 import { forwardRef, useRef, useState } from "react";
 import { searchSongs } from "../../../services/Songs.services";
+import { getLyricsBySongId } from "../../../services/Lyric.services";
+import { saveKaraoke } from "../../../services/Karaoke.services";
 
-function Subtitle() {
+interface SubtitleProps {
+    onData: (data: string) => void;
+  }
+function Subtitle({ onData }: SubtitleProps) {
     const elementsRefs = useRef([])
+    /*______________ Formulario ______________*/
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log("BOTON SAVE...")
         //CREAR UN OBJETO CON LOS DATOS DEL FORMULARIO
         console.log(elements)
-        let settings = []
+        let settings:any = []
         const mySubtitles = elementsRefs.current;
         mySubtitles.forEach((element,index) => {
             console.log(index);
@@ -27,7 +33,26 @@ function Subtitle() {
             }
             settings.push(mySubtitle)
         });
-        console.log(settings)
+
+
+        // REFACTORIZAR LLEVARLO A UTILS
+        let cadena = "";
+        settings.forEach(subtitulo => {
+            cadena += `${subtitulo.number}\n${subtitulo.startTime} --> ${subtitulo.endTime}\n${subtitulo.text}\n\n`;
+          });
+        console.log(cadena);
+        const Karaoke ={
+            'settings': cadena,
+            'publication_date': '2024-04-27',
+            'isPublished': 1,
+            'id_lyric': 1,
+            'id_user': 1,
+        }
+        console.log(Karaoke)
+        // GUARDAR LOS DATOS EN LA BASE DE DATOS
+        saveKaraoke(Karaoke).then((data) => {
+            console.log(data)
+        })
     };
 
     interface FormSettings {
@@ -48,17 +73,35 @@ function Subtitle() {
     const assignRef = (index:number) => (element) => {
         elementsRefs.current[index] = element;
     };
-    
+    /*______________ LETRAS ______________*/
     // Función para obtener los resultados de las canciones
     const [value, setValue] = useState('');
+    const [sugesstions, setSuggestions] = useState([]);
+    const [lyrics, setLyrics] = useState([]);
+    
     const getSuggestions  = (event) => {
         setValue(event.target.value);
         if(value.length >= 2) {
             searchSongs(value).then((data) => {
                 console.log(data)
+                let suggestions = data.map((song) => {
+                    return <li key={song.id} onClick={()=>showLyrics(song.id)}>{song.name}</li>
+                })
+                setSuggestions(suggestions);
             })
         }
     }
+    const showLyrics = (id) => {
+        getLyricsBySongId(id).then((data) => {
+            console.log(data)
+            
+            let arrayLyrics = data.map((lyric) => {
+                return <option key={lyric.id} value={lyric.lyric}>{lyric.id}</option>
+            })
+            setLyrics(arrayLyrics)
+        })
+    }
+    
     return ( 
         // <form {...props} onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm space-y-8">
         <form onSubmit={handleSubmit} className="h-full w-full border-r pr-5">
@@ -67,7 +110,14 @@ function Subtitle() {
             <StackLayout orientation="row" gap={5}>
                 Options
                 <button onClick={duplicarComponente}><span className="material-symbols-outlined">add_circle</span></button>
-                <input value={value} onChange={getSuggestions} className="text-black" placeholder="Song" />
+                <div>
+                    <input value={value} onChange={getSuggestions} className="text-black" placeholder="Song" />
+                    <ul>{sugesstions}</ul>
+                </div>
+                <select className="text-black" onChange={(event) => onData(event.target.value)}>
+                            <option value="1">Song 1</option>
+                            {lyrics}
+                 </select>
                 <Button>Save</Button>
             </StackLayout>
             {/* LYRICS */}
