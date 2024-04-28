@@ -19,6 +19,7 @@ import ArtistsPage from './pages/Artist/ArtistsPage.tsx';
 import { loaderArtists } from './services/Artist.services.ts';
 import ProfilePage from './pages/Profile/ProfilePage.tsx';
 import KaraokesPage from './pages/Karaoke/KaraokesPage.tsx';
+import { loaderKaraoke } from './services/Karaoke.services.ts';
 
 
 const router = createBrowserRouter([
@@ -71,8 +72,9 @@ const router = createBrowserRouter([
         loader: loaderAlbums
       },
       {
-        path: "/player",
+        path: "/player/:id",
         element: <PlayerPage></PlayerPage>,
+        loader: loaderKaraoke
       },
       {
         path: "/karaoke",

@@ -30,9 +30,29 @@ export async function searchSongs(name:string){
     } catch (error) {
       console.error(error);
     }
-  
 }
 
+// GET /songs/artists/:id
+export async function getSongsByArtist(id:number){
+    try {
+      const response = await axios.get(API_URL+'song/artist/'+id);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+}
+
+// GET /songs/albums/:id
+export async function getSongsByAlbum(id:number){
+    try {
+      const response = await axios.get(API_URL+'song/album/'+id);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+}
+
+/* LOADERS */
 // export  async function loaderSong ({params}:any)  {
 //   try{
 //     const res = await axios.get(`${API_URL}song/${params.id}`);

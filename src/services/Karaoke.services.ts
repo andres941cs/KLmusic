@@ -30,3 +30,13 @@ export async function randomKaraoke(){
     }
   
 }
+
+export const loaderKaraoke = async ({params}:any) => {
+    try{
+      const res = await axios.get(`${API_URL}karaoke/${params.id}`);
+      const karaoke = await res.data;
+      return karaoke
+    }catch(error){
+      console.error(error);
+    };
+}

@@ -1,36 +1,25 @@
-import { Card } from '@components/UI/Card';
-import { useEffect, useState } from 'react';
-import { getSongs } from '../../services/Songs.services';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from '../../components/UI/Table'
-import { Song } from 'src/models/songs';
-import { format } from '../../utils/index';
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@components/UI/Table"
+import { format } from "../../../utils/index";
 import { useNavigate } from "react-router-dom";
-function SongsPage() {
-  const [songs, setSongs] = useState([])
-  const navigate = useNavigate();
-  useEffect(() => {
-    getSongs().then((data) => { 
-      setSongs(data);
-      console.log(data)
-    });
-    
-  }, [])
-
-  const playKaraoke = (id) => {
-    navigate(`/player/${id}`)
-  }
-
-    return ( 
-        <Card className="p-0">
-          <Table>
+import { Song } from "src/models/songs";
+import { useEffect, useState } from "react";
+const TableSong = (songs:Song[]) => {
+    // const { data, isLoading } = useQuery('songs', fetchSongs);
+    const navigate = useNavigate();
+    const {data} = songs;
+    console.log(data);
+  
+    const playKaraoke = (id) => {
+        navigate(`/player/${id}`)
+      }
+    //   const [songs, setSongs] = useState([]);
+    // console.log(data);
+    // if (!)) {
+    //     // Manejo del caso en que data no es un array
+    //     return <p>Los datos no son válidos.</p>;
+    //   }
+    return (
+        <Table>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">#</TableHead>
@@ -40,7 +29,7 @@ function SongsPage() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {songs.map((songs:Song) => (
+        {data.map((songs:Song) => (
           <TableRow onClick={()=>playKaraoke(songs.id)} key={songs.id}>
             <TableCell className="font-medium">{songs.id}</TableCell>
             <TableCell>
@@ -58,7 +47,6 @@ function SongsPage() {
               
             </TableCell>
             <TableCell>{songs.album?.name ? songs.album.name : "Álbum desconocido"}</TableCell>
-            {/* <TableCell>{songs.album.name}</TableCell> */}
             <TableCell className="text-right">{format(songs.duration)}</TableCell>
           </TableRow>
         ))}
@@ -71,9 +59,6 @@ function SongsPage() {
         </TableRow>
       </TableFooter>
     </Table>
-        </Card>
-          
-     );
-}
-
-export default SongsPage;
+    );
+    }
+export default TableSong;

@@ -1,5 +1,5 @@
 import { Card } from "@components/UI/Card";
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "../Song/components/Table";
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "../../components/UI/Table";
 import { Button } from "@components/UI";
 
 const KaraokesPage = () => {
