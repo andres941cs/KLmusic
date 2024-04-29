@@ -1,4 +1,7 @@
 /* IMPORTACIONES */
+import { AuthContext } from "@pages/Login/AuthContext";
+import { API_URL } from "@utils/constantes";
+import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from 'sonner'
@@ -12,12 +15,13 @@ interface FormData {
 interface Props extends React.FormHTMLAttributes<HTMLFormElement>{}
 /* COMPONENTE */
 function LoginForm(props:Props) {
+  const {isAuthenticated,login,logout} = useContext(AuthContext)
   const navigate = useNavigate();
   //const { register, handleSubmit, watch, formState: { errors }} = useForm<FormData>()
   const { register, handleSubmit} = useForm<FormData>()
   const onSubmit: SubmitHandler<FormData> = (data) => {
     //console.log(watch(['username','password']))
-    const URL ="http://127.0.0.1:8000/api/login";
+    const URL = API_URL+ "/api/login";
       const PARAMS = {
         method: 'POST',
         headers: {
@@ -34,7 +38,9 @@ function LoginForm(props:Props) {
         })
         .then(data => {
             console.log(data);
-            navigate("/register");
+            login();
+            navigate("/");
+
         })
         .catch(error => {
             console.error("Error during fetch operation:", error);

@@ -52,7 +52,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const logout = () => {
-    // Lógica de cierre de sesión
+    /* LOGIGA DEL LOGOUT*/
     setIsAuthenticated(false);
     // Borrar el token del sesion storage
   };
