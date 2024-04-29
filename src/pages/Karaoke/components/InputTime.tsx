@@ -25,7 +25,7 @@ import { useState } from "react";
 interface InputTimeProps {
     id: string; // Mandatory string type for id
   }
-const InputTime = ({id}) => {
+const InputTime = ({id}:InputTimeProps) => {
     const [time, setTime] = useState('');
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -24,7 +24,7 @@ function SongsPage() {
     
   }, [])
 
-  const playKaraoke = (id) => {
+  const playKaraoke = (id:number) => {
     navigate(`/player/${id}`)
   }
 
