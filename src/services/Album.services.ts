@@ -1,49 +1,37 @@
+import { API_URL } from "@utils/constantes";
 import axios from "axios";
-import { Album } from "src/models/album";
-const API_URL = "http://127.0.0.1:8000/api/";
+
+const URL = API_URL+ '/api/';
 /* RUTAS DE LA API - ENDPOINTS */
 // GET /abums
-// export async function getSongs() {
-//     try {
-//       const response = await axios.get(API_URL+'songs');
-//       return response.data;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
+
+// GET /album/artist/:id
+export async function getAlbumsByArtist(id:number){
+    try {
+      const response = await axios.get(URL+'album/artist/'+id);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+}
 
 /* RUTAS DE LA API - LOADERS */
 export const loaderAlbums = async () => {
     try{
-        const res = await axios.get(API_URL+'album');
+        const res = await axios.get(URL+'album');
         const song = await res.data;
-        console.log(song);
         return song
     }catch(error){
         console.error(error);
     };
 }
 
-// GET /songs/:id
-// export const loaderSong = async ({params}:any) => {
-//   try{
-//     const res = await axios.get(`${API_URL}song/${params.id}`);
-//     const song: Song = await res.data;
-//     console.log(song);
-//     return song
-//   }catch(error){
-//     console.error(error);
-//   };
-// }
-// export  async function loaderSong ({params}:any)  {
-//   try{
-//     const res = await axios.get(`${API_URL}song/${params.id}`);
-    
-//     const song: Song = await res.data;
-//     console.log(song);
-//     return song
-//   }catch(error){
-//     console.error(error);
-//   };
-// }
-// export default loaderSong;
+export const loaderAlbum = async ({params}:any) => {
+    try{
+        const res = await axios.get(URL+'album/'+params.id);
+        const song = await res.data;
+        return song
+    }catch(error){
+        console.error(error);
+    };
+}

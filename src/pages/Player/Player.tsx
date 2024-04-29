@@ -137,7 +137,7 @@ function Player(data:any){
     // }
     // }
     return(
-        <div className='flex flex-col h-full'>
+        <div className='flex flex-col h-full overflow-hidden'>
         {/* <iframe src={data.url}></iframe> */}
         <ReactPlayer ref={player}
             className="hidden"
@@ -175,7 +175,6 @@ function Player(data:any){
                 </div>
                 <span id="time-total"></span>
             </div> */}
-                {/* <Button onClick={handlePlay}>Play</Button> */}
                 <span onClick={handlePlay} className="material-symbols-outlined cursor-pointer">play_arrow</span>
                 <span>{Math.ceil(playedSeconds)}</span>
                 <input id='myInput' className='w-full bg-slate-500'

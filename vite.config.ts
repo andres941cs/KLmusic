@@ -12,6 +12,7 @@ export default defineConfig({
       "@services": path.resolve(__dirname, 'src/services'),
       "@utils": path.resolve(__dirname, 'src/utils'),
       "@hooks": path.resolve(__dirname, 'src/hooks'),
+      "@models": path.resolve(__dirname, 'src/models'),
       // MODIFICAR TAMBIEN tsconfig.json
     },
   },

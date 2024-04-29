@@ -4,16 +4,28 @@ import TableSong from "../Song/components/TableSong";
 import { Artist } from "src/models/artist";
 import { useEffect, useState } from "react";
 import { getSongsByArtist } from "../../services/Songs.services";
+import { API_URL } from "@utils/constantes";
+import { getAlbumsByArtist } from "@services/Album.services";
+import { Album } from "@models/album";
+import { getYears } from "@utils/index";
+
 
 function ArtistPage() {
     const artist = useLoaderData() as Artist;
-    const API_URL =  'http://127.0.0.1:8000';
     const navigate = useNavigate();
     const [songs, setSongs] = useState([]);
+    const [albums, setAlbums] = useState([]);
+    const navigateTo = (id:number) => {
+        navigate(`/album/${id}`)
+    }
     useEffect(() => {
         getSongsByArtist(artist.id)
         .then(data => {
             setSongs(data);
+            console.log(data)
+        });
+        getAlbumsByArtist(artist.id).then(data => {
+            setAlbums(data);
             console.log(data)
         })
     }, [])
@@ -39,11 +51,27 @@ function ArtistPage() {
                     {/* Cnciones */}
                     <h2 className="text-foreground">Songs</h2>
                    {songs.length > 0 ? <TableSong data={songs}></TableSong> : <span className="text-foreground">No hay canciones</span>}
-                    <StackLayout>
+                    {/* <StackLayout>
                         <span>sus canciones</span>
-                    </StackLayout>
-   
+                    </StackLayout> */}
                     {/* Albumnes */}
+                    <h2 className="text-foreground">Albums</h2>
+                    <div className="flex flex-wrap">
+                    {albums.map((album:Album) => (
+                        // Max width of 222px
+                        <div onClick={()=>navigateTo(album.id)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
+                            <img
+                                src={API_URL+album.image}
+                                alt={album.name}
+                                className="w-[150px] h-[150px] rounded-sm object-cover m-auto"
+                            />
+                            <div className='flex flex-col text-foreground'>
+                                <span className="truncate">{album.name}</span>
+                                <span>{getYears(album.release_date)}</span>
+                            </div>
+                        </div>
+                    ))}
+            </div>
             </div>
             
         </StackLayout>

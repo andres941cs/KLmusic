@@ -2,25 +2,37 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import LoginPage from './pages/Login/LoginPage';
-import HomePage from './pages/Home/HomePage'
-import {createBrowserRouter,RouterProvider,} from "react-router-dom";
-import RegisterPage from './pages/Register/RegisterPage.tsx';
-import SearchPage from './pages/Search/SearchPage.tsx';
-import PlayerPage from './pages/Player/PlayerPage.tsx';
-import ArtistPage, { loaderArtist } from './pages/Artist/ArtistPage.tsx';
-import KaraokePage from './pages/Karaoke/KaraokePage.tsx';
-import { loaderSong } from './services/Songs.services.ts';
-import SongsPage from './pages/Song/SongsPage.tsx';
-import SongPage from './pages/Song/SongPage.tsx';
-import AlbumsPage from './pages/Album/AlbumsPage.tsx';
-import { loaderAlbums } from './services/Album.services.ts';
-import ArtistsPage from './pages/Artist/ArtistsPage.tsx';
-import { loaderArtists } from './services/Artist.services.ts';
-import ProfilePage from './pages/Profile/ProfilePage.tsx';
-import KaraokesPage from './pages/Karaoke/KaraokesPage.tsx';
-import { loaderKaraoke } from './services/Karaoke.services.ts';
 
+import {createBrowserRouter,RouterProvider,} from "react-router-dom";
+
+import ArtistPage, { loaderArtist } from './pages/Artist/ArtistPage.tsx';
+
+
+
+import HomePage from '@pages/Home/HomePage.tsx';
+import LoginPage from '@pages/Login/LoginPage.tsx';
+import RegisterPage from '@pages/Register/RegisterPage.tsx';
+import ProfilePage from '@pages/Profile/ProfilePage.tsx';
+import SearchPage from '@pages/Search/SearchPage.tsx';
+
+import { loaderAlbum, loaderAlbums } from '@services/Album.services.ts';
+import AlbumsPage from '@pages/Album/AlbumsPage.tsx';
+import AlbumPage from '@pages/Album/AlbumPage.tsx';
+
+import SongsPage from '@pages/Song/SongsPage.tsx';
+import SongPage from '@pages/Song/SongPage.tsx';
+import { loaderSong } from '@services/Songs.services.ts';
+
+import ArtistsPage from '@pages/Artist/ArtistsPage.tsx';
+import { loaderArtists } from '@services/Artist.services.ts';
+
+import PlayerPage from '@pages/Player/PlayerPage.tsx';
+import { loaderKaraoke } from '@services/Karaoke.services.ts';
+import KaraokesPage from '@pages/Karaoke/KaraokesPage.tsx';
+
+
+
+import KaraokePage from '@pages/Karaoke/KaraokePage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -70,6 +82,11 @@ const router = createBrowserRouter([
         path: "/albums",
         element: <AlbumsPage></AlbumsPage>,
         loader: loaderAlbums
+      },
+      {
+        path: "/album/:id",
+        element: <AlbumPage></AlbumPage>,
+        loader: loaderAlbum
       },
       {
         path: "/player/:id",

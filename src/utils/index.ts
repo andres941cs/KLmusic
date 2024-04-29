@@ -12,3 +12,8 @@ export function format (seconds: number): string {
   function pad (string: number) {
     return ('0' + string).slice(-2)
   }
+
+export function getYears (date: string): string {
+    const year = new Date(date).getFullYear()
+    return year.toString()
+  }

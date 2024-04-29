@@ -23,7 +23,7 @@ BOTON PLAY => INICIA EL VIDEO Y INICIA EL KARAOKE HECHO
             url:'https://www.youtube.com/embed/pYNYhSsR8EE'
         }
     return(
-        <Card>
+        <Card className="overflow-hidden">
             {/* <video src={data.url}></video> */}
             {/* <iframe src={data.url}></iframe> */}
             <Player data={karaoke}/>

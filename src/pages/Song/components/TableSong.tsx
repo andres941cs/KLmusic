@@ -1,23 +1,21 @@
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@components/UI/Table"
-import { format } from "../../../utils/index";
+import { format } from "@utils/index"
 import { useNavigate } from "react-router-dom";
-import { Song } from "src/models/songs";
-import { useEffect, useState } from "react";
-const TableSong = (songs:Song[]) => {
+import { Song } from "@models/songs";
+
+
+interface TableSongProps {
+    data: Song[]
+}
+const TableSong = ({data}:TableSongProps) => {
     // const { data, isLoading } = useQuery('songs', fetchSongs);
     const navigate = useNavigate();
-    const {data} = songs;
     console.log(data);
   
     const playKaraoke = (id) => {
         navigate(`/player/${id}`)
       }
-    //   const [songs, setSongs] = useState([]);
-    // console.log(data);
-    // if (!)) {
-    //     // Manejo del caso en que data no es un array
-    //     return <p>Los datos no son válidos.</p>;
-    //   }
+
     return (
         <Table>
       <TableHeader>
@@ -29,25 +27,25 @@ const TableSong = (songs:Song[]) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((songs:Song) => (
-          <TableRow onClick={()=>playKaraoke(songs.id)} key={songs.id}>
-            <TableCell className="font-medium">{songs.id}</TableCell>
+        {data.map((song:Song) => (
+          <TableRow onClick={()=>playKaraoke(song.id)} key={song.id}>
+            <TableCell className="font-medium">{song.id}</TableCell>
             <TableCell>
               <div className='flex gap-3'>
                 <img
-                  src={songs.image}	
-                  alt={songs.name}
+                  src={song.image}	
+                  alt={song.name}
                   className="w-[40px] h-[40px] rounded-sm object-cover"
                 />
                 <div className='flex flex-col'>
-                {songs.name}
-                <span className='text-gray-500 text-sm'>{songs.artist.name}</span>
+                {song.name}
+                <span className='text-gray-500 text-sm'>{song.artist.name}</span>
                 </div>
               </div>
               
             </TableCell>
-            <TableCell>{songs.album?.name ? songs.album.name : "Álbum desconocido"}</TableCell>
-            <TableCell className="text-right">{format(songs.duration)}</TableCell>
+            <TableCell>{song.album?.name ? song.album.name : "Álbum desconocido"}</TableCell>
+            <TableCell className="text-right">{format(song.duration)}</TableCell>
           </TableRow>
         ))}
       </TableBody>

@@ -35,8 +35,8 @@ const Header = () => {
                 </div>
                 {/* <!-- LOGIN / REGISTRO --> */}
                 <div className="hidden xl:flex gap-2 items-center lg:order-2">
-                    <a href="login" className="hover:bg-gray-500">Log in</a>
-                    <a href="register" className="hover:bg-gray-500">Sign up</a>
+                    <Link to={'login'} className="hover:bg-gray-500">Log in</Link>
+                    <Link to={'register'} className="hover:bg-gray-500">Sign up</Link>
                 </div>
                 
                 <button data-collapse-toggle="mobile-menu" type="button" className="inline-flex items-center text-sm lg:hidden dark:hover:text-gray-700" aria-controls="mobile-menu-2" aria-expanded="false">

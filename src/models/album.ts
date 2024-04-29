@@ -4,7 +4,7 @@ export interface Album {
     name: string;
     artist: string;
     image: string;
-    release_date: number;
+    release_date: string;
     genre: string;
     songs: string;
 }

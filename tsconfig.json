@@ -33,6 +33,7 @@
       "@styles/*": ["src/styles/*"],
       "@services/*": ["src/services/*"],
       "@pages/*": ["src/pages/*"],
+      "@models/*": ["src/models/*"],
     }
   },
   "include": ["src"],
