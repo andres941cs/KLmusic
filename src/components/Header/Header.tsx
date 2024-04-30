@@ -1,6 +1,6 @@
 import { AuthContext } from "@pages/Login/AuthContext";
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 // Definición del componente funcional
 const Header = () => {
@@ -12,31 +12,44 @@ const Header = () => {
     }
     return (
         // fixed top-0
-        <header className=" w-full dark:bg-[#1C1917] dark:text-white text-gray-700 border-b dark:border-none">
+        <header className=" w-full dark:bg-[#1C1917] dark:text-white text-gray-700 border-b dark:border-b-gray-600">
         <nav className="p-3">
             <div className="flex flex-wrap justify-between lg:justify-center xl:justify-between items-center mx-auto max-w-screen-xl">
                 {/* <!-- LOGO --> */}
                 <a href="/" className="flex lg:hidden xl:flex items-center">
-                    {/* <img src="" className="mr-3 h-6 sm:h-9" alt="LKmusic Logo" /> */}
-                    <span className="self-center text-xl font-semibold whitespace-nowrap ">LKmusic</span>
+                    {/* <img src="" className="mr-3 h-6 sm:h-9" alt="KLmusic Logo" /> */}
+                    <span className="self-center text-xl font-semibold whitespace-nowrap ">KLmusic</span>
                 </a>
                 {/* <!-- RUTAS --> */}
                 <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu">
                     <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                        <li><NavLink to={'/'} className={({ isActive, isPending }) => 
+                                {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
+                                Home
+                            </NavLink></li>
                         <li>
-                            <a href="/" className="" aria-current="page">Home</a>
+                            <NavLink to={'songs'} className={({ isActive, isPending }) => 
+                                {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
+                                Songs
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={'songs'} className="">Songs</Link>
+                            <NavLink to={'artists'} className={({ isActive, isPending }) => 
+                                {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
+                                Artists
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={'artists'} className="">Artists</Link>
+                            <NavLink to={'albums'} className={({ isActive, isPending }) => 
+                                {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
+                                Albums
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={'albums'} className="">Albums</Link>
-                        </li>
-                        <li>
-                            <Link to={'/karaoke'} className="">Karaoke</Link>
+                            <NavLink to={'karaoke'} className={({ isActive, isPending }) => 
+                                {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
+                                Karaoke
+                            </NavLink>
                         </li>
                     </ul>
                     
@@ -44,12 +57,21 @@ const Header = () => {
                 {/* <!-- LOGIN / REGISTRO --> */}
                 {!isAuthenticated ? (
                     <div className="hidden xl:flex gap-2 items-center lg:order-2">
-                    <Link to={'login'} className="hover:bg-gray-500">Log in</Link>
-                    <Link to={'register'} className="hover:bg-gray-500">Sign up</Link>
-                </div>
+                        <NavLink to={'login'} className={({ isActive, isPending }) => 
+                            {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
+                            Log in
+                        </NavLink>
+                        <NavLink to={'register'} className={({ isActive, isPending }) => 
+                            {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
+                            Sign up
+                        </NavLink>
+                    </div>
                 ) : (
                     <div className="hidden xl:flex gap-2 items-center lg:order-2">
-                    <Link to={'profile'} className="hover:bg-gray-500">Profile</Link>
+                        <NavLink to={'profile'} className={({ isActive, isPending }) => 
+                            {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
+                            Profile
+                        </NavLink>
                     {/* <Link to={'logout'} className="hover:bg-gray-500">Logout</Link> */}
                     <button onClick={()=>handleLogout()} className="hover:bg-gray-500">Logout</button>
                         </div>

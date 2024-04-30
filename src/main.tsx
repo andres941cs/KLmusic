@@ -34,11 +34,13 @@ import KaraokesPage from '@pages/Karaoke/KaraokesPage.tsx';
 
 import KaraokePage from '@pages/Karaoke/KaraokePage.tsx';
 import { AuthProvider } from '@pages/Login/AuthContext.tsx';
+import NotFoundPAge from '@pages/NotFound.tsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    errorElement: <NotFoundPAge/>,
     children:[
       {
         index:true,

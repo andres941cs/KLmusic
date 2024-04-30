@@ -1,18 +1,25 @@
 //import SearchForm from "./components/SearchForm"
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Button } from '../../components/UI'
 import { randomKaraoke, searchKaraoke } from './../../services/Karaoke.services';
+import { Karaoke } from '@models/Karaoke';
 
 function HomePage(){
     const [search, setSearch] = useState('')
-    const handleSearch = (event) => {
+    const [results, setResults] = useState([])
+    const handleSearch = (event:ChangeEvent<HTMLInputElement>) => {
         setSearch(event.target.value);
       };
-    
+    console.log(results.length)
     const handleResults = () => {
         if(search === '') return
         searchKaraoke(search).then((data) => {
-            console.log(data)
+            const newResutls:any = []
+            data.forEach((element:Karaoke) => {
+                newResutls.push(element)
+            });
+            console.log(newResutls)
+            setResults(newResutls)
         })
     }
     const handleRandom = () => {
@@ -26,17 +33,21 @@ function HomePage(){
                 <section className=" w-full sm:mx-auto sm:w-full sm:max-w-xl rounded-xl">
                     <h1 className="dark:text-white text-8xl text-center">KLmusic</h1>
                 <div className="mt-5">
-                    <div className="flex items-center rounded-3xl border border-gray-200 h-12 px-3 max-w-xl">
+                    <div className={`flex items-center ${results.length==0?'rounded-3xl':'rounded-t-3xl border-b-0'}  border border-gray-200 h-12 px-3 max-w-xl`}>
                         <span className="material-symbols-outlined dark:text-white">search</span>
-                        <input value={search} onChange={handleSearch} className="w-full px-3 bg-transparent dark:text-white border-none focus:outline-none" type="text" id="search-bar"/>
+                        <input value={search} onChange={handleSearch} className={`w-full px-3 bg-transparent dark:text-white ${results.length==0?' border-none':'border-b border-[#4b5563]'} focus:outline-none`} type="text" id="search-bar"/>
                     </div>
                     {/* IMPLEMENTANDO */}
-                    {/* <div className='border border-gray-200 border-t-0 rounded-b-3xl '>
-                        <ul className=''>
-                            <li className='text-foreground px-6 hover:bg-gray-700'>Un resuldato</li>
-                            <li className='text-foreground px-6'>Otro resultado</li>
+                    {/* <div className=> */}
+                    {results.length>0&&(<ul className='border border-gray-200 border-t-0 rounded-b-3xl'>
+                            {
+                            results.map((result:Karaoke,index) => (
+                                <li key={result.id} className={`text-foreground px-6 hover:bg-gray-700  ${index === results.length - 1 && 'rounded-b-3xl'}`}>
+                                    {result.lyric.song.name} - {result.lyric.song.artist.name}
+                                </li>
+                            ))}
                         </ul>
-                    </div> */}
+                    )}
                     <div className='flex gap-3 my-3'>
                         <Button onClick={handleResults}>Search Song</Button>
                         <Button onClick={handleRandom}>Random Song</Button>

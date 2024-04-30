@@ -1,8 +1,9 @@
 import { Card } from "@components/UI/Card";
 import Subtitle from "./components/Subtitle";
 import { StackLayout } from "@components/Layouts/StackLayout";
-import { letraPrueba } from "../Player/LetraPrueba";
+// import { letraPrueba } from "../Player/LetraPrueba";
 import { useState } from "react";
+import AudioPlayer from "./AudioPlayer";
 
 function KaraokePage() {
     const  [selectedLyric, setSelectedLyric] = useState('');
@@ -18,12 +19,13 @@ function KaraokePage() {
                     <Subtitle onData={handleSelectedData}></Subtitle>
                     {/* PREVIEW */}
                     {/* <Subtitle></Subtitle> */}
-                    <div className="h-full w-full overflow-x-scroll">{selectedLyric}</div>
+                    <div className="h-full w-full overflow-y-auto">{selectedLyric}</div>
                 </StackLayout>
-                {/* LINETIME */}
-                <div className="w-full h-1/3">
-                    {/* <Subtitle></Subtitle> */}
+                {/* LINE TIME */}
+                <div className="w-full h-1/3 grid border-t content-center">
+                <AudioPlayer></AudioPlayer>
                 </div>
+                
                 
             </StackLayout>
         </Card>
