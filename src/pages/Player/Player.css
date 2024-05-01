@@ -45,10 +45,10 @@
 #lyrics .line {
 	position: relative;
 	display: block;
-	font-weight: 500;
-	color: var(--color-fg);
-	font-size: 36px;
 	text-align: center;
+	/* STYLE */
+	font-size: 36px;
+	opacity: 0.5;
 }
 
 #lyrics .line.empty,
@@ -59,8 +59,9 @@
 #lyrics .line.active {
 	margin: 4px 0;
 	font-size: 36px;
-	opacity: 0.5;
-	display: block;
+	opacity:1;
+	color: var(--color-fg);
+	font-weight: 500;
 }
 
 /* SEEKBAR CSS */

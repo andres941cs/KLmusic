@@ -1,7 +1,6 @@
-
 import axios from 'axios';
-
-const API_URL = "http://127.0.0.1:8000/api/";
+import { API_URL } from '@utils/constantes';
+import { Karaoke } from '@models/Karaoke';
 
 export const saveKaraoke = async (karaoke: Karaoke) => {
     try {
@@ -23,7 +22,7 @@ export async function searchKaraoke(name:string){
 }
 export async function randomKaraoke(){
     try {
-      const response = await axios.get(API_URL+'karaoke/random');
+      const response = await axios.get(API_URL+'random/karaoke');
       return response.data;
     } catch (error) {
       console.error(error);

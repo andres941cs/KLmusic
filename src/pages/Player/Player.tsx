@@ -1,10 +1,13 @@
 import { Button } from '@components/UI'
-import { useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import ReactPlayer from 'react-player/youtube'
 import './Player.css'
 import { letraPrueba } from './LetraPrueba'
 import {procesarSubtitulos} from './parser'
-
+import { format } from '@utils/index'
+// import { putLyricsInPlace, updateActiveLyrics } from './lyric'
+import './lyric'
+import { putLyricsInPlace, reCenter, updateActiveLyrics } from './lyric'
 {/* <ReactPlayer url='https://www.youtube.com/watch?v=LXb3EKWsInQ' /> */}
 function Player(data:any){
     const [url, setUrl] = useState(null);
@@ -24,58 +27,21 @@ function Player(data:any){
     const divLetraRef = useRef<HTMLDivElement>(null);
     
     // PRUEBAS
-    // console.log(data['data'])
+
     const karaoke = data['data'];
-    // const data = {
-    //     // url:'https://www.youtube.com/watch?v=pYNYhSsR8EE'
-    //     // url:'https://www.youtube.com/embed/pYNYhSsR8EE'
-    //     url:'https://www.youtube.com/watch?v=_KSyWS8UgA4'
-    // }
     // PROCESAR LOS SUBTILULOS
     let subtitles = []
     let dataProcesada = procesarSubtitulos(karaoke.settings);
     subtitles = dataProcesada
-    console.log("Subtitulos Cargados");
+    // console.log("Subtitulos Cargados");
     // console.log(subtitles)
     // const [elements, setElements] = useState<JSX.Element[]>([]);
     const handlePlay = () => {
         console.log('onPlay');
         setPlaying(true);
         // REPRODUCIR AL CAMBIAR DEL ESTADO
-        if(playing){
-            // CODIGO PARA INSERTAR LA LETRA
-            const divLetra = divLetraRef.current;
-            subtitles.forEach(item => {
-                const timeoutId = setTimeout(() => {
-                    const span = document.createElement('span');
-                    span.id = item.numero.toString();
-                    span.className = 'line';
-                    span.textContent = item.texto;
-                    divLetra?.appendChild(span);
-                }, item.tiempoInicio);
-            });
-            // CODIGO PARA SINCRONIZAR LOS SUBTITULOS
-            var currentTime = 0
-            setInterval(function() {
-                console.log('Tiempo actual del video:', currentTime);
-                const currentSubtitle = subtitles.find(subtitle => currentTime*1000 >= subtitle.tiempoInicio && currentTime*1000 <= subtitle.tiempoFin);
-                if (currentSubtitle) {
-                    const lineActive = document.getElementById(currentSubtitle.numero.toString());
-                    lineActive!.classList.add('active');
-                    lineActive!.scrollIntoView({
-                        block: "start", behavior: "smooth"
-                    });
-                
-                } 
-                // else {
-                //     subtitles.forEach(subtitle => {
-                //         const line = document.getElementById(subtitle.numero.toString());
-                //         line!.classList.remove('active');
-                //     });
-                // }
-                currentTime++;
-            }, 1000); // Intervalo de 1000 milisegundos (1 segundo)
-        }
+        
+        putLyricsInPlace(subtitles);
       };
     // const [lyrics, setLyrics] = useState<React.ReactElement[]>([]);
     useEffect(() => {
@@ -97,12 +63,12 @@ function Player(data:any){
         setSeeking(true)
     }
     
-    const  handleSeekChange = e => {
-        console.log('handleSeekChange', e.target.value)
+    const  handleSeekChange = (e:ChangeEvent<HTMLInputElement>) => {
+        // console.log('handleSeekChange', e.target.value)
         setPlayed(parseFloat(e.target.value))
         var input = document.querySelector("#myInput");
         const progress = ((e.target.value / 0.999) * 100);
-        input.style.background = `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`;
+        input!.style.background = `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`;
     }
     
     const  handleSeekMouseUp = e => {
@@ -111,15 +77,18 @@ function Player(data:any){
         player.current.seekTo(parseFloat(e.target.value))
     }
     const handleProgress = state => {
-        console.log('onProgress', state)
-        setPlayedSeconds(state.playedSeconds)
+        console.log('onProgress', state);
+        setPlayedSeconds(state.playedSeconds);
+        
         // We only want to update time slider if we are not currently seeking
         if (!seeking) {
             setPlayed(state.played)
+            updateActiveLyrics(state.playedSeconds, subtitles);
+            reCenter()
             var input = document.querySelector("#myInput");
             // const progress = ((played / 0.999999) * 100);
             const progress = Math.ceil(played * 100);
-            console.log('PORCENTAJE DE LA BARRA: ',progress+'%')
+            // console.log('PORCENTAJE DE LA BARRA: ',progress+'%')
             input.style.background = `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`;
         }
     }
@@ -175,8 +144,8 @@ function Player(data:any){
                 </div>
                 <span id="time-total"></span>
             </div> */}
-                <span onClick={handlePlay} className="material-symbols-outlined cursor-pointer">play_arrow</span>
-                <span>{Math.ceil(playedSeconds)}</span>
+                <span onClick={handlePlay} className="material-symbols-outlined cursor-pointer hover:text-red-600">play_arrow</span>
+                <span>{format(playedSeconds)}</span>
                 <input id='myInput' className='w-full bg-slate-500'
                     type='range' min={0} max={0.999999} step='any'
                     value={played}
@@ -184,17 +153,9 @@ function Player(data:any){
                     onChange={handleSeekChange}
                     onMouseUp={handleSeekMouseUp}
                   />
-                  <span>{duration}</span>
+                  <span>{format(duration)}</span>
             </div>
         </div>
     )
 }
 export default Player;
-
-// const PlayerController = () => {
-//     return (
-//         <div>
-//             <Player />
-//         </div>
-//     )
-// }

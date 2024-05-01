@@ -1,14 +1,12 @@
 import { API_URL } from "@utils/constantes";
 import axios from "axios";
-
-const URL = API_URL+ '/api/';
 /* RUTAS DE LA API - ENDPOINTS */
 // GET /abums
 
 // GET /album/artist/:id
 export async function getAlbumsByArtist(id:number){
     try {
-      const response = await axios.get(URL+'album/artist/'+id);
+      const response = await axios.get(API_URL+'album/artist/'+id);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -18,7 +16,7 @@ export async function getAlbumsByArtist(id:number){
 /* RUTAS DE LA API - LOADERS */
 export const loaderAlbums = async () => {
     try{
-        const res = await axios.get(URL+'album');
+        const res = await axios.get(API_URL+'album');
         const song = await res.data;
         return song
     }catch(error){
@@ -28,7 +26,7 @@ export const loaderAlbums = async () => {
 
 export const loaderAlbum = async ({params}:any) => {
     try{
-        const res = await axios.get(URL+'album/'+params.id);
+        const res = await axios.get(API_URL+'album/'+params.id);
         const song = await res.data;
         return song
     }catch(error){

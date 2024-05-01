@@ -81,13 +81,14 @@ function Subtitle({ onData }: SubtitleProps) {
     
     const getSuggestions  = (event) => {
         setValue(event.target.value);
-        if(value.length >= 2) {
-            searchSongs(value).then((data) => {
-                console.log(data)
+        setSuggestions([]);
+        if(event.target.value.length >= 3) {
+            searchSongs(event.target.value).then((data) => {
                 let suggestions = data.map((song) => {
                     return <li key={song.id} onClick={()=>showLyrics(song.id)}>{song.name}</li>
                 })
                 setSuggestions(suggestions);
+                console.log(suggestions)
             })
         }
     }
@@ -109,7 +110,7 @@ function Subtitle({ onData }: SubtitleProps) {
             {/* ACTIONS */}
             <StackLayout orientation="row" gap={5}>
                 Options
-                <button onClick={duplicarComponente}><span className="material-symbols-outlined">add_circle</span></button>
+                <button type="button" onClick={duplicarComponente}><span className="material-symbols-outlined">add_circle</span></button>
                 <div>
                     <input value={value} onChange={getSuggestions} className="text-black" placeholder="Song" />
                     <ul>{sugesstions}</ul>
@@ -118,7 +119,7 @@ function Subtitle({ onData }: SubtitleProps) {
                             <option value="1">Song 1</option>
                             {lyrics}
                  </select>
-                <Button>Save</Button>
+                <Button type="submit">Save</Button>
             </StackLayout>
             {/* LYRICS */}
             {/* <StackLayout className="w-[900px] h-[110px] border"> */}

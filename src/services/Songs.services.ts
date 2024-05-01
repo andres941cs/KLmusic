@@ -1,16 +1,20 @@
 import axios from "axios";
+import { API_URL, URL_SERVER } from "@utils/constantes";
 import { Song } from "src/models/songs";
-const API_URL = "http://127.0.0.1:8000/api/";
 /* RUTAS DE LA API - ENDPOINTS */
 // GET /songs
 export async function getSongs() {
-    try {
-      const response = await axios.get(API_URL+'songs');
-      return response.data;
-    } catch (error) {
-      console.error(error);
-    }
+  try {
+    const response = await axios.get(API_URL+'songs');
+    // response.data.forEach((song:Song) => {
+    //   song.image = URL_SERVER + song.image;
+    //   console.log(song.image)
+    // });
+    return response.data;
+  } catch (error) {
+    console.error(error);
   }
+}
 // GET /songs/:id
 export const loaderSong = async ({params}:any) => {
   try{

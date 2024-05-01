@@ -1,6 +1,6 @@
+import { API_URL } from "@utils/constantes";
 import axios from "axios";
 // import { Artists } from "src/models/artist";
-const API_URL = "http://127.0.0.1:8000/api/";
 /* RUTAS DE LA API - ENDPOINTS */
 // GET /abums
 // export async function getSongs() {

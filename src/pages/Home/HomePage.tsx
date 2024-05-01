@@ -1,12 +1,13 @@
-//import SearchForm from "./components/SearchForm"
 import { ChangeEvent, useState } from 'react'
-import { Button } from '../../components/UI'
-import { randomKaraoke, searchKaraoke } from './../../services/Karaoke.services';
+import { useNavigate } from 'react-router-dom';
+import { randomKaraoke, searchKaraoke } from '@services/Karaoke.services';
 import { Karaoke } from '@models/Karaoke';
+import { Button } from '@components/UI';
 
 function HomePage(){
     const [search, setSearch] = useState('')
     const [results, setResults] = useState([])
+    const navigate = useNavigate()
     const handleSearch = (event:ChangeEvent<HTMLInputElement>) => {
         setSearch(event.target.value);
       };
@@ -24,7 +25,8 @@ function HomePage(){
     }
     const handleRandom = () => {
         randomKaraoke().then((data) => {
-            console.log(data)
+            console.log(data);
+            navigate(`/player/${data.id}`)
         })
     }
     return (
@@ -38,7 +40,6 @@ function HomePage(){
                         <input value={search} onChange={handleSearch} className={`w-full px-3 bg-transparent dark:text-white ${results.length==0?' border-none':'border-b border-[#4b5563]'} focus:outline-none`} type="text" id="search-bar"/>
                     </div>
                     {/* IMPLEMENTANDO */}
-                    {/* <div className=> */}
                     {results.length>0&&(<ul className='border border-gray-200 border-t-0 rounded-b-3xl'>
                             {
                             results.map((result:Karaoke,index) => (
