@@ -1,13 +1,9 @@
-import { StackLayout } from "../../../components/Layouts/StackLayout"
+import { StackLayout } from "@components/Layouts/StackLayout"
+import { Album } from "@models/album"
+import { Artist } from "@models/artist"
+import { Song } from "@models/songs"
 
-// CARDS
-interface Song{
-    id:number
-    name:string
-    artist:string
-    image:string
-}
-// 
+
 export function SongCard(songs:Song[]) {
     songs.map((song) => {return(
         <StackLayout key={song.id} orientation="row" className="w-full justify-between  hover:bg-accent p-2">
@@ -15,7 +11,7 @@ export function SongCard(songs:Song[]) {
                 <img src={song.image}  className="h-12 w-12 rounded-full"></img>
                 <StackLayout>
                 <p>{song.name}</p>
-                <p>{song.artist}</p>
+                <p>{song.artist.name}</p>
                 </StackLayout>
             </StackLayout>
             <span className="material-symbols-outlined">navigate_next</span>
@@ -23,12 +19,6 @@ export function SongCard(songs:Song[]) {
     )})
 }
 
-interface Artist{
-    id:number
-    name:string
-    artist:string
-    image:string
-}
 interface ArtistCardProps {
     data: Artist;
     // Other necessary props
@@ -47,15 +37,12 @@ export function ArtistCard({data}:ArtistCardProps) {
     // )})
 }
 
-interface Album{
-    id:number
-    name:string
-    release_date:Date
-    artist:string
-    image:string
-}
 
-export function AlbumCard(album:Album) {
+
+interface IAlbumcard{
+    album:Album
+}
+export function AlbumCard({album}:IAlbumcard) {
 
         // return albums.map((album) => {
             return(
@@ -63,8 +50,8 @@ export function AlbumCard(album:Album) {
             <StackLayout orientation="row" className="gap-2 ">
                 <img src={album.image}  className="h-12 w-12 rounded-full"></img>
                 <p className="font-bold">{album.name}</p>
-                <p>{album.artist}</p>
-                <p>{album.release_date.getFullYear()}</p>
+                <p>{album.artist.name}</p>
+                <p>{album.release_date}</p>
             </StackLayout>
             <span className="material-symbols-outlined">navigate_next</span>
         </StackLayout>

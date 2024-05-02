@@ -18,10 +18,10 @@ BOTON PLAY => INICIA EL VIDEO Y INICIA EL KARAOKE HECHO
         const karaoke = useLoaderData() as Karaoke;
         // console.log(karaoke);
         // PRUEBAS
-        const data = {
-            // url:'https://www.youtube.com/watch?v=pYNYhSsR8EE'
-            url:'https://www.youtube.com/embed/pYNYhSsR8EE'
-        }
+        // const data = {
+        //     // url:'https://www.youtube.com/watch?v=pYNYhSsR8EE'
+        //     url:'https://www.youtube.com/embed/pYNYhSsR8EE'
+        // }
     return(
         <Card className="overflow-hidden">
             {/* <video src={data.url}></video> */}

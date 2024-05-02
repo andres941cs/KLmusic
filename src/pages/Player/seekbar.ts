@@ -47,10 +47,11 @@ seekbarWhole.onmousedown = (e) => {
 	}
 };
 
-function seekTo(e) {
+function seekTo(e:any) {
 	const rect = seekbarWhole.getBoundingClientRect();
 	const x = e.clientX - rect.left;
 	const percentage = x / rect.width;
+	console.log(percentage)
     // Cambiar el tiempo de la cancion
     // AQUI SE DEBE CAMBIAR EL TIEMPO DE LA CANCION => REPRODUCTOR
 	// window.np.seek(percentage);

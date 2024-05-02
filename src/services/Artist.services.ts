@@ -13,6 +13,26 @@ import axios from "axios";
 //   }
 
 /* RUTAS DE LA API - LOADERS */
+export const loaderArtist = async ({params}:any) => {
+    
+    const URL =`http://127.0.0.1:8000/api/artist/${params.id}`;
+    const res = await fetch(URL)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        return response.json();
+    })
+    // .then(data => {
+    //     console.log(data);
+    //     setData(data);
+    // })
+    .catch(error => {
+        console.error("Error during fetch operation:", error);
+    });
+    return res;
+}
+
 export const loaderArtists = async () => {
     try{
         const res = await axios.get(API_URL+'artist');
@@ -23,27 +43,3 @@ export const loaderArtists = async () => {
         console.error(error);
     };
 }
-
-// GET /songs/:id
-// export const loaderSong = async ({params}:any) => {
-//   try{
-//     const res = await axios.get(`${API_URL}song/${params.id}`);
-//     const song: Song = await res.data;
-//     console.log(song);
-//     return song
-//   }catch(error){
-//     console.error(error);
-//   };
-// }
-// export  async function loaderSong ({params}:any)  {
-//   try{
-//     const res = await axios.get(`${API_URL}song/${params.id}`);
-    
-//     const song: Song = await res.data;
-//     console.log(song);
-//     return song
-//   }catch(error){
-//     console.error(error);
-//   };
-// }
-// export default loaderSong;

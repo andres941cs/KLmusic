@@ -4,21 +4,19 @@ import TableSong from '@pages/Song/components/TableSong';
 import { getSongsByAlbum } from '@services/Songs.services';
 import { API_URL } from '@utils/constantes';
 import { useEffect, useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
-interface AlbumPageProps {
-    // Define the props for the AlbumPage component here
-}
+// interface AlbumPageProps {
 
-const AlbumPage: React.FC<AlbumPageProps> = (props) => {
-    // Add your component logic here
+// }
+
+// const AlbumPage: React.FC<AlbumPageProps> = (props) => {
+const AlbumPage = () => {
     const album = useLoaderData() as Album;
-    console.log(album);
-    const navigate = useNavigate();
-
-    const navigateTo = (id) => {
-        navigate(`/artist/${id}`)
-    }
+    // const navigate = useNavigate();
+    // const navigateTo = (route:string, id:number) => {
+    //     navigate(`/route/${id}`)
+    // }
     const [songs, setSongs] = useState([]);
     useEffect(() => {
         getSongsByAlbum(album.id)
@@ -40,7 +38,7 @@ const AlbumPage: React.FC<AlbumPageProps> = (props) => {
             <div className="flex h-2/5 lg:h-72 w-full gap-5 p-5">
                 <img className="w-52 h-52 rounded" src={API_URL+album.image} alt="" />
                 <div className="flex flex-col justify-center items-start">
-                        <span className="m-1 text-foreground">Artist</span>
+                        <span className="m-1 text-foreground">Album</span>
                         <h1 className="lg:text-8xl md:text-6xl sm:text-4xl font-bold text-foreground">{album.name}</h1>
                         
                     </div>

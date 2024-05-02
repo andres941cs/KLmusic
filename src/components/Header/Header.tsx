@@ -1,7 +1,7 @@
 import { AuthContext } from "@pages/Login/AuthContext";
 import { useContext } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-
+// import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 // Definición del componente funcional
 const Header = () => {
     const {isAuthenticated ,logout} = useContext(AuthContext);

@@ -1,12 +1,13 @@
 import { Card } from "@components/UI/Card";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "../../components/UI/Table";
 import { Button } from "@components/UI";
+// import { Karaoke } from "@models/Karaoke";
 
 const KaraokesPage = () => {
-    const user = {
-        id: 1,
-        name: 'Admin'
-    }
+    // const user = {
+    //     id: 1,
+    //     name: 'Admin'
+    // }
     const Karaokes = [
         {
             id: 1,
@@ -44,7 +45,7 @@ const KaraokesPage = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {Karaokes.map((karaoke:Karaoke) => (
+        {Karaokes.map(({karaoke}:any) => (
           <TableRow key={karaoke.id}>
             <TableCell className="font-medium">{karaoke.id}</TableCell>
             <TableCell>

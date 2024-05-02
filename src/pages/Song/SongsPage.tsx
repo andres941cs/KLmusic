@@ -65,10 +65,10 @@ function SongsPage() {
       </TableBody>
       <TableFooter>
         {/* AQUI VA LA PAGINACION */}
-        <TableRow>
+        {/* <TableRow>
           <TableCell colSpan={3}>Total</TableCell>
           <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
+        </TableRow> */}
       </TableFooter>
     </Table>
         </Card>

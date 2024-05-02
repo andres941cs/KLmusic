@@ -115,34 +115,3 @@ export const CardHeader = () => {
     )
 }
 export default ArtistPage;
-
-export const loaderArtist = async ({params}) => {
-    
-    const URL =`http://127.0.0.1:8000/api/artist/${params.id}`;
-    
-    // const PARAMS = {
-    //     method: 'POST',
-    //     headers: {
-    //     'Content-Type': 'application/json',
-    //     },
-    //     body:JSON.stringify(data)
-    // }
-    const res = await fetch(URL)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
-        }
-        return response.json();
-    })
-    // .then(data => {
-    //     console.log(data);
-    //     setData(data);
-    // })
-    .catch(error => {
-        console.error("Error during fetch operation:", error);
-    });
-    console.log(res)
-    return res;
-    const artist = await res;
-    return {artist}
-}

@@ -26,8 +26,8 @@
     // Iteramos sobre las líneas del archivo
     for (let i = 0; i < lineas.length; i++) { 
       let linea = lineas[i].trim().replace(/\r/g, '');
-
       // Verificamos si es un número para identificar el número de subtítulo
+      // @ts-ignore
       if (!isNaN(linea) && linea !== "") {
         // Si es un número, obtenemos el tiempo de inicio y fin del subtítulo
         let lineaTiempo = obtenerTiempo(lineas[i + 1]);

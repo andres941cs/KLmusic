@@ -15,7 +15,8 @@ interface FormData {
 interface Props extends React.FormHTMLAttributes<HTMLFormElement>{}
 /* COMPONENTE */
 function LoginForm(props:Props) {
-  const {isAuthenticated,login,logout} = useContext(AuthContext)
+  // const {isAuthenticated,login,logout} = useContext(AuthContext)
+  const {login} = useContext(AuthContext)
   const navigate = useNavigate();
   //const { register, handleSubmit, watch, formState: { errors }} = useForm<FormData>()
   const { register, handleSubmit} = useForm<FormData>()

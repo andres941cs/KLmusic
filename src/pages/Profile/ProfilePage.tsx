@@ -1,20 +1,27 @@
-import { Input, Label } from "@components/UI";
+// import { Input, Label } from "@components/UI";
+import { Label } from "@components/UI";
 import { Card } from "@components/UI/Card";
 import { useForm } from "react-hook-form";
 // FONDO #1e1e1e
+interface IFormProfile {
+    username: string;
+    email: string;
+    password: string;
+  }
 const ProfilePage = () => {
     // const { user } = useAuth();
     const user = {name: "John Doe"};
     const {
-        handleSubmit,register
+        // handleSubmit,
+        register
         //watch,
         //formState: { errors },
-      } = useForm<FormData>()
-    const registerFields = [
-        { label: 'Username', type: 'text', name: 'username' },
-        { label: 'Email', type: 'email', name: 'email' },
-        { label: 'Password', type: 'password', name: 'password' },
-      ];
+      } = useForm<IFormProfile>()
+    // const registerFields = [
+    //     { label: 'Username', type: 'text', name: 'username' },
+    //     { label: 'Email', type: 'email', name: 'email' },
+    //     { label: 'Password', type: 'password', name: 'password' },
+    //   ];
     return (
         <Card className="flex flex-col">
             {/* Card Header */}
@@ -34,12 +41,20 @@ const ProfilePage = () => {
                 <h2 className="text-2xl font-bold text-foreground">Edit Profile</h2>
                 <p className="text-foreground">This is your profile page. You can see your personal information here.</p>
                 <form className="xl:w-1/3 lg:w-1/2">
-                    <Label>Username:</Label>
+                    {/* <Label>Username:</Label>
                     <Input className="" nameInput="username" register={register} />
                     <Label>Email:</Label>
                     <Input className="" nameInput="email" register={register} />
                     <Label>Password:</Label>
-                    <Input className="" nameInput="password" register={register} />
+                    <Input className="" nameInput="password" register={register} /> */}
+
+                    <Label>Username:</Label>
+                    <input className="" {...register("username")}/>
+                    <Label>Email:</Label>
+                    <input className="" {...register("email")} />
+                    <Label>Password:</Label>
+                    <input className="" {...register("password")} />
+
                 </form>
             </div>
         </Card>

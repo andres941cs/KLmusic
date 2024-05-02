@@ -1,17 +1,15 @@
+import { Album } from "@models/album";
 import { StackLayout } from "../../../components/Layouts/StackLayout";
 import { AlbumCard, ArtistCard } from "./Cards";
+import { Song } from "@models/songs";
+import { Artist } from "@models/artist";
 
-interface Song{
-    id:number
-    name:string
-    artist:string
-    image:string
-}
-interface myProps  {
+
+interface IResultProps  {
     songs:Song[],
-    className?: 'my-custom-class' // Optional HTML attribute
+    className?: 'my-custom-class'
   }
-function Result({songs}:myProps) {
+function Result({songs}:IResultProps) {
     const listItems =  songs.map((song) => {return(
         <StackLayout key={song.id} orientation="row" className="w-full justify-between  hover:bg-accent p-2">
             <StackLayout orientation="row" className="gap-2 ">
@@ -39,19 +37,13 @@ function Result({songs}:myProps) {
 
 export default Result;
 
-interface Artist{
-    id:number
-    name:string
-    artist:string
-    image:string
-}
 
 
-interface myProps  {
+interface IResultArtist  {
     artists:Artist[],
     className?: 'my-custom-class' // Optional HTML attribute
   }
-export function ResultArtist({artists}:myProps) {
+export function ResultArtist({artists}:IResultArtist) {
     const listItems =  artists.map((artist) => {return(
         <ArtistCard data={artist}></ArtistCard>
     )})
@@ -63,18 +55,12 @@ export function ResultArtist({artists}:myProps) {
 }
 
 
-interface Album{
-    id:number
-    name:string
-    release_date:Date
-    artist:string
-    image:string
-}
-interface myProps  {
+
+interface IResultAlbum {
     albums:Album[],
     className?: 'my-custom-class' // Optional HTML attribute
   }
-export function ResultAlbum({albums}:myProps) {
+export function ResultAlbum({albums}:IResultAlbum) {
     return ( 
         <StackLayout orientation="column" className="w-full h-full gap-2">
             {albums.map((album) => 

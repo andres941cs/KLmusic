@@ -19,8 +19,8 @@ import SongPage from '@pages/Song/SongPage.tsx';
 import { loaderSong } from '@services/Songs.services.ts';
 
 import ArtistsPage from '@pages/Artist/ArtistsPage.tsx';
-import ArtistPage, { loaderArtist } from '@pages/Artist/ArtistPage.tsx';
-import { loaderArtists } from '@services/Artist.services.ts';
+import ArtistPage from '@pages/Artist/ArtistPage.tsx';
+import { loaderArtist, loaderArtists } from '@services/Artist.services.ts';
 
 import PlayerPage from '@pages/Player/PlayerPage.tsx';
 import { loaderKaraoke } from '@services/Karaoke.services.ts';
@@ -29,6 +29,7 @@ import KaraokesPage from '@pages/Karaoke/KaraokesPage.tsx';
 import KaraokePage from '@pages/Karaoke/KaraokePage.tsx';
 import { AuthProvider } from '@pages/Login/AuthContext.tsx';
 import NotFoundPAge from '@pages/NotFound.tsx';
+
 
 const router = createBrowserRouter([
   {

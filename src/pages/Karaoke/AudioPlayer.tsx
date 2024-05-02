@@ -20,6 +20,7 @@ const AudioPlayer = () => {
   })
 
   const onPlayPause = React.useCallback(() => {
+    console.log(currentTime)
     wavesurfer && wavesurfer.playPause()
   }, [wavesurfer])
 
