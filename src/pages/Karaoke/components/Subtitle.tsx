@@ -2,10 +2,13 @@ import { StackLayout } from "@components/Layouts/StackLayout";
 import { Textarea } from "./Textarea";
 import InputTime from "./InputTime";
 import { Button } from "@components/UI";
-import { forwardRef, useRef, useState } from "react";
+import { ChangeEvent, forwardRef, useRef, useState } from "react";
 import { searchSongs } from "../../../services/Songs.services";
 import { getLyricsBySongId } from "../../../services/Lyric.services";
 import { saveKaraoke } from "../../../services/Karaoke.services";
+import { Song } from "@models/songs";
+import { Lyric } from "@models/Lyric";
+import { Karaoke } from "@models/Karaoke";
 
 interface SubtitleProps {
     onData: (data: string) => void;
@@ -20,8 +23,9 @@ function Subtitle({ onData }: SubtitleProps) {
         console.log(elements)
         let settings:any = []
         const mySubtitles = elementsRefs.current;
-        mySubtitles.forEach((element,index) => {
+        mySubtitles.forEach((element:any,index) => {
             console.log(index);
+            // const InputLyric = element.querySelector('#lyric') as HTMLInputElement;
             const lyric = element.querySelector('#lyric')?.value;
             const startTime = element.querySelector('#startTime')?.value;
             const endTime = element.querySelector('#endTime')?.value;
@@ -37,11 +41,11 @@ function Subtitle({ onData }: SubtitleProps) {
 
         // REFACTORIZAR LLEVARLO A UTILS
         let cadena = "";
-        settings.forEach(subtitulo => {
+        settings.forEach((subtitulo:any) => {
             cadena += `${subtitulo.number}\n${subtitulo.startTime} --> ${subtitulo.endTime}\n${subtitulo.text}\n\n`;
           });
         console.log(cadena);
-        const Karaoke ={
+        const Karaoke:Karaoke ={
             'settings': cadena,
             'publication_date': '2024-04-27',
             'isPublished': 1,
@@ -70,7 +74,7 @@ function Subtitle({ onData }: SubtitleProps) {
         setElements(prevElements => [...prevElements, newElement]);
     };
     // Función para asignar una ref a un elemento generado
-    const assignRef = (index:number) => (element) => {
+    const assignRef = (index:number) => (element:never) => {
         elementsRefs.current[index] = element;
     };
     /*______________ LETRAS ______________*/
@@ -79,12 +83,12 @@ function Subtitle({ onData }: SubtitleProps) {
     const [sugesstions, setSuggestions] = useState([]);
     const [lyrics, setLyrics] = useState([]);
     
-    const getSuggestions  = (event) => {
+    const getSuggestions  = (event:ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);
         setSuggestions([]);
         if(event.target.value.length >= 3) {
             searchSongs(event.target.value).then((data) => {
-                let suggestions = data.map((song) => {
+                let suggestions = data.map((song:Song) => {
                     return <li key={song.id} onClick={()=>showLyrics(song.id)}>{song.name}</li>
                 })
                 setSuggestions(suggestions);
@@ -92,11 +96,11 @@ function Subtitle({ onData }: SubtitleProps) {
             })
         }
     }
-    const showLyrics = (id) => {
+    const showLyrics = (id:number) => {
         getLyricsBySongId(id).then((data) => {
             console.log(data)
             
-            let arrayLyrics = data.map((lyric) => {
+            let arrayLyrics = data.map((lyric:Lyric) => {
                 return <option key={lyric.id} value={lyric.lyric}>{lyric.id}</option>
             })
             setLyrics(arrayLyrics)
