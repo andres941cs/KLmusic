@@ -1,8 +1,6 @@
-import { Button } from '@components/UI'
 import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from 'react'
 import ReactPlayer from 'react-player/youtube'
 import './Player.css'
-import { letraPrueba } from './LetraPrueba'
 import {procesarSubtitulos} from './parser'
 import { format } from '@utils/index'
 // import { putLyricsInPlace, updateActiveLyrics } from './lyric'
@@ -10,18 +8,25 @@ import { format } from '@utils/index'
 import { putLyricsInPlace, reCenter, updateActiveLyrics } from './lyric'
 {/* <ReactPlayer url='https://www.youtube.com/watch?v=LXb3EKWsInQ' /> */}
 function Player(data:any){
-    const [url, setUrl] = useState(null);
+    // const [url, setUrl] = useState(null);
+    // const [loaded, setLoaded] = useState(0);
+    const [light] = useState(false);
+    const [volume] = useState(0.8);
+    const [muted] = useState(false);
+    const [controls] = useState(false);
+    const [playbackRate] = useState(1.0);
+
     const [playing, setPlaying] = useState(false);
-    const [controls, setControls] = useState(false);
-    const [light, setLight] = useState(false);
-    const [volume, setVolume] = useState(0.8);
-    const [muted, setMuted] = useState(false);
+    // const [controls, setControls] = useState(false);
+    // const [light, setLight] = useState(false);
+    // const [volume, setVolume] = useState(0.8);
+    // const [muted, setMuted] = useState(false);
     const [played, setPlayed] = useState(0);
     const [playedSeconds, setPlayedSeconds] = useState(0);
-    const [loaded, setLoaded] = useState(0);
     const [duration, setDuration] = useState(0);
-    const [playbackRate, setPlaybackRate] = useState(1.0);
-    const [loop, setLoop] = useState(false);
+    // const [playbackRate, setPlaybackRate] = useState(1.0);
+    const [loop] = useState(false);
+    // const [loop, setLoop] = useState(false);
     const [seeking, setSeeking] = useState(false);
     const player = useRef<ReactPlayer>(null);
     const divLetraRef = useRef<HTMLDivElement>(null);
@@ -66,7 +71,7 @@ function Player(data:any){
     }, []);
 
     /* METODOS PARA EL SEEKBAR */
-    const handleSeekMouseDown = (e:MouseEvent<HTMLInputElement>) => {
+    const handleSeekMouseDown = () => {
         setSeeking(true)
     }
     

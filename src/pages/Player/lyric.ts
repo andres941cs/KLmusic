@@ -1,12 +1,6 @@
-// import lang from "./lang/index.js";
-// import songdata from "./songdata.js";
-// import config from "./config.js";
-// import { animateScroll } from "./util.js";
 
-import { Karaoke } from "@models/Karaoke";
-console.log('Lyric.ts')
 // VAROABLES TEMPORALES
-const container = document.getElementById("lyrics")!;
+// const container = document.getElementById("lyrics")!;
 
 const synchronized = true;
 // let isContainerHovered: boolean, animateStatus: { invalidated: boolean; completed: boolean; } | undefined;

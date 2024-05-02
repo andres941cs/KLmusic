@@ -168,7 +168,7 @@ export default Subtitle;
 // }
 const Setting = forwardRef<HTMLDivElement>((props, ref) => {
     return ( 
-        <div ref={ref} className="flex flex-row items-center gap-3 w-full px-5 py-1">
+        <div ref={ref} className="flex flex-row items-center gap-3 w-full px-5 py-1" {...props}>
             <div className="w-full h-[100px] border"> 
                 <Textarea id="lyric" className="h-full resize-none"></Textarea>
             </div>
