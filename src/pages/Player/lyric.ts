@@ -2,6 +2,7 @@
 // VAROABLES TEMPORALES
 // const container = document.getElementById("lyrics")!;
 
+
 const synchronized = true;
 // let isContainerHovered: boolean, animateStatus: { invalidated: boolean; completed: boolean; } | undefined;
 

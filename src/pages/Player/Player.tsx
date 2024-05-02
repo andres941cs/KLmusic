@@ -4,7 +4,14 @@ import './Player.css'
 import {procesarSubtitulos} from './parser'
 import { format } from '@utils/index'
 // import { putLyricsInPlace, updateActiveLyrics } from './lyric'
-
+// export interface ISubtitles {
+//     texto: string;
+//     tiempoInicio: number;
+//     tiempoFin: number;
+// }
+// export interface ISubtitles {
+//     subtitle: ISubtitles[];
+// }
 import { putLyricsInPlace, reCenter, updateActiveLyrics } from './lyric'
 {/* <ReactPlayer url='https://www.youtube.com/watch?v=LXb3EKWsInQ' /> */}
 function Player(data:any){
@@ -37,12 +44,14 @@ function Player(data:any){
         played: number;
         playedSeconds: number;
     }
+
     
     // PRUEBAS
 
     const karaoke = data['data'];
     // PROCESAR LOS SUBTILULOS
-    let subtitles = []
+    
+    let subtitles:any = []
     let dataProcesada = procesarSubtitulos(karaoke.settings);
     subtitles = dataProcesada
     // console.log("Subtitulos Cargados");

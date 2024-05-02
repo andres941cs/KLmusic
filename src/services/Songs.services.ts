@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL, URL_SERVER } from "@utils/constantes";
+import { API_URL } from "@utils/constantes";
 import { Song } from "src/models/songs";
 /* RUTAS DE LA API - ENDPOINTS */
 // GET /songs
