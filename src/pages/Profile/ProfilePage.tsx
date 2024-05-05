@@ -1,9 +1,8 @@
 // import { Input, Label } from "@components/UI";
 import { Label } from "@components/UI";
 import { Card } from "@components/UI/Card";
-import { AuthContext } from "@pages/Login/AuthContext";
 import { getProfile } from "@services/User.services";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 // FONDO #1e1e1e
 interface IFormProfile {

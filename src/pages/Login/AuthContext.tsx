@@ -23,22 +23,17 @@
 
 // export default AuthProvider;
 
-import { getProfile } from '@services/User.services';
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
 
 // Definición de tipos
 type IAuthContext = {
   isAuthenticated: boolean;
-  // user: any;
-  token: string;
   login: (token:string) => void;
   logout: () => void;
   // setAuthenticated:(newState:boolean)=>void
 };
 const InicialVale = {
   isAuthenticated : false,
-  token: '',
-  // user: null,
   // setAuthenticated:()=>{}
   login: () =>{},
   logout: () => {}
@@ -48,7 +43,6 @@ export const AuthContext = createContext<IAuthContext>(InicialVale);
 // Proveedor de autenticación
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(InicialVale.isAuthenticated);
-  const [user, setUser] = useState<any>(null);
   // const [token, setToken] = useState<string>(InicialVale.token);
   useEffect(() => {
     // const token = localStorage.getItem('token');
@@ -79,7 +73,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     // GUARDAR EL TOKEN  EN LA SESION STORAGE
     // localStorage.setItem('token', );
     sessionStorage.setItem('token', token);
-    setToken(token);
   };
 
   const logout = () => {
