@@ -13,12 +13,13 @@ import { format } from '@utils/index'
 //     subtitle: ISubtitles[];
 // }
 import { putLyricsInPlace, reCenter, updateActiveLyrics } from './lyric'
+import Slider from '@components/UI/Slider'
+
 {/* <ReactPlayer url='https://www.youtube.com/watch?v=LXb3EKWsInQ' /> */}
 function Player(data:any){
     // const [url, setUrl] = useState(null);
     // const [loaded, setLoaded] = useState(0);
     const [light] = useState(false);
-    const [volume] = useState(0.8);
     const [muted] = useState(false);
     const [controls] = useState(false);
     const [playbackRate] = useState(1.0);
@@ -26,7 +27,7 @@ function Player(data:any){
     const [playing, setPlaying] = useState(false);
     // const [controls, setControls] = useState(false);
     // const [light, setLight] = useState(false);
-    // const [volume, setVolume] = useState(0.8);
+    const [volume, setVolume] = useState(0.8);
     // const [muted, setMuted] = useState(false);
     const [played, setPlayed] = useState(0);
     const [playedSeconds, setPlayedSeconds] = useState(0);
@@ -64,6 +65,10 @@ function Player(data:any){
         
         putLyricsInPlace(subtitles);
       };
+
+    const handlePlayPause = () => {
+        setPlaying(!playing)
+    }
     // const [lyrics, setLyrics] = useState<React.ReactElement[]>([]);
     useEffect(() => {
         
@@ -78,6 +83,16 @@ function Player(data:any){
         // });
     
     }, []);
+
+
+    const handleVolumeChange = (e:any) => {
+        console.log('handleVolumeChange', volume)
+        setVolume(e/100)
+    }
+
+    // const handleToggleMuted = () => {
+    //     setMuted(!muted)
+    // }
 
     /* METODOS PARA EL SEEKBAR */
     const handleSeekMouseDown = () => {
@@ -153,23 +168,16 @@ function Player(data:any){
             onProgress={handleProgress}
             onDuration={handleDuration}
             />
-
+            {/* Lyrics */}
         <div className='lyrics-container'>
             <div ref={divLetraRef} id='lyrics'></div>
         </div>
             {/* PlayerController */}
-            <div className='flex items-center bg-black h-20 w-full'>
+            <div className='flex items-center bg-black h-20 w-full gap-1'>
             {/* <!-- Seekbar --> */}
-            {/* <div className="seekbar-container">
-                <span id="time-elapsed"></span>
-                <div id="seekbar">
-                    <div id="seekbar-bg"></div>
-                    <div id="seekbar-fg"></div>
-                    <div id="seekbar-ball"></div>
-                </div>
-                <span id="time-total"></span>
-            </div> */}
-                <span onClick={handlePlay} className="material-symbols-outlined cursor-pointer hover:text-red-600">play_arrow</span>
+            <span onClick={handlePlayPause} className="material-symbols-outlined cursor-pointer hover:text-red-600">{playing ? 'pause' : 'play_arrow'}</span>
+                {/* <span onClick={handlePlay} className="material-symbols-outlined cursor-pointer hover:text-red-600">play_arrow</span>
+                <span onClick={handlePause} className="material-symbols-outlined cursor-pointer hover:text-red-600">pause</span> */}
                 <span>{format(playedSeconds)}</span>
                 <input id='myInput' ref={inputRef} className='w-full bg-slate-500'
                     type='range' min={0} max={0.999999} step='any'
@@ -179,6 +187,8 @@ function Player(data:any){
                     onMouseUp={handleSeekMouseUp}
                   />
                   <span>{format(duration)}</span>
+                  <span className="material-symbols-outlined cursor-pointer hover:text-red-600">volume_up</span>
+                  <div className='w-24'><Slider min={0} max={100} step={1}  value={[volume*100]} onValueChange={handleVolumeChange}></Slider></div>
             </div>
         </div>
     )

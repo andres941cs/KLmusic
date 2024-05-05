@@ -1,6 +1,9 @@
 // import { Input, Label } from "@components/UI";
 import { Label } from "@components/UI";
 import { Card } from "@components/UI/Card";
+import { AuthContext } from "@pages/Login/AuthContext";
+import { getProfile } from "@services/User.services";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 // FONDO #1e1e1e
 interface IFormProfile {
@@ -9,8 +12,16 @@ interface IFormProfile {
     password: string;
   }
 const ProfilePage = () => {
-    // const { user } = useAuth();
-    const user = {name: "John Doe"};
+    // const {token} = useContext(AuthContext);
+    const [user, setUser] = useState<any>(null); 
+    useEffect(() => {
+        const token = sessionStorage.getItem('token');
+        getProfile(token!).then((response) => {
+            setUser(response);
+            console.log(response);
+        });
+        console.log(user);
+    }, []);
     const {
         // handleSubmit,
         register
@@ -25,14 +36,11 @@ const ProfilePage = () => {
     return (
         <Card className="flex flex-col">
             {/* Card Header */}
-            <div className="bg-purple-300 h-72 flex items-end gap-5 p-5">
+            <div className="bg-purple-300 h-72 flex items-center  gap-5 p-5">
                     <img src="https://i.pravatar.cc/300" alt="Profile" className="w-52 h-52 rounded-full"/>
-                    <div className="flex flex-col justify-center items-start">
+                    <div className="flex flex-col justify-center  gap-1">
                         <span>Profile</span>
-                        <h1 className="xl:text-8xl font-bold text-foreground">{user.name}</h1>
-                        <div className="flex flex-col">
-                            <span>Username: {user.name}</span>
-                        </div>
+                        <h1 className="xl:text-8xl font-bold text-foreground">{user?user.username:"Loading..."}</h1>
                     </div>
                 </div>  
             {/* Card Body */}
@@ -49,9 +57,9 @@ const ProfilePage = () => {
                     <Input className="" nameInput="password" register={register} /> */}
 
                     <Label>Username:</Label>
-                    <input className="" {...register("username")}/>
+                    <input className="" value={user?user.username:"Loading..."} {...register("username")}/>
                     <Label>Email:</Label>
-                    <input className="" {...register("email")} />
+                    <input className=""  value={user?user.email:"Loading..."} {...register("email")} />
                     <Label>Password:</Label>
                     <input className="" {...register("password")} />
 

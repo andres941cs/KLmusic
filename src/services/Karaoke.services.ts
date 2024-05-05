@@ -27,7 +27,14 @@ export async function randomKaraoke(){
     } catch (error) {
       console.error(error);
     }
-  
+}
+export async function getKaraokesByUser(id:number){
+    try {
+      const response = await axios.get(API_URL+'karaoke/user/'+id);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
 }
 
 export const loaderKaraoke = async ({params}:any) => {

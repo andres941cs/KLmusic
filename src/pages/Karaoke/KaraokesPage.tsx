@@ -1,33 +1,22 @@
 import { Card } from "@components/UI/Card";
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "../../components/UI/Table";
-import { Button } from "@components/UI";
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@components/UI/Table";
+import { Karaoke } from "@models/Karaoke";
+import { useEffect, useState } from "react";
+import { getKaraokesByUser } from "@services/Karaoke.services";
 // import { Karaoke } from "@models/Karaoke";
 
 const KaraokesPage = () => {
-    // const user = {
-    //     id: 1,
-    //     name: 'Admin'
-    // }
-    const Karaokes = [
-        {
-            id: 1,
-            name: 'Song 1',
-            album: 'Album 1',
-            duration: '3:00'
-        },
-        {
-            id: 2,
-            name: 'Song 2',
-            album: 'Album 2',
-            duration: '3:00'
-        },
-        {
-            id: 3,
-            name: 'Song 3',
-            album: 'Album 3',
-            duration: '3:00'
-        }
-    ]
+    const user = {
+        id: 1,
+        name: 'Admin'
+    }
+    const [Karaokes, setKaraokes] = useState<Karaoke[]>([]);
+    useEffect(() => {
+        getKaraokesByUser(user.id).then((response) => {
+            setKaraokes(response);
+        });
+    }, [])
+
     return (
         <Card>
           <div className="flex gap-3">
@@ -45,22 +34,22 @@ const KaraokesPage = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {Karaokes.map(({karaoke}:any) => (
+        {Karaokes.map((karaoke:Karaoke) => (
           <TableRow key={karaoke.id}>
             <TableCell className="font-medium">{karaoke.id}</TableCell>
             <TableCell>
                 <div className='flex flex-col'>
-                {karaoke.name}
-                <span className='text-gray-500 text-sm'>{karaoke.album}</span>
+                {karaoke.lyric?.song.name}
+                <span className='text-gray-500 text-sm'>{karaoke.publication_date}</span>
                 </div>
             </TableCell>
             <TableCell>{karaoke.publication_date}</TableCell>
             <TableCell>{karaoke.isPublished}</TableCell>
             <TableCell className="text-right">
-                <div className="flex gap-3">
-                    <Button >Change Visibity</Button>
-                    <Button className="items-center">Edit</Button>
-                    <Button className="items-center">Delete</Button>
+                <div className="flex gap-1"> 
+                <span className="material-symbols-outlined m-auto text-muted-foreground text-xl">visibility</span>
+                    <span className="material-symbols-outlined m-auto text-muted-foreground text-xl">edit</span>
+                    <span className="material-symbols-outlined m-auto text-muted-foreground text-xl">delete</span>
                 </div>
             </TableCell>
           </TableRow>

@@ -1,4 +1,5 @@
 /* IMPORTACIONES */
+import { Switch } from "@components/UI/Switch";
 import { AuthContext } from "@pages/Login/AuthContext";
 import { API_URL } from "@utils/constantes";
 import { useContext } from "react";
@@ -22,7 +23,7 @@ function LoginForm(props:Props) {
   const { register, handleSubmit} = useForm<FormData>()
   const onSubmit: SubmitHandler<FormData> = (data) => {
     //console.log(watch(['username','password']))
-    const URL = API_URL+ "/api/login";
+    const URL = API_URL+ "login";
       const PARAMS = {
         method: 'POST',
         headers: {
@@ -39,7 +40,7 @@ function LoginForm(props:Props) {
         })
         .then(data => {
             console.log(data);
-            login();
+            login(data["token"]);
             navigate("/");
 
         })
@@ -54,7 +55,7 @@ function LoginForm(props:Props) {
       <div className="w-full sm:mx-auto sm:w-full sm:max-w-sm rounded-xl bg-white shadow-[0px_0px_0px_1px_rgba(9,9,11,0.07),0px_2px_2px_0px_rgba(9,9,11,0.05)] dark:bg-zinc-900 dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)] dark:before:pointer-events-none dark:before:absolute dark:before:rounded-xl dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset] forced-colors:outline">
         <div className="grid h-full w-full justify-items-center overflow-hidden place-items-start p-6 py-8 sm:p-8 lg:p-12">
           <form {...props} onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm space-y-8">
-            <h3 className="text-lg/7 font-semibold tracking-[-0.015em] text-zinc-950 sm:text-base/7 dark:text-white">
+            <h3 className="text-xl font-semibold tracking-[-0.015em] text-zinc-950  dark:text-white">
               Sign in
             </h3>
             <div className="mt-6">
@@ -87,18 +88,7 @@ function LoginForm(props:Props) {
             </div>
             <div className="flex flex-wrap justify-between gap-2">
               <div className="flex items-center gap-2">
-                <button
-                  data-slot="control"
-                  className="group relative isolate inline-flex h-6 w-10 cursor-default rounded-full p-[3px] sm:h-5 sm:w-8 transition duration-0 ease-in-out data-[changing]:duration-200 forced-colors:outline forced-colors:[--switch-bg:Highlight] dark:forced-colors:[--switch-bg:Highlight] bg-zinc-200 ring-1 ring-inset ring-black/5 dark:bg-white/5 dark:ring-white/15 data-[checked]:bg-[--switch-bg] data-[checked]:ring-[--switch-bg-ring] dark:data-[checked]:bg-[--switch-bg] dark:data-[checked]:ring-[--switch-bg-ring] focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500 data-[hover]:data-[checked]:ring-[--switch-bg-ring] data-[hover]:ring-black/15 dark:data-[hover]:data-[checked]:ring-[--switch-bg-ring] dark:data-[hover]:ring-white/25 data-[disabled]:bg-zinc-200 data-[disabled]:data-[checked]:bg-zinc-200 data-[disabled]:opacity-50 data-[disabled]:data-[checked]:ring-black/5 dark:data-[disabled]:bg-white/15 dark:data-[disabled]:data-[checked]:bg-white/15 dark:data-[disabled]:data-[checked]:ring-white/15 [--switch-bg-ring:theme(colors.zinc.950/90%)] [--switch-bg:theme(colors.zinc.900)] dark:[--switch-bg-ring:transparent] dark:[--switch-bg:theme(colors.white/25%)] [--switch-ring:theme(colors.zinc.950/90%)] [--switch-shadow:theme(colors.black/10%)] [--switch:white] dark:[--switch-ring:theme(colors.zinc.700/90%)]"
-                  id="headlessui-control-:R1dllfalta:"
-                  role="switch"
-                  type="button"
-                  tabIndex={0}
-                  aria-checked="false">
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none relative inline-block size-[1.125rem] rounded-full sm:size-3.5 translate-x-0 transition duration-200 ease-in-out border border-transparent bg-white shadow ring-1 ring-black/5 group-data-[checked]:bg-[--switch] group-data-[checked]:shadow-[--switch-shadow] group-data-[checked]:ring-[--switch-ring] group-data-[checked]:translate-x-4 sm:group-data-[checked]:translate-x-3 group-data-[disabled]:group-data-[checked]:bg-white group-data-[disabled]:group-data-[checked]:shadow group-data-[disabled]:group-data-[checked]:ring-black/5"></span>
-                </button>
+                <Switch />
                 <label
                   data-slot="label"
                   className="select-none text-base/6 text-zinc-950 data-[disabled]:opacity-50 sm:text-sm/6 dark:text-white"

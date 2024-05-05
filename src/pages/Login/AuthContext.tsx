@@ -23,17 +23,22 @@
 
 // export default AuthProvider;
 
-import React, { createContext, useState, ReactNode } from 'react';
+import { getProfile } from '@services/User.services';
+import React, { createContext, useState, ReactNode, useEffect } from 'react';
 
 // Definición de tipos
 type IAuthContext = {
   isAuthenticated: boolean;
-  login: () => void;
+  // user: any;
+  token: string;
+  login: (token:string) => void;
   logout: () => void;
   // setAuthenticated:(newState:boolean)=>void
 };
 const InicialVale = {
   isAuthenticated : false,
+  token: '',
+  // user: null,
   // setAuthenticated:()=>{}
   login: () =>{},
   logout: () => {}
@@ -43,18 +48,44 @@ export const AuthContext = createContext<IAuthContext>(InicialVale);
 // Proveedor de autenticación
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(InicialVale.isAuthenticated);
-
-  const login = () => {
+  const [user, setUser] = useState<any>(null);
+  // const [token, setToken] = useState<string>(InicialVale.token);
+  useEffect(() => {
+    // const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
+    // const user = sessionStorage.getItem('user');
+    // VERIFICAR SI ES UN TOLKEN VALIDO
+    if (token) {
+      // getProfile(token).then((response) => {
+      //   console.log(response);
+      //   setUser(response);
+      // }).catch(() => {
+      //   setIsAuthenticated(false);
+      // });
+      // setToken(token);
+      setIsAuthenticated(true);
+      console.log("Hay token")
+    }
+  }, []);
+  const login = (token:string) => {
     setIsAuthenticated(true);
     /* LOGIGA DEL LOGIN*/
     // GUARDAR LAS CREDENCIALES
+    // getProfile(token).then((response) => {
+    //   console.log(response);
+    //   sessionStorage.setItem('user', JSON.stringify(response));
+    //   setUser(response);
+    // });
     // GUARDAR EL TOKEN  EN LA SESION STORAGE
+    // localStorage.setItem('token', );
+    sessionStorage.setItem('token', token);
+    setToken(token);
   };
 
   const logout = () => {
     /* LOGIGA DEL LOGOUT*/
     setIsAuthenticated(false);
-    // Borrar el token del sesion storage
+    sessionStorage.removeItem('token');
   };
 
   return (

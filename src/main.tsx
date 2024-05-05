@@ -29,6 +29,7 @@ import KaraokesPage from '@pages/Karaoke/KaraokesPage.tsx';
 import KaraokePage from '@pages/Karaoke/KaraokePage.tsx';
 import { AuthProvider } from '@pages/Login/AuthContext.tsx';
 import NotFoundPAge from '@pages/NotFound.tsx';
+import ProtectedRoute from '@pages/Login/ProtectedRoute.tsx';
 
 
 const router = createBrowserRouter([
@@ -97,7 +98,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/karaokes",
-        element: <KaraokesPage></KaraokesPage>,
+        element: <ProtectedRoute><KaraokesPage></KaraokesPage></ProtectedRoute>,
       },
     ]
   },

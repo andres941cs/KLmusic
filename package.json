@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-slider": "^1.1.2",
+    "@radix-ui/react-switch": "^1.0.3",
     "@types/node": "^20.11.30",
     "@wavesurfer/react": "^1.0.5",
     "axios": "^1.6.8",
