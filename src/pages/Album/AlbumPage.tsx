@@ -2,6 +2,7 @@ import { StackLayout } from '@components/Layouts/StackLayout';
 import { Album } from '@models/album';
 import TableSong from '@pages/Song/components/TableSong';
 import { getSongsByAlbum } from '@services/Songs.services';
+import { getRamdomColor } from '@utils/index';
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ const AlbumPage = () => {
     //     navigate(`/route/${id}`)
     // }
     const [songs, setSongs] = useState([]);
+    const bg = getRamdomColor();
     useEffect(() => {
         getSongsByAlbum(album.id)
         .then(data => {
@@ -25,7 +27,7 @@ const AlbumPage = () => {
         })
     }, [])
     return (
-        <StackLayout  className="max-h-full h-full bg-purple-300">
+        <StackLayout  className={`max-h-full h-full ${bg}`}>
             {/* <CardHeader></CardHeader> */}
             
             {/* Image */}
@@ -42,7 +44,7 @@ const AlbumPage = () => {
                         
                     </div>
             </div>
-            <div className="h-full w-full bg-black">
+            <div className="h-full w-full bg-transparent">
                     {/* Cnciones */}
                     <h2 className="text-foreground">Songs</h2>
                     {songs.length > 0 ? <TableSong data={songs}></TableSong> : <span className="text-foreground">No hay canciones</span>}

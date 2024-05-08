@@ -10,6 +10,7 @@ const AlbumsPage = () => {
     const navigateTo = (id:number) => {
         navigate(`/album/${id}`)
     }
+
     return (
         <Card className="flex flex-col">
             <div className="flex flex-wrap">

@@ -29,7 +29,7 @@ function ArtistPage() {
         })
     }, [])
     return ( 
-        <StackLayout  className="max-h-full h-full bg-purple-700">
+        <StackLayout  className="max-h-full h-full bg-[#f01050]">
             <CardHeader></CardHeader>
             
             {/* Image */}
@@ -43,34 +43,27 @@ function ArtistPage() {
                 <div className="flex flex-col justify-center items-start">
                         <span className="m-1 text-foreground">Artist</span>
                         <h1 className="lg:text-8xl md:text-6xl sm:text-4xl font-bold text-foreground">{artist.name}</h1>
-                        
-                    </div>
+                </div>
             </div>
-            <div className="h-full w-full bg-black">
-                    {/* Cnciones */}
+            <div className="h-full w-full bg-gradient-to-b from-red-900 to-slate-900">
+                    {/* Canciones */}
                     <h2 className="text-foreground">Songs</h2>
-                   {songs.length > 0 ? <TableSong data={songs}></TableSong> : <span className="text-foreground">No hay canciones</span>}
-                    {/* <StackLayout>
-                        <span>sus canciones</span>
-                    </StackLayout> */}
-                    {/* Albumnes */}
+                   <div className="">{songs.length > 0 ? <TableSong data={songs}></TableSong> : <span className="text-foreground">No hay canciones</span>}</div>
+
                     <h2 className="text-foreground">Albums</h2>
                     <div className="flex flex-wrap">
                     {albums.map((album:Album) => (
                         // Max width of 222px
                         <div onClick={()=>navigateTo(album.id)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
-                            <img
-                                src={album.image}
-                                alt={album.name}
-                                className="w-[150px] h-[150px] rounded-sm object-cover m-auto"
-                            />
+                            <img src={album.image} alt={album.name}
+                                className="w-[150px] h-[150px] rounded-sm object-cover m-auto"/>
                             <div className='flex flex-col text-foreground'>
                                 <span className="truncate">{album.name}</span>
                                 <span>{getYears(album.release_date)}</span>
                             </div>
                         </div>
                     ))}
-            </div>
+                    </div>
             </div>
             
         </StackLayout>

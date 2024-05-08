@@ -3,5 +3,11 @@
 @tailwind utilities;
 
 .dark body{
-    background: #000;
+    /* DARK BG BODY */
+    background-image: linear-gradient(147deg, #000000 0%, #8b8b8b 74%);
+    /* background-image: linear-gradient(180deg, #000000 0%, #2b2b2b 75%); */
+}
+body{
+    /* LIGHT BG BODY */
+    background-image: linear-gradient(180deg, #ffffff 0%, #a3a3a3 75%);
 }

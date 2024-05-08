@@ -98,7 +98,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/karaokes",
-        element: <ProtectedRoute><KaraokesPage></KaraokesPage></ProtectedRoute>,
+        element: <ProtectedRoute><KaraokesPage/></ProtectedRoute>,
       },
     ]
   },
