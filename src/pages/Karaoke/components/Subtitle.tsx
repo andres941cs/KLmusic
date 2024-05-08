@@ -9,6 +9,7 @@ import { saveKaraoke } from "../../../services/Karaoke.services";
 import { Song } from "@models/songs";
 import { Lyric } from "@models/Lyric";
 import { Karaoke } from "@models/Karaoke";
+import SearchSong from "./Search";
 
 interface SubtitleProps {
     onData: (data: string) => void;
@@ -88,7 +89,7 @@ function Subtitle({ onData }: SubtitleProps) {
         setSuggestions([]);
         if(event.target.value.length >= 3) {
             searchSongs(event.target.value).then((data) => {
-                let suggestions = data.map((song:Song) => {
+                const suggestions = data.map((song:Song) => {
                     return <li key={song.id} onClick={()=>showLyrics(song.id)}>{song.name}</li>
                 })
                 setSuggestions(suggestions);
@@ -100,7 +101,7 @@ function Subtitle({ onData }: SubtitleProps) {
         getLyricsBySongId(id).then((data) => {
             console.log(data)
             
-            let arrayLyrics = data.map((lyric:Lyric) => {
+            const arrayLyrics = data.map((lyric:Lyric) => {
                 return <option key={lyric.id} value={lyric.lyric}>{lyric.id}</option>
             })
             setLyrics(arrayLyrics)
@@ -124,6 +125,8 @@ function Subtitle({ onData }: SubtitleProps) {
                             {lyrics}
                  </select>
                 <Button type="submit">Save</Button>
+                {/* Pruebas */}
+                <SearchSong/>
             </StackLayout>
             {/* LYRICS */}
             {/* <StackLayout className="w-[900px] h-[110px] border"> */}

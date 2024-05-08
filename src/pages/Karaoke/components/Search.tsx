@@ -1,0 +1,47 @@
+import { Song } from "@models/songs";
+import { getLyricsBySongId } from "@services/Lyric.services";
+import { searchSongs } from "@services/Songs.services";
+import { ChangeEvent, useState } from "react";
+
+const SearchSong = () => {
+    const [open , setOpen ] = useState(true);
+    const [value, setValue] = useState('');
+    const [sugesstions, setSuggestions] = useState([]);
+    const [lyrics, setLyrics] = useState([]);
+    const getSuggestions  = (event:ChangeEvent<HTMLInputElement>) => {
+        setValue(event.target.value);
+        setSuggestions([]);
+        if(event.target.value.length >= 3) {
+            searchSongs(event.target.value).then((data) => {
+                const suggestions = data.map((song:Song) => {
+                    return <li key={song.id} onClick={()=>showLyrics(song.id)}>{song.name}</li>
+                })
+                setSuggestions(suggestions);
+                console.log(suggestions)
+            })
+        }
+    }
+    const showLyrics = (id:number) => {
+        getLyricsBySongId(id).then((data) => {
+            console.log(data)
+            
+            const arrayLyrics = data.map((lyric:Lyric) => {
+                return <option key={lyric.id} value={lyric.lyric}>{lyric.id}</option>
+            })
+            setLyrics(arrayLyrics)
+        })
+    }
+    if (!open) return null;
+    return ( 
+        <>
+        <div onClick={()=>setOpen(false)} className={`bg-black opacity-80 h-screen w-screen absolute z-40 top-0 left-0 `}></div>
+        <div className="absolute z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <input value={value} onChange={getSuggestions} className="border border-white bg-white/5 w-60 h-8 p-3 outline-none" placeholder="Song" />
+            <ul>{sugesstions}</ul>
+        </div>
+        
+        </>
+     );
+}
+ 
+export default SearchSong;
