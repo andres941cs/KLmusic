@@ -4,7 +4,6 @@ import TableSong from "../Song/components/TableSong";
 import { Artist } from "src/models/artist";
 import { useEffect, useState } from "react";
 import { getSongsByArtist } from "../../services/Songs.services";
-import { API_URL } from "@utils/constantes";
 import { getAlbumsByArtist } from "@services/Album.services";
 import { Album } from "@models/album";
 import { getYears } from "@utils/index";
@@ -40,7 +39,7 @@ function ArtistPage() {
                 <h1 className="absolute bottom-0">{artist.name}</h1>
             </div> */}
             <div className="flex h-2/5 lg:h-72 w-full gap-5 p-5">
-                <img className="w-52 h-52 rounded-full" src={API_URL+artist.image} alt="" />
+                <img className="w-52 h-52 rounded-full" src={artist.image} alt="" />
                 <div className="flex flex-col justify-center items-start">
                         <span className="m-1 text-foreground">Artist</span>
                         <h1 className="lg:text-8xl md:text-6xl sm:text-4xl font-bold text-foreground">{artist.name}</h1>
@@ -61,7 +60,7 @@ function ArtistPage() {
                         // Max width of 222px
                         <div onClick={()=>navigateTo(album.id)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
                             <img
-                                src={API_URL+album.image}
+                                src={album.image}
                                 alt={album.name}
                                 className="w-[150px] h-[150px] rounded-sm object-cover m-auto"
                             />

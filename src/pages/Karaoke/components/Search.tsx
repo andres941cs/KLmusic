@@ -1,13 +1,15 @@
+import { Lyric } from "@models/Lyric";
 import { Song } from "@models/songs";
 import { getLyricsBySongId } from "@services/Lyric.services";
 import { searchSongs } from "@services/Songs.services";
 import { ChangeEvent, useState } from "react";
 
-const SearchSong = () => {
+interface ISearchSong { onData: (data: []) => void; }
+const SearchSong = ({ onData }: ISearchSong) => {
     const [open , setOpen ] = useState(true);
     const [value, setValue] = useState('');
     const [sugesstions, setSuggestions] = useState([]);
-    const [lyrics, setLyrics] = useState([]);
+    // const [lyrics, setLyrics] = useState([]);
     const getSuggestions  = (event:ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);
         setSuggestions([]);
@@ -28,7 +30,7 @@ const SearchSong = () => {
             const arrayLyrics = data.map((lyric:Lyric) => {
                 return <option key={lyric.id} value={lyric.lyric}>{lyric.id}</option>
             })
-            setLyrics(arrayLyrics)
+            onData(arrayLyrics);
         })
     }
     if (!open) return null;

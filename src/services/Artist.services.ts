@@ -15,7 +15,7 @@ import axios from "axios";
 /* RUTAS DE LA API - LOADERS */
 export const loaderArtist = async ({params}:any) => {
     
-    const URL =`http://127.0.0.1:8000/api/artist/${params.id}`;
+    const URL =`${API_URL}artist/${params.id}`;
     const res = await fetch(URL)
     .then(response => {
         if (!response.ok) {
@@ -23,10 +23,6 @@ export const loaderArtist = async ({params}:any) => {
         }
         return response.json();
     })
-    // .then(data => {
-    //     console.log(data);
-    //     setData(data);
-    // })
     .catch(error => {
         console.error("Error during fetch operation:", error);
     });

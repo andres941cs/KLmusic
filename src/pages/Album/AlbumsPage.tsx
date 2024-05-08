@@ -5,8 +5,6 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 
 const AlbumsPage = () => {
     const albums = useLoaderData() as Album[];
-    console.log(albums);
-    const API_URL = "http://127.0.0.1:8000";
     const navigate = useNavigate();
 
     const navigateTo = (id:number) => {
@@ -18,7 +16,7 @@ const AlbumsPage = () => {
             {albums.map((album:Album) => (
                 <div onClick={()=>navigateTo(album.id)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
                     <img
-                        src={API_URL+album.image}
+                        src={album.image}
                         alt={album.name}
                         className="w-[150px] h-[150px] rounded-sm object-cover m-auto"
                     />

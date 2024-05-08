@@ -107,6 +107,10 @@ function Subtitle({ onData }: SubtitleProps) {
             setLyrics(arrayLyrics)
         })
     }
+
+    const handleLyrics = (data: [])  => {
+        setLyrics(data);
+      };
     
     return ( 
         // <form {...props} onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm space-y-8">
@@ -126,7 +130,7 @@ function Subtitle({ onData }: SubtitleProps) {
                  </select>
                 <Button type="submit">Save</Button>
                 {/* Pruebas */}
-                <SearchSong/>
+                <SearchSong onData={handleLyrics} />
             </StackLayout>
             {/* LYRICS */}
             {/* <StackLayout className="w-[900px] h-[110px] border"> */}
