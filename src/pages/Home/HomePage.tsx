@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { randomKaraoke, searchKaraoke } from '@services/Karaoke.services';
 import { Karaoke } from '@models/Karaoke';
@@ -11,7 +11,6 @@ function HomePage(){
     const handleSearch = (event:ChangeEvent<HTMLInputElement>) => {
         setSearch(event.target.value);
       };
-    console.log(results.length)
     const handleResults = () => {
         if(search === '') return
         searchKaraoke(search).then((data) => {
@@ -29,6 +28,14 @@ function HomePage(){
             navigate(`/player/${data.id}`)
         })
     }
+    const handleKeyDown = (event:KeyboardEvent<HTMLInputElement>) => {
+        if(event.key === 'Enter'){
+            handleResults()
+        }
+    }
+    const playKaraoke = (id:number) => {
+        navigate(`/player/${id}`)
+      }
     return (
         <>
             <main className="flex flex-col items-center justify-center px-4 md:px-0">
@@ -37,13 +44,13 @@ function HomePage(){
                 <div className="mt-5">
                     <div className={`flex items-center ${results.length==0?'rounded-3xl':'rounded-t-3xl border-b-0'}  border border-gray-200 h-12 px-3 max-w-xl`}>
                         <span className="material-symbols-outlined dark:text-white">search</span>
-                        <input value={search} onChange={handleSearch} className={`w-full px-3 bg-transparent dark:text-white ${results.length==0?' border-none':'border-b border-[#4b5563]'} focus:outline-none`} type="text" id="search-bar"/>
+                        <input value={search} onChange={handleSearch} onKeyDown={(e)=>handleKeyDown(e)} className={`w-full px-3 bg-transparent dark:text-white ${results.length==0?' border-none':'border-b border-[#4b5563]'} focus:outline-none`} type="text" id="search-bar"/>
                     </div>
                     {/* IMPLEMENTANDO */}
                     {results.length>0&&(<ul className='border border-gray-200 border-t-0 rounded-b-3xl'>
                             {
                             results.map((result:Karaoke,index) => (
-                                <li key={result.id} className={`text-foreground px-6 hover:bg-gray-700  ${index === results.length - 1 && 'rounded-b-3xl'}`}>
+                                <li key={result.id} onClick={()=>playKaraoke(result.id!)} className={`text-foreground px-6 hover:bg-gray-700  ${index === results.length - 1 && 'rounded-b-3xl'}`}>
                                     {result.lyric!.song.name} - {result.lyric!.song.artist.name}
                                 </li>
                             ))}

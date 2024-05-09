@@ -146,12 +146,12 @@ function Player(data:any){
     // }
     // }
     return(
-        <div className='flex flex-col h-full overflow-hidden'>
-        {/* <iframe src={data.url}></iframe> */}
+        <div className='flex flex-col h-full overflow-hidden relative'>
+        {/*  absolute -> Mejoras scale 1.2 ->  Animcion Para el comienzo y para el final quitar ultimos 3s*/}
         <ReactPlayer ref={player}
             className="hidden"
             width="100%"
-            height="100%"
+            height="90%"
             url={karaoke.lyric.url}
             playing={playing}
             controls={controls}
@@ -173,7 +173,7 @@ function Player(data:any){
             <div ref={divLetraRef} id='lyrics'></div>
         </div>
             {/* PlayerController */}
-            <div className='flex items-center bg-black h-20 w-full gap-1'>
+            <div className='flex items-center bg-background h-20 w-full gap-1'>
             {/* <!-- Seekbar --> */}
             <span onClick={handlePlayPause} className="material-symbols-outlined cursor-pointer hover:text-red-600">{playing ? 'pause' : 'play_arrow'}</span>
                 {/* <span onClick={handlePlay} className="material-symbols-outlined cursor-pointer hover:text-red-600">play_arrow</span>
