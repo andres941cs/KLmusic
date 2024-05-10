@@ -21,7 +21,7 @@ const KaraokesPage = () => {
         <Card>
           <div className="flex gap-3">
             <h1>My Karaokes</h1>
-            <span className="material-symbols-outlined hover:bg-muted-foreground rounded-full">add</span>
+            <span className="material-symbols-outlined cursor-pointer rounded-full">add</span>
           </div>
         <Table>
         <TableHeader>
@@ -46,11 +46,11 @@ const KaraokesPage = () => {
             <TableCell>{karaoke.publication_date}</TableCell>
             <TableCell>{karaoke.isPublished}</TableCell>
             <TableCell className="text-right">
-                <div className="flex gap-1"> 
-                <span className="material-symbols-outlined m-auto text-muted-foreground text-xl">visibility</span>
-                    <span className="material-symbols-outlined m-auto text-muted-foreground text-xl">edit</span>
-                    <span className="material-symbols-outlined m-auto text-muted-foreground text-xl">delete</span>
-                </div>
+                {/* <div className="flex gap-1">  */}
+                <span className="material-symbols-outlined m-auto text-muted-foreground text-xl mx-4">visibility</span>
+                  <span className="material-symbols-outlined m-auto text-muted-foreground text-xl mx-4">edit</span>
+                  <span className="material-symbols-outlined m-auto text-muted-foreground text-xl mx-4">delete</span>
+                {/* </div> */}
             </TableCell>
           </TableRow>
         ))}

@@ -6,6 +6,7 @@ export interface Lyric {
     isInstrumental: boolean;
     song: Song;
     url: string;
+    language: string;
     createdAt: Date;
     updatedAt: Date;
 }

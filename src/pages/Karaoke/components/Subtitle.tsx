@@ -2,14 +2,11 @@ import { StackLayout } from "@components/Layouts/StackLayout";
 import { Textarea } from "./Textarea";
 import InputTime from "./InputTime";
 import { Button } from "@components/UI";
-import { ChangeEvent, forwardRef, useRef, useState } from "react";
-import { searchSongs } from "../../../services/Songs.services";
-import { getLyricsBySongId } from "../../../services/Lyric.services";
+import { forwardRef, useRef, useState } from "react";
 import { saveKaraoke } from "../../../services/Karaoke.services";
-import { Song } from "@models/songs";
-import { Lyric } from "@models/Lyric";
 import { Karaoke } from "@models/Karaoke";
 import SearchSong from "./Search";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/UI/Select";
 
 interface SubtitleProps {
     onData: (data: string) => void;
@@ -80,38 +77,47 @@ function Subtitle({ onData }: SubtitleProps) {
     };
     /*______________ LETRAS ______________*/
     // Función para obtener los resultados de las canciones
-    const [value, setValue] = useState('');
-    const [sugesstions, setSuggestions] = useState([]);
+    // const [value, setValue] = useState('');
+    // const [sugesstions, setSuggestions] = useState([]);
     const [lyrics, setLyrics] = useState([]);
     
-    const getSuggestions  = (event:ChangeEvent<HTMLInputElement>) => {
-        setValue(event.target.value);
-        setSuggestions([]);
-        if(event.target.value.length >= 3) {
-            searchSongs(event.target.value).then((data) => {
-                const suggestions = data.map((song:Song) => {
-                    return <li key={song.id} onClick={()=>showLyrics(song.id)}>{song.name}</li>
-                })
-                setSuggestions(suggestions);
-                console.log(suggestions)
-            })
-        }
-    }
-    const showLyrics = (id:number) => {
-        getLyricsBySongId(id).then((data) => {
-            console.log(data)
+    // const getSuggestions  = (event:ChangeEvent<HTMLInputElement>) => {
+    //     setValue(event.target.value);
+    //     setSuggestions([]);
+    //     if(event.target.value.length >= 3) {
+    //         searchSongs(event.target.value).then((data) => {
+    //             const suggestions = data.map((song:Song) => {
+    //                 return <li key={song.id} onClick={()=>showLyrics(song.id)}>{song.name}</li>
+    //             })
+    //             setSuggestions(suggestions);
+    //             console.log(suggestions)
+    //         })
+    //     }
+    // }
+    // const showLyrics = (id:number) => {
+    //     getLyricsBySongId(id).then((data) => {
+    //         console.log(data)
             
-            const arrayLyrics = data.map((lyric:Lyric) => {
-                return <option key={lyric.id} value={lyric.lyric}>{lyric.id}</option>
-            })
-            setLyrics(arrayLyrics)
-        })
-    }
+    //         const arrayLyrics = data.map((lyric:Lyric) => {
+    //             return <option className="focus:bg-white" key={lyric.id} value={lyric.lyric}>{lyric.id}</option>
+    //         })
+    //         setLyrics(arrayLyrics)
+    //     })
+    // }
+    // const showLyrics = (id:number) => {
+    //     getLyricsBySongId(id).then((data) => {
+    //         const arrayLyrics = data.map((lyric:Lyric) => {
+    //             return <SelectItem key={lyric.id} value={lyric.lyric}>{lyric.language}</SelectItem>
+    //         })
+    //         setLyrics(arrayLyrics)
+    //     })
+    // }
 
     const handleLyrics = (data: [])  => {
         setLyrics(data);
       };
-    
+    const [open , setOpen ] = useState(false);
+
     return ( 
         // <form {...props} onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm space-y-8">
         <form onSubmit={handleSubmit} className="h-full w-full border-r pr-5">
@@ -119,18 +125,32 @@ function Subtitle({ onData }: SubtitleProps) {
             {/* ACTIONS */}
             <StackLayout orientation="row" gap={5}>
                 Options
-                <button type="button" onClick={duplicarComponente}><span className="material-symbols-outlined">add_circle</span></button>
-                <div>
+                {/* <button type="button" onClick={duplicarComponente}><span className="material-symbols-outlined">add_circle</span></button> */}
+                <span onClick={duplicarComponente} className="material-symbols-outlined cursor-pointer">add_circle</span>
+                {/* <div>
                     <input value={value} onChange={getSuggestions} className="text-black" placeholder="Song" />
                     <ul>{sugesstions}</ul>
-                </div>
-                <select className="text-black" onChange={(event) => onData(event.target.value)}>
-                            <option value="1">Song 1</option>
+                </div> */}
+                <span onClick={()=>setOpen(true)} className="material-symbols-outlined cursor-pointer">search</span>
+                {/* <select className="bg-background border rounded p-1.5" onChange={(event) => onData(event.target.value)}>
+                            <option className="checked:bg-white hover:bg-slate-600 " value="1">Song 1</option>
                             {lyrics}
-                 </select>
+                 </select> */}
+                <Select onValueChange={(e)=>onData(e)}>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Lyrics" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {/* <SelectItem value="dark">Dark</SelectItem>
+                        <SelectItem value="system">System</SelectItem> */}
+                        {lyrics.length>0?lyrics:<SelectItem value="Select Lyrics">Select Song</SelectItem>}
+                    </SelectContent>
+                </Select>
+
+
                 <Button type="submit">Save</Button>
                 {/* Pruebas */}
-                <SearchSong onData={handleLyrics} />
+                <SearchSong onData={handleLyrics} isOpen={open} setIsOpen={setOpen} />
             </StackLayout>
             {/* LYRICS */}
             {/* <StackLayout className="w-[900px] h-[110px] border"> */}
