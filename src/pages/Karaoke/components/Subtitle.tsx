@@ -2,7 +2,7 @@ import { StackLayout } from "@components/Layouts/StackLayout";
 import { Textarea } from "./Textarea";
 import InputTime from "./InputTime";
 import { Button } from "@components/UI";
-import { forwardRef, useRef, useState } from "react";
+import { ChangeEvent, forwardRef, useRef, useState } from "react";
 import { saveKaraoke } from "../../../services/Karaoke.services";
 import { Karaoke } from "@models/Karaoke";
 import SearchSong from "./Search";
@@ -118,6 +118,36 @@ function Subtitle({ onData }: SubtitleProps) {
       };
     const [open , setOpen ] = useState(false);
 
+    /*______________ IMPORT ______________*/
+    const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
+        // setFile(event.target.files[0]);
+        console.log(event.target.files![0]);
+        const file = event.target.files![0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              // CREAR EL KARAOKE => PENDIENTE SELECT LYRICS Y USER
+              console.log(e.target!.result);
+              const settings = e.target!.result as string;
+              const date = new Date();
+              const today = date.toISOString().slice(0, 10);
+              const Karaoke:Karaoke ={
+                'settings': settings,
+                'publication_date': today,
+                'isPublished': 1,
+                'id_lyric': 1,
+                'id_user': 1,
+            }
+            console.log(Karaoke)
+            // GUARDAR LOS DATOS EN LA BASE DE DATOS
+            saveKaraoke(Karaoke).then((data) => {
+                console.log(data)
+            })
+
+            };
+            reader.readAsText(file);
+          }
+      };
     return ( 
         // <form {...props} onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm space-y-8">
         <form onSubmit={handleSubmit} className="h-full w-full border-r pr-5">
@@ -127,6 +157,9 @@ function Subtitle({ onData }: SubtitleProps) {
                 Options
                 {/* <button type="button" onClick={duplicarComponente}><span className="material-symbols-outlined">add_circle</span></button> */}
                 <span onClick={duplicarComponente} className="material-symbols-outlined cursor-pointer">add_circle</span>
+               
+                <label className="contents" htmlFor="fileInput"><span className="material-symbols-outlined cursor-pointer">upload</span></label>
+                <input id="fileInput" type="file" className="hidden" onChange={handleChange} />
                 {/* <div>
                     <input value={value} onChange={getSuggestions} className="text-black" placeholder="Song" />
                     <ul>{sugesstions}</ul>

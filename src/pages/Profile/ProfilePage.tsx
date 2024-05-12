@@ -36,7 +36,7 @@ const ProfilePage = () => {
         <Card className="flex flex-col">
             {/* Card Header */}
             <div className="bg-purple-300 h-72 flex items-center  gap-5 p-5">
-                    <img src="https://i.pravatar.cc/300" alt="Profile" className="w-52 h-52 rounded-full"/>
+                    <img src={user?user.image:'Loading...'} alt="Profile" className="w-52 h-52 rounded-full"/>
                     <div className="flex flex-col justify-center  gap-1">
                         <span>Profile</span>
                         <h1 className="xl:text-8xl font-bold text-foreground">{user?user.username:"Loading..."}</h1>

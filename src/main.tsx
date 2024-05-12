@@ -30,6 +30,7 @@ import KaraokePage from '@pages/Karaoke/KaraokePage.tsx';
 import { AuthProvider } from '@pages/Login/AuthContext.tsx';
 import NotFoundPAge from '@pages/NotFound.tsx';
 import ProtectedRoute from '@pages/Login/ProtectedRoute.tsx';
+import FormPage from '@pages/Forms/FormPage.tsx';
 
 
 const router = createBrowserRouter([
@@ -100,6 +101,11 @@ const router = createBrowserRouter([
         path: "/karaokes",
         element: <ProtectedRoute><KaraokesPage/></ProtectedRoute>,
       },
+      {
+        path: "/forms",
+        element:<FormPage/>,
+      },
+
     ]
   },
   

@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@components/UI/Table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@components/UI/Table"
 import { format } from "@utils/index"
 import { useNavigate } from "react-router-dom";
 import { Song } from "@models/songs";
@@ -8,13 +8,12 @@ interface TableSongProps {
     data: Song[]
 }
 const TableSong = ({data}:TableSongProps) => {
-    // const { data, isLoading } = useQuery('songs', fetchSongs);
     const navigate = useNavigate();
     console.log(data);
   
     const playKaraoke = (id:number) => {
         navigate(`/player/${id}`)
-      }
+    }
 
     return (
         <Table>
@@ -49,13 +48,13 @@ const TableSong = ({data}:TableSongProps) => {
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
-        {/* AQUI VA LA PAGINACION */}
-        {/* <TableRow>
+      {/* AQUI VA LA PAGINACION */}
+      {/* <TableFooter>
+        <TableRow>
           <TableCell colSpan={3}>Total</TableCell>
           <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow> */}
-      </TableFooter>
+        </TableRow>
+      </TableFooter> */}
     </Table>
     );
     }

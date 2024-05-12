@@ -1,12 +1,12 @@
-// export function leerArchivo(input) {
+// export function leerArchivo(archivo:any) {
 //     return new Promise((resolve, reject) => {
-//         let archivo = input.files[0];
+//         // let archivo = input.files[0];
 //         let lector = new FileReader();
         
 //         lector.onload = function(e) {
-//             let contenido = e.target.result;
+//             let contenido = e.target!.result;
 //             // Llamamos a la función para procesar el contenido del archivo
-//             let dataProcesada = procesarSubtitulos(contenido);
+//             let dataProcesada = procesarSubtitulos(contenido as string);
 //             resolve(dataProcesada);
 //         };
         
