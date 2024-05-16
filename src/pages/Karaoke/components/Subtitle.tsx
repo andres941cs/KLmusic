@@ -7,6 +7,7 @@ import { saveKaraoke } from "../../../services/Karaoke.services";
 import { Karaoke } from "@models/Karaoke";
 import SearchSong from "./Search";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/UI/Select";
+import { romanized } from "@services/Api.services";
 
 interface SubtitleProps {
     onData: (data: string) => void;
@@ -140,14 +141,23 @@ function Subtitle({ onData }: SubtitleProps) {
             }
             console.log(Karaoke)
             // GUARDAR LOS DATOS EN LA BASE DE DATOS
-            saveKaraoke(Karaoke).then((data) => {
-                console.log(data)
-            })
+            // saveKaraoke(Karaoke).then((data) => {
+            //     console.log(data)
+            // })
 
             };
             reader.readAsText(file);
           }
       };
+
+    /*______________ ROMANIZED ______________*/
+    const [song, setSong] = useState('');
+    const romanize =  () => {
+        romanized(song).then((data) => {
+            console.log(data)
+        });
+        console.log('ROMANIZED')
+    }
     return ( 
         // <form {...props} onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm space-y-8">
         <form onSubmit={handleSubmit} className="h-full w-full border-r pr-5">
@@ -169,7 +179,7 @@ function Subtitle({ onData }: SubtitleProps) {
                             <option className="checked:bg-white hover:bg-slate-600 " value="1">Song 1</option>
                             {lyrics}
                  </select> */}
-                <Select onValueChange={(e)=>onData(e)}>
+                <Select onValueChange={(e)=>{onData(e);setSong(e)}}>
                     <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Lyrics" />
                     </SelectTrigger>
@@ -180,7 +190,7 @@ function Subtitle({ onData }: SubtitleProps) {
                     </SelectContent>
                 </Select>
 
-
+                <span onClick={romanize} className="material-symbols-outlined  hover:text-red-700 cursor-pointer">translate</span>
                 <Button type="submit">Save</Button>
                 {/* Pruebas */}
                 <SearchSong onData={handleLyrics} isOpen={open} setIsOpen={setOpen} />

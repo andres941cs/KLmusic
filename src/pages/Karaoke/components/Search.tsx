@@ -12,6 +12,7 @@ const SearchSong = ({ onData,isOpen,setIsOpen }: ISearchSong) => {
     const [sugesstions, setSuggestions] = useState([]);
 
     const getSuggestions  = (event:ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
         setValue(event.target.value);
         setSuggestions([]);
         if(event.target.value.length >= 3) {
