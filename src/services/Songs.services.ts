@@ -15,6 +15,15 @@ export async function getSongs() {
     console.error(error);
   }
 }
+// POST /search => search:name
+// export async function searchSongByName(query: string) {
+//   try {
+//       const response = await axios.post(API_URL+'song/search', {search: query});
+//       return response.data;
+//   } catch (error) {
+//       console.error(error);
+//   }
+// }
 // GET /songs/:id
 export const loaderSong = async ({params}:any) => {
   try{

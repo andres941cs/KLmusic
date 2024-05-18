@@ -1,7 +1,5 @@
-"use client"
-
-import * as React from "react"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
+import { forwardRef } from "react"
 
 function cn(base:string,classname?:string) {
     if (classname) {
@@ -10,7 +8,7 @@ function cn(base:string,classname?:string) {
     return base
     }
 
-const Switch = React.forwardRef<
+const Switch = forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
 >(({ className, ...props }, ref) => (

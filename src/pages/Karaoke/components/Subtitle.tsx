@@ -196,11 +196,7 @@ function Subtitle({ onData }: SubtitleProps) {
                 <SearchSong onData={handleLyrics} isOpen={open} setIsOpen={setOpen} />
             </StackLayout>
             {/* LYRICS */}
-            {/* <StackLayout className="w-[900px] h-[110px] border"> */}
-            <StackLayout className="w-full h-[110px]">
-                {/* <div className="w-full h-24 border">
-
-                </div> */}
+            {/* <StackLayout className="w-full h-[110px]">
                 <StackLayout gap={3} orientation="row" className="w-full py-1 px-2">
                     <div className="w-full h-[100px] border"> 
                         <Textarea id="lyric" className="h-full resize-none"></Textarea>
@@ -211,7 +207,7 @@ function Subtitle({ onData }: SubtitleProps) {
                         <div className="w-40 h-10 border"><InputTime id="endTime"/></div>
                     </StackLayout>
                 </StackLayout>
-            </StackLayout>
+            </StackLayout> */}
             
             {elements}
         </StackLayout>

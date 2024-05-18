@@ -12,6 +12,15 @@ import axios from "axios";
 //     }
 //   }
 
+export async function searchArtistByName(query: string) {
+    try {
+        const response = await axios.post(API_URL+'artist/search', {search: query});
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 /* RUTAS DE LA API - LOADERS */
 export const loaderArtist = async ({params}:any) => {
     

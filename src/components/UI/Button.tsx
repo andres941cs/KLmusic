@@ -10,8 +10,14 @@
 
 // export default Button
 
-    interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement>{variant?:string}
-    export const Button = ({variant,children,...props}:Props) => {
+import { forwardRef } from "react";
+
+    // interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement>{variant?:string}
+    // export const Button = ({variant,children,...props}:Props) => {
+      export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{variant?:string}
+     
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+      ({ className, variant, children, ...props }, ref) => {
     // Define base classes for button
     // let baseClasses = "px-4 py-2 rounded";
     let baseClasses = "flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-foreground shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
@@ -35,11 +41,12 @@
     }
     
     return (
-        <button {...props} className={baseClasses}>
+        <button {...props} ref={ref} className={baseClasses}>
             {children}
         </button>
     );
   }
+)
   
 // Usage
 //   <Button variant="primary">Primary Button</Button>

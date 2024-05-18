@@ -1,7 +1,15 @@
 import { API_URL } from "@utils/constantes";
 import axios from "axios";
 /* RUTAS DE LA API - ENDPOINTS */
-// GET /abums
+// POST
+export async function searchAlbumsByName(query: string) {
+    try {
+        const response = await axios.post(API_URL+'album/search', {search: query});
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 // GET /album/artist/:id
 export async function getAlbumsByArtist(id:number){

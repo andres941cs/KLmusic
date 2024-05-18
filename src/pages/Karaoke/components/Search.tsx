@@ -49,7 +49,8 @@ const SearchSong = ({ onData,isOpen,setIsOpen }: ISearchSong) => {
         <>
         <div onClick={()=>setIsOpen(false)} className={`bg-black opacity-80 h-screen w-screen absolute z-40 top-0 left-0 `}></div>
         <div className="absolute z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <input value={value} onChange={getSuggestions} className="border border-white bg-white/5 w-60 h-8 p-3 outline-none" placeholder="Song" />
+            <input value={value} onChange={getSuggestions} onKeyDown={(e)=>{(e.key === 'Enter')&&e.preventDefault()}} 
+            className="border border-white bg-white/5 w-60 h-8 px-3 py-5 outline-none" placeholder="Song" />
             <ul>{sugesstions}</ul>
         </div>
         
