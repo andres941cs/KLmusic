@@ -8,6 +8,7 @@ import { Karaoke } from "@models/Karaoke";
 import SearchSong from "./Search";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/UI/Select";
 import { romanized } from "@services/Api.services";
+import { insertLyric } from "@services/Lyric.services";
 
 interface SubtitleProps {
     onData: (data: string) => void;
@@ -64,11 +65,9 @@ function Subtitle({ onData }: SubtitleProps) {
         endTime: string;
         text: string;
     }
-    // const [duplicados, setDuplicados] = useState(0);
+
     const [elements, setElements] = useState<JSX.Element[]>([]);
     const duplicarComponente = () => {
-        // setDuplicados(duplicados + 1);
-        console.log(elements.length)
         const newElement = <Setting key={elements.length} ref={assignRef(elements.length)}/>;
         setElements(prevElements => [...prevElements, newElement]);
     };
@@ -153,8 +152,19 @@ function Subtitle({ onData }: SubtitleProps) {
     /*______________ ROMANIZED ______________*/
     const [song, setSong] = useState('');
     const romanize =  () => {
-        romanized(song).then((data) => {
-            console.log(data)
+        romanized(song).then((res) => {
+            console.log(res)
+            const data = {
+                'lyric': res.data,
+                'isInstrumental': 0,
+                'id_song': 7,
+                'url': 'https://www.youtube.com/watch?v=Zm24Y_f6qQk',
+                'language': res.language
+            }
+
+            insertLyric(data).then((res) => {
+                console.log(res)
+            })
         });
         console.log('ROMANIZED')
     }
@@ -217,21 +227,6 @@ function Subtitle({ onData }: SubtitleProps) {
 
 export default Subtitle;
 
-
-// function Setting() {
-//     return ( 
-//         <StackLayout gap={3} orientation="row" className="w-full px-5 py-1">
-//             <div className="w-full h-[100px] border"> 
-//                 <Textarea id="lyric" className="h-full resize-none"></Textarea>
-//             </div>
-//             <span className="material-symbols-outlined text-foreground">delete</span>
-//             <StackLayout justifyContent="between" className="h-full">
-//                 <div className="w-40 h-10 border"><InputTime/></div>
-//                 <div className="w-40 h-10 border"><InputTime/></div>
-//             </StackLayout>
-//         </StackLayout>
-//      );
-// }
 const Setting = forwardRef<HTMLDivElement>((props, ref) => {
     return ( 
         <div ref={ref} className="flex flex-row items-center gap-3 w-full px-5 py-1" {...props}>

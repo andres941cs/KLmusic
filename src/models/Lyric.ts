@@ -1,12 +1,13 @@
 import { Song } from "./songs";
 
 export interface Lyric {
-    id: number;
+    id?: number;
     lyric: string;
-    isInstrumental: boolean;
-    song: Song;
+    isInstrumental: number;
+    song?: Song;
+    id_song?: number;
     url: string;
     language: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 }

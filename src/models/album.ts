@@ -2,11 +2,12 @@ import { Artist } from "./artist";
 
 // Interface for Album
 export interface Album {
-    id: number;
+    id?: number;
     name: string;
-    artist: Artist;
+    id_artist?: number;
+    artist?: Artist;
     image: string;
     release_date: string;
     genre: string;
-    songs: string;
+    // songs: string;
 }

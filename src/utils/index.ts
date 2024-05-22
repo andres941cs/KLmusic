@@ -29,6 +29,10 @@ export function getRamdomColor(){
   }
     
   }
+
+export function arrayToString(array: string[]): string {
+    return array.join(' ')
+  }
 // function getTheme() {
 //   const htmlElement = document.documentElement;
 //   if (htmlElement.classList.contains('dark')) {

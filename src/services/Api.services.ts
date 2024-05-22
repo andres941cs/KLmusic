@@ -1,5 +1,5 @@
 import axios from "axios";
-
+// PENDIENTE => Cambiar a variable de entorno
 const API_SERVICE_URL = 'http://localhost:3000/v1/';
 /* RUTAS DE LA API - ENDPOINTS */
 export const romanized = async (lyric:string) => {
@@ -24,7 +24,7 @@ export const searchArtist = async (artist:string) => {
 
 export const searchAlbum = async (album:string) => {
     try {
-        const response = await axios.get(API_SERVICE_URL + 'album/search' + album);
+        const response = await axios.get(API_SERVICE_URL + 'album/search/' + album);
         return response.data;
     }
     catch (error) {
@@ -34,7 +34,7 @@ export const searchAlbum = async (album:string) => {
 
 export const searchSong = async (song:string) => {
     try {
-        const response = await axios.get(API_SERVICE_URL + 'song/search' + song);
+        const response = await axios.get(API_SERVICE_URL + 'song/search/' + song);
         return response.data;
     }
     catch (error) {

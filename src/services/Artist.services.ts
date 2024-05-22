@@ -1,20 +1,21 @@
+import { Artist } from "@models/artist";
 import { API_URL } from "@utils/constantes";
 import axios from "axios";
-// import { Artists } from "src/models/artist";
-/* RUTAS DE LA API - ENDPOINTS */
-// GET /abums
-// export async function getSongs() {
-//     try {
-//       const response = await axios.get(API_URL+'songs');
-//       return response.data;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
 
+/* RUTAS DE LA API - ENDPOINTS */
 export async function searchArtistByName(query: string) {
+    console.log(query);
     try {
         const response = await axios.post(API_URL+'artist/search', {search: query});
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function insertArtist(artist: Artist) {
+    try {
+        const response = await axios.post(API_URL+'form/artist', artist);
         return response.data;
     } catch (error) {
         console.error(error);
