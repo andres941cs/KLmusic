@@ -4,7 +4,7 @@ import { Song } from "src/models/songs";
 
 const SongPage = () => {
     const song = useLoaderData() as Song;
-    console.log(song);
+
     return (
         <Card className="flex flex-col">
             {/* CARD HEADER */}

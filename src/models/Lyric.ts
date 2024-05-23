@@ -7,6 +7,7 @@ export interface Lyric {
     song?: Song;
     id_song?: number;
     url: string;
+    preview?: string;
     language: string;
     createdAt?: Date;
     updatedAt?: Date;

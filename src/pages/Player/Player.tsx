@@ -146,10 +146,10 @@ function Player(data:any){
     // }
     // }
     return(
-        <div className='flex flex-col h-full overflow-hidden relative'>
+        <div className='flex flex-col h-full overflow-hidden relative puff-in-center'>
         {/*  absolute -> Mejoras scale 1.2 ->  Animcion Para el comienzo y para el final quitar ultimos 3s*/}
         <ReactPlayer ref={player}
-            className="hidden"
+            className="absolute"
             width="100%"
             height="90%"
             url={karaoke.lyric.url}

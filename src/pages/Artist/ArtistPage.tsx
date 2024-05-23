@@ -14,20 +14,16 @@ function ArtistPage() {
     const navigate = useNavigate();
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
+
+    useEffect(() => {
+        getSongsByArtist(artist.id!).then(data => setSongs(data));
+        getAlbumsByArtist(artist.id!).then(data => setAlbums(data))
+    }, [])
+
     const navigateTo = (id:number) => {
         navigate(`/album/${id}`)
     }
-    useEffect(() => {
-        getSongsByArtist(artist.id!)
-        .then(data => {
-            setSongs(data);
-            console.log(data)
-        });
-        getAlbumsByArtist(artist.id!).then(data => {
-            setAlbums(data);
-            console.log(data)
-        })
-    }, [])
+    
     return ( 
         <StackLayout  className="max-h-full h-full bg-[#f01050]">
             <CardHeader></CardHeader>
@@ -41,29 +37,28 @@ function ArtistPage() {
             <div className="flex h-2/5 lg:h-72 w-full gap-5 p-5">
                 <img className="w-52 h-52 rounded-full" src={artist.image} alt="" />
                 <div className="flex flex-col justify-center items-start">
-                        <span className="m-1 text-foreground">Artist</span>
-                        <h1 className="lg:text-8xl md:text-6xl sm:text-4xl font-bold text-foreground">{artist.name}</h1>
+                    <span className="m-1 text-foreground">Artist</span>
+                    <h1 className="lg:text-8xl md:text-6xl sm:text-4xl font-bold text-foreground">{artist.name}</h1>
                 </div>
             </div>
             <div className="h-full w-full bg-gradient-to-b from-red-900 to-slate-900">
-                    {/* Canciones */}
-                    <h2 className="text-foreground">Songs</h2>
-                   <div className="">{songs.length > 0 ? <TableSong data={songs}></TableSong> : <span className="text-foreground">No hay canciones</span>}</div>
+                {/* Canciones */}
+                <h2 className="text-foreground">Songs</h2>
+                <div className="">{songs.length > 0 ? <TableSong data={songs}></TableSong> : <span className="text-foreground">No hay canciones</span>}</div>
 
-                    <h2 className="text-foreground">Albums</h2>
-                    <div className="flex flex-wrap">
-                    {albums.map((album:Album) => (
-                        // Max width of 222px
-                        <div onClick={()=>navigateTo(album.id!)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
-                            <img src={album.image} alt={album.name}
-                                className="w-[150px] h-[150px] rounded-sm object-cover m-auto"/>
-                            <div className='flex flex-col text-foreground'>
-                                <span className="truncate">{album.name}</span>
-                                <span>{getYears(album.release_date)}</span>
-                            </div>
+                <h2 className="text-foreground">Albums</h2>
+                <div className="flex flex-wrap">
+                {albums.map((album:Album) => (
+                    <div onClick={()=>navigateTo(album.id!)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
+                        <img src={album.image} alt={album.name}
+                            className="w-[150px] h-[150px] rounded-sm object-cover m-auto"/>
+                        <div className='flex flex-col text-foreground'>
+                            <span className="truncate">{album.name}</span>
+                            <span>{getYears(album.release_date)}</span>
                         </div>
-                    ))}
                     </div>
+                ))}
+                </div>
             </div>
             
         </StackLayout>
@@ -91,15 +86,8 @@ function ArtistPage() {
 // }
 export const CardHeader = () => {
     const navigate = useNavigate();
+    const goBack = () => navigate(-1);
 
-    const goBack = () => {
-        console.log('go back')
-        navigate(-1);
-    }
-
-    // const navigateTo = (id) => {
-    //     navigate(`/artist/${id}`)
-    // }
     return (
         <div className="bg-slate-800 flex w-full p-2">
             <span onClick={()=>goBack()} className="material-symbols-outlined font-thin p-1 bg-slate-500 dark:text-white mx-2 rounded-full">arrow_left_alt</span>

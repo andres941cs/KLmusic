@@ -5,20 +5,21 @@ import { Karaoke } from '@models/Karaoke';
 import { Button } from '@components/UI';
 
 function HomePage(){
-    const [search, setSearch] = useState('')
-    const [results, setResults] = useState([])
-    const navigate = useNavigate()
+    const [search, setSearch] = useState('');
+    const [results, setResults] = useState([]);
+    const navigate = useNavigate();
+
     const handleSearch = (event:ChangeEvent<HTMLInputElement>) => {
         setSearch(event.target.value);
-      };
+    };
+    
     const handleResults = () => {
-        if(search === '') return
+        if(search === '') return;
         searchKaraoke(search).then((data) => {
             const newResutls:any = []
             data.forEach((element:Karaoke) => {
                 newResutls.push(element)
             });
-            console.log(newResutls)
             setResults(newResutls)
         })
     }
@@ -35,7 +36,8 @@ function HomePage(){
     }
     const playKaraoke = (id:number) => {
         navigate(`/player/${id}`)
-      }
+    }
+
     return (
         <>
             <main className="flex flex-col items-center justify-center px-4 md:px-0">
@@ -44,13 +46,12 @@ function HomePage(){
                 <div className="mt-5">
                     <div className={`flex items-center ${results.length==0?'rounded-3xl':'rounded-t-3xl border-b-0'}  border border-gray-200 h-12 px-3 max-w-xl`}>
                         <span className="material-symbols-outlined dark:text-white">search</span>
-                        <input value={search} onChange={handleSearch} onKeyDown={(e)=>handleKeyDown(e)} className={`w-full px-3 bg-transparent dark:text-white ${results.length==0?' border-none':'border-b border-[#4b5563]'} focus:outline-none`} type="text" id="search-bar"/>
+                        <input value={search} onChange={handleSearch} onKeyDown={(e)=>handleKeyDown(e)} className={`w-full px-3 bg-transparent dark:text-white ${results.length==0?' border-none':'border-b border-muted'} focus:outline-none`} type="text" />
                     </div>
-                    {/* IMPLEMENTANDO */}
                     {results.length>0&&(<ul className='border border-gray-200 border-t-0 rounded-b-3xl'>
                             {
                             results.map((result:Karaoke,index) => (
-                                <li key={result.id} onClick={()=>playKaraoke(result.id!)} className={`text-foreground px-6 hover:bg-gray-700  ${index === results.length - 1 && 'rounded-b-3xl'}`}>
+                                <li key={result.id} onClick={()=>playKaraoke(result.id!)} className={`text-foreground px-6 hover:bg-muted  ${index === results.length - 1 && 'rounded-b-3xl'}`}>
                                     {result.lyric!.song!.name} - {result.lyric!.song!.artist!.name}
                                 </li>
                             ))}
@@ -67,25 +68,5 @@ function HomePage(){
         </>
     )
 }
-// background-color: #303134;
-//     box-shadow: 0 1px 6px 0 #171717;
-//     border-color: rgba(223,225,229,0);
 
-// HOVER
-// background-color: #303134;
-//     box-shadow: 0 1px 6px 0 #171717;
-//     border-color: rgba(223,225,229,0);
-
-// display: flex;
-//     z-index: 3;
-//     position: relative;
-//     min-height: 44px;
-//     background: #202124;
-//     border: 1px solid #5f6368;
-//     box-shadow: none;
-//     border-radius: 24px;
-//     margin: 0 auto;
-//     width: 638px;
-//     width: auto;
-//     max-width: 584px;
 export default HomePage

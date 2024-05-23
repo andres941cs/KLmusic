@@ -13,15 +13,13 @@ import {
 import { Song } from 'src/models/songs';
 import { format } from '../../utils/index';
 import { useNavigate } from "react-router-dom";
+
 function SongsPage() {
   const [songs, setSongs] = useState([])
   const navigate = useNavigate();
+
   useEffect(() => {
-    getSongs().then((data) => { 
-      setSongs(data);
-      console.log(data)
-    });
-    
+    getSongs().then((data) => setSongs(data));
   }, [])
 
   const playKaraoke = (id:number) => {
@@ -65,10 +63,6 @@ function SongsPage() {
       </TableBody>
       <TableFooter>
         {/* AQUI VA LA PAGINACION */}
-        {/* <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow> */}
       </TableFooter>
     </Table>
         </Card>

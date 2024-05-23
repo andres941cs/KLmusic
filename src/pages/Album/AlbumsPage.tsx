@@ -13,7 +13,7 @@ const AlbumsPage = () => {
 
     return (
         <Card className="flex flex-col">
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap justify-center gap-5">
             {albums.map((album:Album) => (
                 <div onClick={()=>navigateTo(album.id!)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
                     <img

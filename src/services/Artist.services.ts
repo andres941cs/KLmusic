@@ -4,7 +4,6 @@ import axios from "axios";
 
 /* RUTAS DE LA API - ENDPOINTS */
 export async function searchArtistByName(query: string) {
-    console.log(query);
     try {
         const response = await axios.post(API_URL+'artist/search', {search: query});
         return response.data;
@@ -43,7 +42,6 @@ export const loaderArtists = async () => {
     try{
         const res = await axios.get(API_URL+'artist');
         const artists = await res.data;
-        console.log(artists);
         return artists;
     }catch(error){
         console.error(error);
