@@ -28,7 +28,7 @@ export const FormArtist = () => {
         <h1 className="text-xl mb-3">INSERT ARTISTS</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
             {/* <input className="rounded px-3 py-1.5 text-foreground bg-muted w-full"  type="text" placeholder="Search Artist"/> */}
-            <AutoComplete name="Artist" fecht={searchArtist} onClick={autoSave}/>
+            <AutoComplete fecht={searchArtist} onClick={autoSave}/>
             <p>If not found create here:</p>
             <Label htmlFor="name">Name:</Label>
             <Input id="name" nameInput="name" register={register}/>

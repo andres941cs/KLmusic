@@ -39,7 +39,7 @@ const KaraokesPage = () => {
             <TableCell className="font-medium">{karaoke.id}</TableCell>
             <TableCell>
                 <div className='flex flex-col'>
-                {karaoke.lyric?.song.name}
+                {karaoke.lyric?.song?.name}
                 <span className='text-gray-500 text-sm'>{karaoke.publication_date}</span>
                 </div>
             </TableCell>

@@ -15,7 +15,7 @@ const AlbumsPage = () => {
         <Card className="flex flex-col">
             <div className="flex flex-wrap">
             {albums.map((album:Album) => (
-                <div onClick={()=>navigateTo(album.id)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
+                <div onClick={()=>navigateTo(album.id!)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
                     <img
                         src={album.image}
                         alt={album.name}
@@ -23,7 +23,7 @@ const AlbumsPage = () => {
                     />
                     <div className='flex flex-col'>
                         <span className="truncate">{album.name}</span>
-                        <span className='text-muted-foreground text-sm'>{getYears(album.release_date)} • {album.artist.name}</span>
+                        <span className='text-muted-foreground text-sm'>{getYears(album.release_date)} • {album.artist?.name}</span>
                     </div>
                 </div>
             ))}

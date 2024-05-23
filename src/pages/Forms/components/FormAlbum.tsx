@@ -7,7 +7,6 @@ import { searchAlbum } from "@services/Api.services";
 import { searchArtistByName } from "@services/Artist.services";
 import { Album } from "@models/album";
 import { insertAlbum } from "@services/Album.services";
-import { arrayToString } from "@utils/index";
 import { useState } from "react";
 
 export const FormAlbum = () => {
@@ -47,7 +46,7 @@ export const FormAlbum = () => {
         <Card className="!m-0">
         <h1 className="text-xl mb-3">INSERT ALBUM</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-            <AutoComplete name="Album" onClick={autoSave} fecht={searchAlbum}/>
+            <AutoComplete onClick={autoSave} fecht={searchAlbum}/>
             <p>If not found create here:</p>
             <Label htmlFor="name">Name:</Label>
             <Input id="name" nameInput="name" register={register}/>

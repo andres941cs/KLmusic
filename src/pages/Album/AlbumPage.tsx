@@ -20,7 +20,7 @@ const AlbumPage = () => {
     const [songs, setSongs] = useState([]);
     const bg = getRamdomColor();
     useEffect(() => {
-        getSongsByAlbum(album.id)
+        getSongsByAlbum(album.id!)
         .then(data => {
             setSongs(data);
             console.log(data)

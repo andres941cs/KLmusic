@@ -51,7 +51,7 @@ function HomePage(){
                             {
                             results.map((result:Karaoke,index) => (
                                 <li key={result.id} onClick={()=>playKaraoke(result.id!)} className={`text-foreground px-6 hover:bg-gray-700  ${index === results.length - 1 && 'rounded-b-3xl'}`}>
-                                    {result.lyric!.song.name} - {result.lyric!.song.artist.name}
+                                    {result.lyric!.song!.name} - {result.lyric!.song!.artist!.name}
                                 </li>
                             ))}
                         </ul>

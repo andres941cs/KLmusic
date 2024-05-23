@@ -47,7 +47,7 @@ const FormSong = () => {
         <Card className="!m-0">
             <h1 className="text-xl mb-3">INSERT SONG</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-                <AutoComplete name="Song" onClick={autoSave} fecht={searchSong}/>
+                <AutoComplete onClick={autoSave} fecht={searchSong}/>
                 <p>If not found create here:</p>
                 <Label htmlFor="name">Name:</Label>
                 <Input id="name" nameInput="name" register={register}/>

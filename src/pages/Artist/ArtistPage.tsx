@@ -18,12 +18,12 @@ function ArtistPage() {
         navigate(`/album/${id}`)
     }
     useEffect(() => {
-        getSongsByArtist(artist.id)
+        getSongsByArtist(artist.id!)
         .then(data => {
             setSongs(data);
             console.log(data)
         });
-        getAlbumsByArtist(artist.id).then(data => {
+        getAlbumsByArtist(artist.id!).then(data => {
             setAlbums(data);
             console.log(data)
         })
@@ -54,7 +54,7 @@ function ArtistPage() {
                     <div className="flex flex-wrap">
                     {albums.map((album:Album) => (
                         // Max width of 222px
-                        <div onClick={()=>navigateTo(album.id)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
+                        <div onClick={()=>navigateTo(album.id!)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
                             <img src={album.image} alt={album.name}
                                 className="w-[150px] h-[150px] rounded-sm object-cover m-auto"/>
                             <div className='flex flex-col text-foreground'>

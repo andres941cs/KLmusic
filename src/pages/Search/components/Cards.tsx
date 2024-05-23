@@ -11,7 +11,7 @@ export function SongCard(songs:Song[]) {
                 <img src={song.image}  className="h-12 w-12 rounded-full"></img>
                 <StackLayout>
                 <p>{song.name}</p>
-                <p>{song.artist.name}</p>
+                <p>{song.artist?.name}</p>
                 </StackLayout>
             </StackLayout>
             <span className="material-symbols-outlined">navigate_next</span>
@@ -50,7 +50,7 @@ export function AlbumCard({album}:IAlbumcard) {
             <StackLayout orientation="row" className="gap-2 ">
                 <img src={album.image}  className="h-12 w-12 rounded-full"></img>
                 <p className="font-bold">{album.name}</p>
-                <p>{album.artist.name}</p>
+                <p>{album.artist?.name}</p>
                 <p>{album.release_date}</p>
             </StackLayout>
             <span className="material-symbols-outlined">navigate_next</span>

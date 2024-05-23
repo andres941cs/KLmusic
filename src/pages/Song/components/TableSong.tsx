@@ -27,7 +27,7 @@ const TableSong = ({data}:TableSongProps) => {
       </TableHeader>
       <TableBody>
         {data.map((song:Song) => (
-          <TableRow onClick={()=>playKaraoke(song.id)} key={song.id}>
+          <TableRow onClick={()=>playKaraoke(song.id!)} key={song.id}>
             <TableCell className="font-medium">{song.id}</TableCell>
             <TableCell>
               <div className='flex gap-3'>
@@ -38,7 +38,7 @@ const TableSong = ({data}:TableSongProps) => {
                 />
                 <div className='flex flex-col'>
                 {song.name}
-                <span className='text-gray-500 text-sm'>{song.artist.name}</span>
+                <span className='text-gray-500 text-sm'>{song.artist?.name}</span>
                 </div>
               </div>
               

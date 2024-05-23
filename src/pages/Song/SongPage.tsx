@@ -14,8 +14,8 @@ const SongPage = () => {
                     <span>Song</span>
                     <h1 className="text-4xl font-bold text-foreground">{song.name}</h1>
                     <div className="flex flex-col">
-                        <span>{song.artist.name} {song.album.name}</span>
-                        <span>{song.album.release_date} {song.duration}</span>
+                        <span>{song.artist?.name} {song.album?.name}</span>
+                        <span>{song.album?.release_date} {song.duration}</span>
                     </div>
                 </div>
             </div>

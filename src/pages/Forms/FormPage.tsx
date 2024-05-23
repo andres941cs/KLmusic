@@ -33,35 +33,16 @@ const FormPage = () => {
   )
 }
 
-
-
-// const FormPage = () => {
-//     
-//     return ( 
-//         <Card>
-//             <h1>INSERT ARTISTS</h1>
-//             <FormArtist/>
-//             {/* Buscar Data */}
-//             {/* <div className="w-80">
-//                 <input  type="text" placeholder="Search Artist"/>
-//                 <span className="material-symbols-outlined">search</span></div> */}
-//             {/* <AutoComplete name={'search'} fecht={()=>console.log('ho')}/> */}
-//             {/* Formulario */}
-//             {/* <Form title="Artist" inputs={registerFields} onSubmit={handleRegister} /> */}
-//         </Card>
-//      );
-// }
- 
 export default FormPage;
 
 
 interface IAutoComplete {
-    name:string;
+    // name:string;
     fecht:(name:string)=>Promise<any>;
     onData?:(data:any)=>void;
     onClick?:(data:any)=>void;
 }
-export const AutoComplete = ({name, fecht, onClick,onData}:IAutoComplete) => {
+export const AutoComplete = ({ fecht, onClick,onData}:IAutoComplete) => {
     const [search, setSearch] = useState<string>("")
     const [suggestions, setSuggestions] = useState([])
     const getSuggestions = (event:React.ChangeEvent<HTMLInputElement>) => {

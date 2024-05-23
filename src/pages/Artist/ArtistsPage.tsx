@@ -15,7 +15,7 @@ const ArtistsPage = () => {
             <div className="flex flex-wrap justify-center">
             {artists.map((artist:Artist) => (
                 // Max width of 222px
-                <div onClick={()=>navigateTo(artist.id)}  key={artist.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
+                <div onClick={()=>navigateTo(artist.id!)}  key={artist.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
                     <img
                         src={artist.image}
                         alt={artist.name}

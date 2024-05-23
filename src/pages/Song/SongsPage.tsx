@@ -41,7 +41,7 @@ function SongsPage() {
       </TableHeader>
       <TableBody>
         {songs.map((songs:Song) => (
-          <TableRow onClick={()=>playKaraoke(songs.id)} key={songs.id}>
+          <TableRow onClick={()=>playKaraoke(songs.id!)} key={songs.id}>
             <TableCell className="font-medium">{songs.id}</TableCell>
             <TableCell>
               <div className='flex gap-3'>
@@ -52,7 +52,7 @@ function SongsPage() {
                 />
                 <div className='flex flex-col'>
                 {songs.name}
-                <span className='text-gray-500 text-sm'>{songs.artist.name}</span>
+                <span className='text-gray-500 text-sm'>{songs.artist?.name}</span>
                 </div>
               </div>
               

@@ -18,7 +18,7 @@ const SearchSong = ({ onData,isOpen,setIsOpen }: ISearchSong) => {
         if(event.target.value.length >= 3) {
             searchSongs(event.target.value).then((data) => {
                 const suggestions = data.map((song:Song) => {
-                    return <li key={song.id} onClick={()=>showLyrics(song.id)}>{song.name}</li>
+                    return <li key={song.id} onClick={()=>showLyrics(song.id!)}>{song.name}</li>
                 })
                 setSuggestions(suggestions);
                 console.log(suggestions)
