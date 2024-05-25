@@ -1,10 +1,28 @@
 import axios from 'axios';
-import { API_URL } from '@utils/constantes';
+import { API_URL } from '@utils/constants';
 import { Karaoke } from '@models/Karaoke';
 
 export const saveKaraoke = async (karaoke: Karaoke) => {
     try {
         const response = await axios.post(`${API_URL}karaoke`, karaoke);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const updateKaraoke = async (karaoke: Karaoke) => {
+    try {
+        const response = await axios.put(`${API_URL}karaoke/${karaoke.id}`, karaoke);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const deleteKaraoke = async (id: number) => {
+    try {
+        const response = await axios.delete(`${API_URL}karaoke/${id}`);
         return response.data;
     } catch (error) {
         console.error(error);

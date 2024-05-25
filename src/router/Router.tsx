@@ -28,6 +28,7 @@ import KaraokePage from '@pages/Karaoke/KaraokePage.tsx';
 import NotFoundPAge from '@pages/NotFound.tsx';
 import ProtectedRoute from '@pages/Login/ProtectedRoute.tsx';
 import FormPage from '@pages/Forms/FormPage.tsx';
+import ResetPage from "@pages/Login/ResetPage";
 
 
 const router = createBrowserRouter([
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <ProfilePage></ProfilePage>,
+      },
+      {
+        path: "/reset",
+        element: <ResetPage></ResetPage>,
       },
       {
         path: "/search",

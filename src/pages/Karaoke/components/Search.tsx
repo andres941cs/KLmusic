@@ -17,7 +17,7 @@ const SearchSong = ({ onData,isOpen,setIsOpen }: ISearchSong) => {
         if(event.target.value.length >= 3) {
             searchSongs(event.target.value).then((data) => {
                 const suggestions = data.map((song:Song) => {
-                    return <li key={song.id} onClick={()=>showLyrics(song.id!)}>{song.name}</li>
+                    return <li className="p-2 hover:bg-muted" key={song.id} onClick={()=>showLyrics(song.id!)}>{song.name}</li>
                 })
                 setSuggestions(suggestions);
             })
@@ -39,7 +39,7 @@ const SearchSong = ({ onData,isOpen,setIsOpen }: ISearchSong) => {
         <div className="absolute z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <input value={value} onChange={getSuggestions} onKeyDown={(e)=>{(e.key === 'Enter')&&e.preventDefault()}} 
             className="border border-white bg-white/5 w-60 h-8 px-3 py-5 outline-none" placeholder="Song" />
-            <ul>{sugesstions}</ul>
+            <ul className="border border-t-0">{sugesstions}</ul>
         </div>
         </>
      );

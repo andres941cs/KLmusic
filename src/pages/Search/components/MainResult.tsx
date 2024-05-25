@@ -3,7 +3,7 @@ import { useState } from "react";
 import Result, { ResultAlbum, ResultArtist } from "./Results";
 import Tabs from "./Tabs";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { API_URL } from "@utils/constantes";
+import { API_URL } from "@utils/constants";
 import { Badge } from "@components/UI/Badge";
 import { StackLayout } from "@components/Layouts/StackLayout";
 

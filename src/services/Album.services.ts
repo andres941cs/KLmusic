@@ -1,6 +1,7 @@
 import { Album } from "@models/album";
-import { API_URL } from "@utils/constantes";
+import { API_URL } from "@utils/constants";
 import axios from "axios";
+
 /* RUTAS DE LA API - ENDPOINTS */
 // POST - /album/search => name (string)
 export async function searchAlbumsByName(query: string) {

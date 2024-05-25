@@ -46,9 +46,9 @@ const Header = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'karaoke'} className={({ isActive, isPending }) => 
+                            <NavLink to={'karaokes'} className={({ isActive, isPending }) => 
                                 {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
-                                Karaoke
+                                Karaokes
                             </NavLink>
                         </li>
                     </ul>

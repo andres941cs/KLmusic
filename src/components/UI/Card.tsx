@@ -8,7 +8,7 @@ const Card = forwardRef<
 >(({ className, ...props }, ref) => (
   <div {...props}
     ref={ref}
-    className={`${className||''} rounded-md h-full m-5 p-5 border dark:border-none dark:bg-[#1C1917] text-card-foreground shadow`}
+    className={`${className||''} rounded-md h-full m-5 p-5 border dark:border-none dark:bg-[#1C1917] text-card-foreground shadow overflow-auto`}
     {...props}
   />
 ))

@@ -36,7 +36,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         baseClasses += " bg-red-500 text-white";
         break;
       default:
-        baseClasses += " bg-black dark:bg-white hover:bg-[hsl(240,3.7%,15.9%)] focus-visible:outline-black text-white dark:text-black";
+        baseClasses += " bg-black dark:bg-white hover:bg-[hsl(240,3.7%,15.9%)] dark:hover:opacity-90 focus-visible:outline-black text-white dark:text-black";
         break;
     }
     

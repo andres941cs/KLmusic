@@ -3,18 +3,19 @@ import { SubmitHandler } from "react-hook-form";
 import Form from "@components/UI/Form";//@/components/UI/Form
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from 'sonner'
+import { API_URL } from "@utils/constants";
 
 /* COMPONENTE */
-function RegisterPage(){
+function ResetPage(){
     interface FormData {
       [key: string]: string;
     }
     /* CONSTANTES */
     const navigate = useNavigate();
-    const handleRegister: SubmitHandler<FormData> =  (data) =>{
+    const handleReset: SubmitHandler<FormData> =  (data) =>{
       /* ------------- VALIDACIONES ------------- */
       /* CAMPOS VACIOS */
-      if (!data.username || !data.email || !data.password || !data.password_confirmation) {
+      if (!data.email) {
         toast.error('Todos los campos son obligatorios');
         return;
       }
@@ -24,19 +25,8 @@ function RegisterPage(){
         toast.error('El email no tiene un formato válido');
         return;
       }
-      /* CONTRASEÑAS INVALIDA */
-      const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
-      if (!passwordPattern.test(data.password)) {
-        toast.error('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número');
-        return;
-      }
-      /* CONTRASEÑAS DIFERENTES */
-      if(data.password !== data.password_confirmation){
-        toast.error('Las contraseñas no coinciden');
-        return;
-      }
       /* ------------- PETICION ------------- */
-      const URL ="http://127.0.0.1:8000/api/register";
+      const URL =API_URL+"forgot";
       const PARAMS = {
         method: 'POST',
         headers: {
@@ -53,10 +43,10 @@ function RegisterPage(){
           toast.error(mesagge);
           return;
         }
-        toast.success(`Usuario: ${data.username} registrado correctamente`);
+        toast.success(`Se ha enviado un correo a ${data.email} con las instrucciones para restablecer la contraseña`);
         setTimeout(() => {
           navigate('/login');
-        }, 2000);
+        }, 1000);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -64,18 +54,15 @@ function RegisterPage(){
     }  
         
     const registerFields = [
-      { label: 'Username', type: 'text', name: 'username' },
       { label: 'Email', type: 'email', name: 'email' },
-      { label: 'Password', type: 'password', name: 'password' },
-      { label: 'Confirm Password', type: 'password', name: 'password_confirmation' },
     ];
 
     return (
       <div className="flex flex-col items-center justify-center px-4 md:px-0">
-        <Form title="Sign in" inputs={registerFields} onSubmit={handleRegister} />
+        <Form title="Reset Password" inputs={registerFields} onSubmit={handleReset} />
         <Toaster richColors/>
       </div>
      );
 }
 
-export default RegisterPage;
+export default ResetPage;

@@ -1,6 +1,6 @@
 import axios from "axios";
-// PENDIENTE => Cambiar a variable de entorno
-const API_SERVICE_URL = 'http://localhost:3000/v1/';
+import { API_SERVICE_URL } from "@utils/constants";
+
 /* RUTAS DE LA API - ENDPOINTS */
 export const romanized = async (lyric:string) => {
     try {

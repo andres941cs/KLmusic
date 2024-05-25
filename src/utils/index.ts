@@ -1,4 +1,4 @@
-import { COLORS, LIGHT_COLORS } from "./constantes"
+import { COLORS, LIGHT_COLORS } from "./constants"
 
 export function format(seconds: number): string {
     const date = new Date(seconds * 1000)
@@ -32,21 +32,4 @@ export function getRamdomColor(){
 
 export function arrayToString(array: string[]): string {
     return array.join(' ')
-  }
-// function getTheme() {
-//   const htmlElement = document.documentElement;
-//   if (htmlElement.classList.contains('dark')) {
-//     return 'dark';
-//   } else {
-//     return 'light';
-//   }
-// }
-
-// function getTheme() {
-//   const isDarkTheme = window.matchMedia('(prefers-color: dark)').matches;
-//   if (isDarkTheme) {
-//     return 'dark';
-//   } else {
-//     return 'light';
-//   }
-// }
+}

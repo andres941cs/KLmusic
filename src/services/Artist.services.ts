@@ -1,5 +1,5 @@
 import { Artist } from "@models/artist";
-import { API_URL } from "@utils/constantes";
+import { API_URL } from "@utils/constants";
 import axios from "axios";
 
 /* RUTAS DE LA API - ENDPOINTS */

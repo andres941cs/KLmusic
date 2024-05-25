@@ -1,4 +1,4 @@
-import { API_URL } from "@utils/constantes";
+import { API_URL } from "@utils/constants";
 import axios from "axios";
 
 export async function getProfile(token:string) {

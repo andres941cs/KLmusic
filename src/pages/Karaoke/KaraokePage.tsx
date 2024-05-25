@@ -29,7 +29,7 @@ function KaraokePage() {
                     <div className="h-full w-full overflow-y-auto">{karaoke.lyric?.lyric}</div>
                 </StackLayout>
                 {/* LINE TIME */}
-                <div className="w-full h-1/3 grid border-t content-center">
+                <div className="w-full h-1/3 grid border-t content-center gap-5">
                     <AudioPlayer></AudioPlayer>
                 </div>
             </StackLayout>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL } from '@utils/constantes';
+import { API_URL } from '@utils/constants';
 import { Lyric } from '@models/Lyric';
 
 export const getLyricsBySongId = async (songId: number) => {
@@ -10,7 +10,6 @@ export const getLyricsBySongId = async (songId: number) => {
         console.error(error);
     }
 }
-
 
 export const insertLyric = async (lyric: Lyric) => {
     try {

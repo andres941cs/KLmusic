@@ -4,9 +4,11 @@ import { Karaoke } from "@models/Karaoke";
 import { useEffect, useState } from "react";
 import { getKaraokesByUser } from "@services/Karaoke.services";
 import { getProfile } from "@services/User.services";
+import { useNavigate } from "react-router-dom";
 
 const KaraokesPage = () => {
     const [Karaokes, setKaraokes] = useState<Karaoke[]>([]);
+    const navigate  = useNavigate();
     useEffect(() => {
       const token = sessionStorage.getItem('token');
       getProfile(token!).then((user) => {
@@ -14,13 +16,13 @@ const KaraokesPage = () => {
           setKaraokes(response);
         });
       });
-    }, [])
+    }, []);
 
     return (
-      <Card>
+      <Card className="flex flex-col">
         <div className="flex gap-3">
           <h1>My Karaokes</h1>
-          <span className="material-symbols-outlined cursor-pointer rounded-full">add</span>
+          <span onClick={()=>navigate('/karaoke')} className="material-symbols-outlined cursor-pointer rounded-full">add</span>
         </div>
         <Table>
           <TableHeader>
@@ -33,7 +35,7 @@ const KaraokesPage = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-        {Karaokes.map((karaoke:Karaoke) => (
+        {Karaokes ? Karaokes.map((karaoke:Karaoke) => (
           <TableRow key={karaoke.id}>
             <TableCell className="font-medium">{karaoke.id}</TableCell>
             <TableCell>
@@ -50,7 +52,7 @@ const KaraokesPage = () => {
                 <span className="material-symbols-outlined m-auto text-muted-foreground text-xl mx-4">delete</span>
             </TableCell>
           </TableRow>
-        ))}
+        )): <TableRow><TableCell className="text-center" colSpan={5}>No data</TableCell></TableRow>}
         </TableBody>
         <TableFooter>
           {/* AQUI VA LA PAGINACION */}

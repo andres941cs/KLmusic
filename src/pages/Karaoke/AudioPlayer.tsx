@@ -20,17 +20,19 @@ const AudioPlayer = () => {
   })
 
   const onPlayPause = useCallback(() => {
-    console.log(currentTime)
     wavesurfer && wavesurfer.playPause()
   }, [wavesurfer])
 
   return (
     <>
-      <button onClick={onPlayPause} style={{ minWidth: '5em' }}>
-          {isPlaying ? 'Pause' : 'Play'}
-      </button>
+      {
+        karaoke.lyric?.preview && (
+          <button className='w-[5rem] bg-primary hover:bg-red-700 text-white py-1 rounded' onClick={onPlayPause} >
+            {isPlaying ? 'Pause' : 'Play'}
+          </button>
+        )
+      }
       <div ref={containerRef} className='w-full' />
-        
     </>
   )
 }
