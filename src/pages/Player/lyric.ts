@@ -141,16 +141,13 @@ export function updateActiveLyrics(elapsed: number, subtitles: any) {
 	// let lineIndex = songdata.lyrics.lines!.length - 1;
     let lineIndex = subtitles.length - 1;
 	for (let i = -1; i < subtitles.length; i++) {
-        // console.log('MILISEGUNDOS TRANSCURRIDOS: '+elapsed *1000 + ' - ' + subtitles[i + 1]?)
 		// @ts-ignore
 		if (elapsed *1000 < subtitles[i + 1]?.tiempoInicio) {
 			lineIndex = i;
-            console.log('CAMBIO DE LINEA: ',lineIndex)
 			break;
 		}
 	}
-    console.log('SEGUNDOS TRANSCURIDOS: ',elapsed)
-    console.log('LINE ACTIVE: ',lineIndex)
+
 	const wasActiveBefore = container.children[lineIndex]?.classList?.contains("active");
 
 	for (let i = 0; i < container.children.length; i++) {

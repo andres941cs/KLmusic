@@ -1,8 +1,7 @@
-import { AuthContext } from "@pages/Login/AuthContext";
+import { AuthContext } from "@context/AuthContext";
 import { useContext } from "react";
-// import { Link, NavLink, useNavigate } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
-// Definición del componente funcional
+
 const Header = () => {
     const {isAuthenticated ,logout} = useContext(AuthContext);
     const navigate = useNavigate();
@@ -10,8 +9,8 @@ const Header = () => {
         logout();
         navigate(`/login`)
     }
+
     return (
-        // fixed top-0
         <header className=" w-full dark:bg-[#1C1917] dark:text-white text-gray-700 border-b dark:border-b-gray-600">
         <nav className="p-3">
             <div className="flex flex-wrap justify-between lg:justify-center xl:justify-between items-center mx-auto max-w-screen-xl">
@@ -72,13 +71,12 @@ const Header = () => {
                             {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
                             Profile
                         </NavLink>
-                    {/* <Link to={'logout'} className="hover:bg-gray-500">Logout</Link> */}
-                    <button onClick={()=>handleLogout()} className="hover:bg-gray-500">Logout</button>
-                        </div>
+                        <button onClick={()=>handleLogout()} className="hover:bg-gray-500">Logout</button>
+                    </div>
                 )}
                 
                 <button data-collapse-toggle="mobile-menu" type="button" className="inline-flex items-center text-sm lg:hidden dark:hover:text-gray-700" aria-controls="mobile-menu-2" aria-expanded="false">
-                <span className="material-symbols-outlined">menu</span>
+                    <span className="material-symbols-outlined">menu</span>
                 </button>
             </div>
         </nav>

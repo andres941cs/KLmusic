@@ -33,3 +33,8 @@ export function getRamdomColor(){
 export function arrayToString(array: string[]): string {
     return array.join(' ')
 }
+
+export function getToday(): string {
+    const date = new Date()
+    return date.toISOString().slice(0, 10)
+}

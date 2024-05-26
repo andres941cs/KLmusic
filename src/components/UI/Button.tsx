@@ -1,26 +1,11 @@
-
-// interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement>{}
-// export const Button = ({children,...props}:Props) => {
-//     return (
-//         <button {...props} className="flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm bg-indigo-600 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-//                 {children}
-//         </button>
-//     );
-// }
-
-// export default Button
-
 import { forwardRef } from "react";
-
-    // interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement>{variant?:string}
-    // export const Button = ({variant,children,...props}:Props) => {
-      export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{variant?:string}
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{variant?:string}
      
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ({ className, variant, children, ...props }, ref) => {
     // Define base classes for button
     // let baseClasses = "px-4 py-2 rounded";
-    let baseClasses = "flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-foreground shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+    let baseClasses = "flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-foreground shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
     /* COLORS => Backgroun - Hover - Focus Text  */
     switch (variant) {
       case "primary":
@@ -47,6 +32,3 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 )
-  
-// Usage
-//   <Button variant="primary">Primary Button</Button>

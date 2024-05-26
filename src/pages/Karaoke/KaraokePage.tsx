@@ -26,7 +26,9 @@ function KaraokePage() {
                     {/* SUBTITLE */}
                     <Subtitle/>
                     {/* PREVIEW */}
-                    <div className="h-full w-full overflow-y-auto">{karaoke.lyric?.lyric}</div>
+                    <div className="h-full w-full overflow-y-auto">
+                        <p className="mx-[20%] text-justify">{karaoke.lyric?.lyric}</p>
+                    </div>
                 </StackLayout>
                 {/* LINE TIME */}
                 <div className="w-full h-1/3 grid border-t content-center gap-5">

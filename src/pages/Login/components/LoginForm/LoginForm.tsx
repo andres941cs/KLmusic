@@ -1,6 +1,6 @@
 /* IMPORTACIONES */
 import { Switch } from "@components/UI/Switch";
-import { AuthContext } from "@pages/Login/AuthContext";
+import { AuthContext } from "@context/AuthContext";
 import { API_URL } from "@utils/constants";
 import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";

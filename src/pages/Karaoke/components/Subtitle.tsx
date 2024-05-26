@@ -3,15 +3,15 @@ import { Textarea } from "./Textarea";
 import InputTime from "./InputTime";
 import { Button } from "@components/UI";
 import { ChangeEvent, forwardRef, useRef, useState } from "react";
-import { saveKaraoke } from "../../../services/Karaoke.services";
 import { Karaoke } from "@models/Karaoke";
 import SearchSong from "./Search";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/UI/Select";
 import { romanized } from "@services/Api.services";
 import { insertLyric } from "@services/Lyric.services";
 import { useKaraokeStore } from "../../../store/Karaokes";
-
-
+import { getToday } from "@utils/index";
+import { saveKaraoke } from "@services/Karaoke.services";
+import { Toaster, toast } from 'sonner'
 function Subtitle() {
     const elementsRefs = useRef([]);
     const karaoke = useKaraokeStore(state => state.karaoke);
@@ -36,23 +36,23 @@ function Subtitle() {
             settings.push(mySubtitle)
         });
 
-        // REFACTORIZAR LLEVARLO A UTILS
         let cadena = "";
         settings.forEach((subtitulo:any) => {
             cadena += `${subtitulo.number}\n${subtitulo.startTime} --> ${subtitulo.endTime}\n${subtitulo.text}\n\n`;
-          });
+        });
 
         const Karaoke:Karaoke ={
             'settings': cadena,
-            'publication_date': '2024-04-27',
+            'publication_date': getToday(),
             'isPublished': 1,
-            'id_lyric': 1,
-            'id_user': 1,
+            'id_lyric': karaoke.lyric?.id!,
+            'id_user': karaoke.id_user!,
         }
-        console.log(Karaoke)
+
         // GUARDAR LOS DATOS EN LA BASE DE DATOS
+        if(Karaoke.settings === "") return toast.error('Create a karaoke');
         saveKaraoke(Karaoke).then((data) => {
-            console.log(data)
+            toast.success(data);
         })
     };
 
@@ -72,7 +72,7 @@ function Subtitle() {
     const assignRef = (index:number) => (element:never) => {
         elementsRefs.current[index] = element;
     };
-    /*______________ LETRAS ______________*/
+    /*______________ LYRICS ______________*/
     const [lyrics, setLyrics] = useState([]);
     const handleLyrics = (data: [])  => {
         setLyrics(data);
@@ -81,29 +81,28 @@ function Subtitle() {
 
     /*______________ IMPORT ______________*/
     const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
-        // setFile(event.target.files[0]);
-        console.log(event.target.files![0]);
         const file = event.target.files![0];
         if (file) {
             const reader = new FileReader();
             reader.onload = (e) => {
               // CREAR EL KARAOKE => PENDIENTE SELECT LYRICS Y USER
-              console.log(e.target!.result);
               const settings = e.target!.result as string;
-              const date = new Date();
-              const today = date.toISOString().slice(0, 10);
+
               const Karaoke:Karaoke ={
                 'settings': settings,
-                'publication_date': today,
+                'publication_date': getToday(),
                 'isPublished': 1,
                 'id_lyric': karaoke.lyric?.id!,
                 'id_user': karaoke.id_user!,
             }
-            console.log(Karaoke)
+
             // GUARDAR LOS DATOS EN LA BASE DE DATOS
-            // saveKaraoke(Karaoke).then((data) => {
-            //     console.log(data)
-            // })
+            if(Karaoke.id_lyric === undefined) return toast.error('Select a Lyrics');
+            saveKaraoke(Karaoke).then((data) => {
+                console.log(Karaoke)
+                console.log(data)
+                toast.success(data);
+            })
 
             };
             reader.readAsText(file);
@@ -127,7 +126,6 @@ function Subtitle() {
         });
     }
     return ( 
-        // <form {...props} onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm space-y-8">
         <form onSubmit={handleSubmit} className="h-full w-full border-r pr-5">
             <StackLayout className="h-full w-full overflow-x-auto">
                 {/* ACTIONS */}
@@ -147,12 +145,12 @@ function Subtitle() {
                     </Select>
 
                     <span onClick={romanize} className="material-symbols-outlined  hover:text-red-700 cursor-pointer">translate</span>
-                    <Button type="submit">Save</Button>
-                    {/* Pruebas */}
+                    <Button disabled={karaoke.lyric?false:true} type="submit">Save</Button>
                     <SearchSong onData={handleLyrics} isOpen={open} setIsOpen={setOpen} />
                 </StackLayout>
                 {elements}
             </StackLayout>
+            <Toaster richColors/>
         </form>
      );
 }
@@ -171,6 +169,6 @@ const Setting = forwardRef<HTMLDivElement>((props, ref) => {
                 <div className="w-40 h-10 border"><InputTime id={"endTime"}/></div>
             </StackLayout>
         </div>
+        
     );
 });
-// export default Setting;

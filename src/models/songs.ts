@@ -12,4 +12,5 @@ export interface Song {
   id_artist?: number;
   artist?: Artist;
   album?: Album;
+  id_karaoke?: number;
 }

@@ -19,7 +19,6 @@ export const useKaraokeStore = create<State>()(devtools((set, get) => {
     },
 
     setLyric: (lyric: Lyric) => {
-      console.log(lyric)
       set({ karaoke: {...get().karaoke, lyric: lyric} },false, 'SET_LYRIC')
     }
 

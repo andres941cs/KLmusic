@@ -10,7 +10,8 @@ const InputTime = ({id}:InputTimeProps) => {
         setTime(numericValue);
     };
     return ( 
-        <input value={time} id={id}  onChange={handleInputChange} autoComplete="off" type="text" pattern="[0-2][0-4]:[0-5][0-9]:[0-5][0-9],[0-9][0-9][0-9]" className="h-full w-full bg-background text-foreground p-3" maxLength={12}/>
+        <input value={time} id={id}  onChange={handleInputChange} required autoComplete="off" type="text" 
+        pattern="[0-2][0-4]:[0-5][0-9]:[0-5][0-9],[0-9][0-9][0-9]" className="h-full w-full bg-background text-foreground p-3" maxLength={12}/>
      );
 }
 export default InputTime;

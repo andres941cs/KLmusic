@@ -1,13 +1,12 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { StackLayout } from "../../components/Layouts/StackLayout";
 import TableSong from "../Song/components/TableSong";
-import { Artist } from "src/models/artist";
 import { useEffect, useState } from "react";
 import { getSongsByArtist } from "../../services/Songs.services";
 import { getAlbumsByArtist } from "@services/Album.services";
 import { Album } from "@models/album";
 import { getYears } from "@utils/index";
-
+import { StackLayout } from "@components/Layouts/StackLayout";
+import { Artist } from "@models/artist";
 
 function ArtistPage() {
     const artist = useLoaderData() as Artist;
@@ -25,26 +24,19 @@ function ArtistPage() {
     }
     
     return ( 
-        <StackLayout  className="max-h-full h-full bg-[#f01050]">
-            <CardHeader></CardHeader>
-            
-            {/* Image */}
-            
-            {/* <div className={`relative h-2/5 lg:h-72 w-full`}>
-                <img className="object-cover h-2/5 lg:h-72 w-full" src={API_URL+artist.image} alt="Artist Image" />
-                <h1 className="absolute bottom-0">{artist.name}</h1>
-            </div> */}
-            <div className="flex h-2/5 lg:h-72 w-full gap-5 p-5">
+        <StackLayout  className="h-full overflow-auto">
+            {/* <CardHeader></CardHeader> */}
+            <div className="flex h-2/5 lg:h-72 w-full gap-5 p-5 bg-[#f01050]">
                 <img className="w-52 h-52 rounded-full" src={artist.image} alt="" />
                 <div className="flex flex-col justify-center items-start">
                     <span className="m-1 text-foreground">Artist</span>
                     <h1 className="lg:text-8xl md:text-6xl sm:text-4xl font-bold text-foreground">{artist.name}</h1>
                 </div>
             </div>
-            <div className="h-full w-full bg-gradient-to-b from-red-900 to-slate-900">
+            <div className="h-full w-full bg-gradient-to-b from-red-900 to-slate-900 overflow-auto">
                 {/* Canciones */}
                 <h2 className="text-foreground">Songs</h2>
-                <div className="">{songs.length > 0 ? <TableSong data={songs}></TableSong> : <span className="text-foreground">No hay canciones</span>}</div>
+                <div className="h-auto">{songs.length > 0 ? <TableSong data={songs}></TableSong> : <span className="text-foreground">No hay canciones</span>}</div>
 
                 <h2 className="text-foreground">Albums</h2>
                 <div className="flex flex-wrap">
@@ -64,26 +56,7 @@ function ArtistPage() {
         </StackLayout>
      );
 }
-// function ArtistPage() {
-//     const {artist} = useLoaderData();
-//     const API_URL =  'http://127.0.0.1:8000';
-//     return ( 
-//         <StackLayout className="h-full">
-            
-//             {/* Image */}
-//             <img className="object-cover h-2/5 w-full" src={API_URL+artist.image} alt="Artist Image" />
-            
-//             {/* Cnciones */}
-//             <div className="w-full">
-//                 <h2 className="text-foreground">Songs</h2>
-//                 <StackLayout>
-//                     <span>sus canciones</span>
-//                 </StackLayout>
-//             </div>
-//             {/* Albumnes */}
-//         </StackLayout>
-//      );
-// }
+
 export const CardHeader = () => {
     const navigate = useNavigate();
     const goBack = () => navigate(-1);

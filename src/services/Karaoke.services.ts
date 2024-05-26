@@ -2,6 +2,15 @@ import axios from 'axios';
 import { API_URL } from '@utils/constants';
 import { Karaoke } from '@models/Karaoke';
 
+export const getKaraokes = async() => {
+    try {
+        const response = await axios.get(`${API_URL}karaokes`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export const saveKaraoke = async (karaoke: Karaoke) => {
     try {
         const response = await axios.post(`${API_URL}karaoke`, karaoke);
