@@ -1,9 +1,12 @@
 import { Label } from "@components/UI";
 import { Card } from "@components/UI/Card";
-import { getProfile } from "@services/User.services";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-// FONDO #1e1e1e
+import { AuthContext } from "@context/AuthContext";
+import { getProfile, updateProfile } from "@services/User.services";
+import { useContext, useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "sonner";
+
 interface IFormProfile {
     username: string;
     email: string;
@@ -12,18 +15,54 @@ interface IFormProfile {
   }
 const ProfilePage = () => {
     const [user, setUser] = useState<any>(null);
+    const {logout} = useContext(AuthContext)
+    const navigate = useNavigate();
 
     useEffect(() => {
         const token = sessionStorage.getItem('token');
-        getProfile(token!).then((response) => {setUser(response);});
+        getProfile(token!).then((response) => {setUser(response);})
+        .catch(() =>{ 
+            navigate('/login')
+            logout();
+        } );
     }, []);
 
-    const {
-        // handleSubmit,
-        register
-        //watch,
-        //formState: { errors },
-      } = useForm<IFormProfile>()
+    const { handleSubmit, register } = useForm<IFormProfile>()
+    
+      const onSubmit: SubmitHandler<IFormProfile> = (data) => {
+        if(data.username === "" && data.email === ""){
+            toast.error('The fields have not been modified');
+            return;
+        }
+
+        if(data.password === data.new_password){
+            toast.error('The new password cannot be the same as the previous one');
+            return;
+        }
+        // ACTUALIZAR LOS DATOS
+        const token = sessionStorage.getItem('token');
+        if(data.password!=='' && data.new_password===''){
+            const updateUser = {
+            username: data.username==''?user.username:data.username,
+            email: data.email==''?user.email:data.email,
+            password: data.password,
+            new_password: data.new_password
+            }
+            updateProfile(token!, updateUser, user.id).then((response) => {
+                toast.success(response);
+            })
+
+        }else{
+            const updateUser = {
+                username: data.username==''?user.username:data.username,
+                email: data.email==''?user.email:data.email,
+            }
+            updateProfile(token!, updateUser,user.id).then((response) => {
+            toast.success(response);
+            })
+        }
+        
+      }
 
     return (
         <Card className="flex flex-col m-0">
@@ -36,9 +75,8 @@ const ProfilePage = () => {
                     </div>
                 </div>  
             {/* Card Body */}
-            {/* flex flex-col items-center */}
             <div className="dark:bg-black h-full p-5 border dark:border-none">
-                <form className="xl:w-1/3 lg:w-1/2 m-auto">
+                <form onSubmit={handleSubmit(onSubmit)} className="xl:w-1/3 lg:w-1/2 m-auto">
                 <h2 className="text-2xl font-bold text-foreground">Edit Profile</h2>
                 <p className="text-foreground">This is your profile page. You can see your personal information here.</p>
                     <Label>Username:</Label>
@@ -47,15 +85,16 @@ const ProfilePage = () => {
                     <Label>Email:</Label>
                     <input className="w-full border rounded py-1 px-2 bg-muted mb-3"  defaultValue={user?.email} {...register("email")} />
 
-                    <Label>Password:</Label>
+                    <Label>Last Password:</Label>
                     <input className="w-full  border rounded py-1 px-2 bg-muted" type="password" {...register("password")} />
 
                     <Label>New Password:</Label>
                     <input className="w-full  border rounded py-1 px-2 bg-muted" type="password" {...register("new_password")} />
 
-                    <button className="w-full bg-primary text-white py-2 rounded mt-5">Update Profile</button>
+                    <button className="w-full bg-primary hover:bg-red-800 text-white py-2 rounded mt-5">Update Profile</button>
                 </form>
             </div>
+            <Toaster richColors/>
         </Card>
     );
     }

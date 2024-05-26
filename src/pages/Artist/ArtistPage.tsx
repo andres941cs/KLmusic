@@ -35,11 +35,11 @@ function ArtistPage() {
             </div>
             <div className="h-full w-full bg-gradient-to-b from-red-900 to-slate-900 overflow-auto">
                 {/* Canciones */}
-                <h2 className="text-foreground">Songs</h2>
+                <h2 className="text-foreground text-xl p-2">Songs</h2>
                 <div className="h-auto">{songs.length > 0 ? <TableSong data={songs}></TableSong> : <span className="text-foreground">No hay canciones</span>}</div>
 
-                <h2 className="text-foreground">Albums</h2>
-                <div className="flex flex-wrap">
+                <h2 className="text-foreground text-xl p-2">Albums</h2>
+                <div className="flex flex-wrap px-2">
                 {albums.map((album:Album) => (
                     <div onClick={()=>navigateTo(album.id!)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
                         <img src={album.image} alt={album.name}

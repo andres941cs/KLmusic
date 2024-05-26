@@ -6,30 +6,17 @@ import { Song } from "src/models/songs";
 export async function getSongs() {
   try {
     const response = await axios.get(API_URL+'songs');
-    // response.data.forEach((song:Song) => {
-    //   song.image = URL_SERVER + song.image;
-    //   console.log(song.image)
-    // });
     return response.data;
   } catch (error) {
     console.error(error);
   }
 }
-// POST /search => search:name
-// export async function searchSongByName(query: string) {
-//   try {
-//       const response = await axios.post(API_URL+'song/search', {search: query});
-//       return response.data;
-//   } catch (error) {
-//       console.error(error);
-//   }
-// }
+
 // GET /songs/:id
 export const loaderSong = async ({params}:any) => {
   try{
     const res = await axios.get(`${API_URL}song/${params.id}`);
     const song: Song = await res.data;
-    console.log(song);
     return song
   }catch(error){
     console.error(error);
@@ -74,17 +61,3 @@ export async function insertSong(data:Song){
     console.error(error);
   }
 }
-
-/* LOADERS */
-// export  async function loaderSong ({params}:any)  {
-//   try{
-//     const res = await axios.get(`${API_URL}song/${params.id}`);
-    
-//     const song: Song = await res.data;
-//     console.log(song);
-//     return song
-//   }catch(error){
-//     console.error(error);
-//   };
-// }
-// export default loaderSong;

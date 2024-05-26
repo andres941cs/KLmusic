@@ -20,9 +20,12 @@ const KaraokesPage = () => {
 
     return (
       <Card className="flex flex-col">
-        <div className="flex gap-3">
-          <h1>My Karaokes</h1>
-          <span onClick={()=>navigate('/karaoke')} className="material-symbols-outlined cursor-pointer rounded-full">add</span>
+        <div className="flex gap-3 justify-between">
+          <div className="flex gap-3">
+            <h1>My Karaokes</h1>
+            <span onClick={()=>navigate('/karaoke')} className="material-symbols-outlined cursor-pointer rounded-full">add</span>
+          </div>
+          <span onClick={()=>navigate('/forms')} className="material-symbols-outlined cursor-pointer rounded-full">post_add</span>
         </div>
         <Table>
           <TableHeader>

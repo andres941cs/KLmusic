@@ -44,12 +44,14 @@ const Header = () => {
                                 Albums
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to={'karaokes'} className={({ isActive, isPending }) => 
-                                {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
-                                Karaokes
-                            </NavLink>
-                        </li>
+                        {isAuthenticated && (
+                            <li>
+                                <NavLink to={'karaokes'} className={({ isActive, isPending }) => 
+                                    {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
+                                    Karaokes
+                                </NavLink>
+                            </li>
+                        )}
                     </ul>
                     
                 </div>

@@ -4,6 +4,7 @@ import { Song } from "@models/songs";
 import { getLyricsBySongId } from "@services/Lyric.services";
 import { searchSongs } from "@services/Songs.services";
 import { ChangeEvent, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface ISearchSong { onData: (data: []) => void;isOpen:boolean;setIsOpen: (data: boolean) => void; }
 const SearchSong = ({ onData,isOpen,setIsOpen }: ISearchSong) => {
@@ -40,6 +41,7 @@ const SearchSong = ({ onData,isOpen,setIsOpen }: ISearchSong) => {
             <input value={value} onChange={getSuggestions} onKeyDown={(e)=>{(e.key === 'Enter')&&e.preventDefault()}} 
             className="border border-white bg-white/5 w-60 h-8 px-3 py-5 outline-none" placeholder="Song" />
             <ul className="border border-t-0">{sugesstions}</ul>
+            <Link to={'/forms'} className="absolute right-0 bottom-full hover:text-primary">Not Found?</Link>
         </div>
         </>
      );

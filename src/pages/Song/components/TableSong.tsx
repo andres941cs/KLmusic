@@ -2,15 +2,17 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { format } from "@utils/index"
 import { useNavigate } from "react-router-dom";
 import { Song } from "@models/songs";
+import { MouseEvent } from "react";
 
 interface TableSongProps {
     data: Song[]
 }
 const TableSong = ({data}:TableSongProps) => {
     const navigate = useNavigate();
-  
-    const playKaraoke = (id:number) => {
-        navigate(`/player/${id}`)
+
+    const navigateTo = (e:MouseEvent<HTMLSpanElement>  ,route:string) => {
+      e.stopPropagation();
+      navigate(route)
     }
 
     return (
@@ -25,7 +27,7 @@ const TableSong = ({data}:TableSongProps) => {
         </TableHeader>
         <TableBody>
           {data.map((song:Song) => (
-            <TableRow onClick={()=>playKaraoke(song.id!)} key={song.id}>
+            <TableRow onClick={(e)=>navigateTo(e,`/song/${song.id!}`)} key={song.id}>
               <TableCell className="font-medium">{song.id}</TableCell>
               <TableCell>
                 <div className='flex gap-3'>
@@ -36,12 +38,14 @@ const TableSong = ({data}:TableSongProps) => {
                   />
                   <div className='flex flex-col'>
                   {song.name}
-                  <span className='text-gray-500 text-sm'>{song.artist?.name}</span>
+                  <span onClick={(e)=>navigateTo(e,`/artist/${song.artist?.id}`)} className='text-gray-500 text-sm hover:underline cursor-pointer'>{song.artist?.name}</span>
                   </div>
                 </div>
                 
               </TableCell>
-              <TableCell>{song.album?.name ? song.album.name : "Álbum desconocido"}</TableCell>
+              <TableCell>
+                <span className='hover:text-primary hover:underline cursor-pointer' onClick={(e)=>navigateTo(e,`/album/${song.album?.id}`)}>{song.album?.name ? song.album.name : "Álbum desconocido"}</span>
+                </TableCell>
               <TableCell className="text-right">{format(song.duration)}</TableCell>
             </TableRow>
           ))}

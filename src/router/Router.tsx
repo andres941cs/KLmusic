@@ -97,15 +97,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/karaoke",
-        element: <KaraokePage></KaraokePage>,
+        element: <ProtectedRoute children={<KaraokePage/>}/>,
       },
       {
         path: "/karaokes",
-        element: <ProtectedRoute><KaraokesPage/></ProtectedRoute>,
+        element: <ProtectedRoute children={<KaraokesPage/>}/>,
       },
       {
         path: "/forms",
-        element:<FormPage/>,
+        element:<ProtectedRoute children={<FormPage/>}/>,
       },
 
     ]
