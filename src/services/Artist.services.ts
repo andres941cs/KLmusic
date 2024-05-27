@@ -40,7 +40,7 @@ export const loaderArtist = async ({params}:any) => {
 
 export const loaderArtists = async () => {
     try{
-        const res = await axios.get(API_URL+'artist');
+        const res = await axios.get(API_URL+'artists');
         const artists = await res.data;
         return artists;
     }catch(error){

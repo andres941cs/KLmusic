@@ -34,7 +34,7 @@ export async function insertAlbum(data:Album){
 /* RUTAS DE LA API - LOADERS */
 export const loaderAlbums = async () => {
     try{
-        const res = await axios.get(API_URL+'album');
+        const res = await axios.get(API_URL+'albums');
         const song = await res.data;
         return song
     }catch(error){

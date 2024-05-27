@@ -5,7 +5,7 @@ import { Song } from "src/models/songs";
 // GET /songs
 export async function getSongs() {
   try {
-    const response = await axios.get(API_URL+'songs');
+    const response = await axios.get(API_URL+'song');
     return response.data;
   } catch (error) {
     console.error(error);
