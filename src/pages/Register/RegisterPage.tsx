@@ -37,7 +37,7 @@ function RegisterPage(){
         return;
       }
       /* ------------- PETICION ------------- */
-      const URL =API_URL + "api/register";
+      const URL =API_URL + "register";
       const PARAMS = {
         method: 'POST',
         headers: {
