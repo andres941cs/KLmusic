@@ -3,6 +3,7 @@ import { SubmitHandler } from "react-hook-form";
 import Form from "@components/UI/Form";//@/components/UI/Form
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from 'sonner'
+import { API_URL } from "@utils/constants";
 
 /* COMPONENTE */
 function RegisterPage(){
@@ -36,7 +37,7 @@ function RegisterPage(){
         return;
       }
       /* ------------- PETICION ------------- */
-      const URL ="http://127.0.0.1:8000/api/register";
+      const URL =API_URL + "register";
       const PARAMS = {
         method: 'POST',
         headers: {
