@@ -18,7 +18,7 @@ function LoginForm(props:Props) {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }} = useForm<FormData>()
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    const URL = API_URL+ "login";
+    const URL = API_URL + "login";
       const PARAMS = {
         method: 'POST',
         headers: {
