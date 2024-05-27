@@ -10,11 +10,8 @@ import FormArtist from "./components/FormArtist";
 import { FormAlbum } from "./components/FormAlbum";
 
 const FormPage = () => {
-    // VA SER UN  FORMULARIO PARA INSERTAR ARTISTAS, ALBUMES, CANCIONES
-    // CON TABS PARA CAMBIAR DE UNO A OTRO -> SE TIENE QUE AUTORELLENAR LOS CAMPOS
-    // CON LOS DATOS DE LA API DE SPOTIFY EN EL API SE COMPRUEBA SI ESTAN CORRECTOS Y LES DA EL OK
   return (
-    <Tabs defaultValue="artists" className="md:w-[400px] m-auto">
+    <Tabs defaultValue="artists" className="w-[70%] md:w-[400px] m-auto overflow-auto">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="artists">Artists</TabsTrigger>
         <TabsTrigger value="albums">Albums</TabsTrigger>
@@ -58,9 +55,8 @@ export const AutoComplete = ({ fecht, onClick,onData}:IAutoComplete) => {
         setSuggestions([])
     }
     return ( 
-        <div className="flex items-center relative">
+        <div className="flex items-center relative overflow-auto">
             <input className="w-full border rounded py-1 px-2 bg-muted" value={search} onChange={getSuggestions} type="text" placeholder="Search"/>
-            {/* <span className="material-symbols-outlined">search</span> */}
             {suggestions.length > 0 && 
                 <ul className="absolute h-40 top-full w-full bg-muted overflow-y-auto rounded-sm">
                     {suggestions.map((suggestion:any)=><li onClick={()=>selectSuggestion(suggestion)} key={suggestion.id} className="hover:bg-[#bbbbbb] px-2 py-1">{suggestion.name}</li>)}

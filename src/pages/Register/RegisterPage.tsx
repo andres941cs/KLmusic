@@ -45,22 +45,22 @@ function RegisterPage(){
         body:JSON.stringify(data)
       }
 
-      fetch(URL,PARAMS)
-      .then(response => response.json())
-      .then(res => {
-        if(res.errors){
-          const mesagge =res.errors.join(' ');
-          toast.error(mesagge);
-          return;
-        }
-        toast.success(`Usuario: ${data.username} registrado correctamente`);
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+      const login = fetch(URL,PARAMS).then(response => response.json())
+      toast.promise(login, {
+        loading: 'Registering...',
+        success: (data) => {
+          if(data.errors){
+            const mesagge =data.errors.join(' ');
+            toast.error(mesagge);
+            throw new Error(mesagge);
+          }
+          setTimeout(() => {
+              navigate('/login');
+          }, 1000);
+            return `User registered successfully`;
+        },
+        error: 'Error registering the user'
+    });
     }  
         
     const registerFields = [

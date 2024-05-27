@@ -9,6 +9,7 @@ import { searchArtistByName } from "@services/Artist.services";
 import { useState } from "react";
 import { Song } from "@models/songs";
 import { insertSong } from "@services/Songs.services";
+import { Toaster, toast } from "sonner";
 
 const FormSong = () => {
     const [album, setAlbum] = useState<number>()
@@ -17,6 +18,13 @@ const FormSong = () => {
         [key: string]: string;
       }
       const onSubmit = (data:FormData) => {
+        // Validations
+        console.log(data)
+        if(!data.name || !data.duration || !data.genre ||
+           !data.image || !artist || !album) return toast.error("All fields are required");   
+        if(isNaN(parseInt(data.duration))) return toast.error("Duration must be a number");
+        if(!data.image.match(/\.(jpeg|jpg|gif|png)$/)) return toast.error("Image must be a URL");
+  
         const song : Song = {
             name: data.name,
             duration: parseInt(data.duration),
@@ -25,7 +33,11 @@ const FormSong = () => {
             id_artist: artist,
             id_album: album,
         }
-        insertSong(song).then(res => console.log(res));
+        insertSong(song).then(res =>{
+            if(res.error) return toast.error(res.error);
+            reset();
+            toast.success(res);
+        });
     }
 
     const autoSave = async (data: any) => {
@@ -40,9 +52,9 @@ const FormSong = () => {
             id_artist: artistas[0].id ,
             id_album: albums[0]?.id|| null,
         }
-        insertSong(song).then(res => console.log(res));
+        insertSong(song).then(res => toast.info(res));
     }
-    const { register, handleSubmit} = useForm<FormData>()
+    const { register, handleSubmit, reset} = useForm<FormData>()
     return ( 
         <Card className="!m-0">
             <h1 className="text-xl mb-3">INSERT SONG</h1>
@@ -61,7 +73,6 @@ const FormSong = () => {
                 <Label htmlFor="image">URL Image:</Label>
                 <Input nameInput="image" register={register}/>
                 
-                {/* DESPEGABLES */}
                 <Label htmlFor="artist">Artist:</Label>
                 <SelectForm onData={data=>setArtist(data.value)} myFecht={searchArtistByName}/>
 
@@ -70,6 +81,7 @@ const FormSong = () => {
 
                 <Button className="bg-primary">Save</Button>
             </form>
+            <Toaster richColors/>
         </Card>
      );
 }

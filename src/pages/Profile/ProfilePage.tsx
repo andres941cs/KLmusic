@@ -30,18 +30,25 @@ const ProfilePage = () => {
     const { handleSubmit, register } = useForm<IFormProfile>()
     
       const onSubmit: SubmitHandler<IFormProfile> = (data) => {
-        if(data.username === "" && data.email === ""){
-            toast.error('The fields have not been modified');
+        // Validations
+        if(data.password && data.new_password === ''){
+            toast.error('The new password field cannot be empty');
             return;
         }
 
-        if(data.password === data.new_password){
+        if(data.password === data.new_password && data.password !== '' && data.new_password !== ''){
             toast.error('The new password cannot be the same as the previous one');
             return;
         }
-        // ACTUALIZAR LOS DATOS
+
+        if(data.username === "" && data.email === "" && data.password === "" && data.new_password === ""){
+            toast.error('The fields have not been modified');
+            return;
+        }
+        // Update Profile
         const token = sessionStorage.getItem('token');
-        if(data.password!=='' && data.new_password===''){
+        console.log(data);
+        if(data.password !== '' && data.new_password !== ''){
             const updateUser = {
             username: data.username==''?user.username:data.username,
             email: data.email==''?user.email:data.email,

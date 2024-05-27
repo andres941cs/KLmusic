@@ -29,9 +29,27 @@ export const updateKaraoke = async (karaoke: Karaoke) => {
     }
 }
 
-export const deleteKaraoke = async (id: number) => {
+export const  changeVisibility = async (id: number) => {
+    const token = sessionStorage.getItem('token');
+    const headers = {
+      'Authorization': 'Bearer ' + token
+    }
     try {
-        const response = await axios.delete(`${API_URL}karaoke/${id}`);
+        const response = await axios.put(`${API_URL}user/karaoke/visibility/${id}`, {}, { headers });
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const deleteKaraoke = async (id: number) => {
+    const token = sessionStorage.getItem('token');
+
+    const headers = {
+      'Authorization': 'Bearer ' + token
+    }
+    try {
+        const response = await axios.delete(`${API_URL}user/karaoke/${id}`,{ headers });
         return response.data;
     } catch (error) {
         console.error(error);

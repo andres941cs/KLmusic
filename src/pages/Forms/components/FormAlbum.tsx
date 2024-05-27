@@ -8,15 +8,20 @@ import { searchArtistByName } from "@services/Artist.services";
 import { Album } from "@models/album";
 import { insertAlbum } from "@services/Album.services";
 import { useState } from "react";
+import { Toaster, toast } from "sonner";
 
 export const FormAlbum = () => {
     const [artist, setArtist] = useState();
     interface FormData {
         [key: string]: string;
       }
+      console.log(artist)
     const onSubmit = (data:FormData) => {
-        console.log(data);
-        // FORMATEAR DATA
+        // Validations
+        if(!data.name || !data.release_date || !data.genre || !data.image || !artist) return toast.error("All fields are required");
+        if(!data.release_date.match(/\d{4}-\d{2}-\d{2}/)) return toast.error("Release Date must be in format YYYY-MM-DD");
+        if(!data.image.match(/\.(jpeg|jpg|gif|png)$/)) return toast.error("Image must be a URL");
+
         const Album : Album = {
             name: data.name,
             release_date: data.release_date,
@@ -24,10 +29,13 @@ export const FormAlbum = () => {
             image: data.image,
             id_artist: artist
         }
-        console.log(Album);
-        insertAlbum(Album).then(res => console.log(res));
-    }
 
+        insertAlbum(Album).then(res => {
+            reset();
+            toast.success(res)
+        })
+    }
+    
     const autoSave = (data: any) => {
         searchArtistByName(data.artists).then(res => {
             const Album : Album = {
@@ -38,10 +46,10 @@ export const FormAlbum = () => {
             image: data.image,
             id_artist: res[0].id
         }
-            insertAlbum(Album).then(res => console.log(res));
+            insertAlbum(Album).then(res => toast.success(res));
         });
     }
-    const { register, handleSubmit} = useForm<FormData>()
+    const { register, handleSubmit, reset} = useForm<FormData>()
     return ( 
         <Card className="!m-0">
         <h1 className="text-xl mb-3">INSERT ALBUM</h1>
@@ -60,16 +68,12 @@ export const FormAlbum = () => {
             <Label htmlFor="image">URL Image:</Label>
             <Input nameInput="image" register={register}/>
             
-            {/* DESPEGABLES */}
             <Label htmlFor="artist">Artist:</Label>
-            {/* <Select/> */}
             <SelectForm onData={data=>setArtist(data.value)} myFecht={searchArtistByName}/>
-
-            {/* <Label htmlFor="songs">Songs:</Label>
-            <SelectForm onData={data=>console.log(data.value)} myFecht={searchSongs}/> */}
-
+            
             <Button className="bg-primary">Save</Button>
         </form>
+        <Toaster richColors/>
         </Card>
      );
 }

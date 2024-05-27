@@ -1,10 +1,11 @@
 import { Card } from "@components/UI/Card";
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@components/UI/Table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@components/UI/Table";
 import { Karaoke } from "@models/Karaoke";
 import { useEffect, useState } from "react";
-import { getKaraokesByUser } from "@services/Karaoke.services";
+import { changeVisibility, deleteKaraoke, getKaraokesByUser } from "@services/Karaoke.services";
 import { getProfile } from "@services/User.services";
 import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "sonner";
 
 const KaraokesPage = () => {
     const [Karaokes, setKaraokes] = useState<Karaoke[]>([]);
@@ -17,6 +18,32 @@ const KaraokesPage = () => {
         });
       });
     }, []);
+
+    const handleDelete = (id:number) => {
+      deleteKaraoke(id).then(() => {
+        toast.success('Karaoke deleted');
+        const token = sessionStorage.getItem('token');
+        // UPDATE KARAOKE LIST
+        getProfile(token!).then((user) => {
+          getKaraokesByUser(user.id).then((response) => {
+            setKaraokes(response);
+          });
+        });
+      });
+    }
+
+    const handleVisibility = (id:number) => {
+      changeVisibility(id).then((response) => {
+        toast.success(response);
+        const token = sessionStorage.getItem('token');
+        // UPDATE KARAOKE LIST
+        getProfile(token!).then((user) => {
+          getKaraokesByUser(user.id).then((response) => {
+            setKaraokes(response);
+          });
+        });
+      });
+    }
 
     return (
       <Card className="flex flex-col">
@@ -33,7 +60,7 @@ const KaraokesPage = () => {
             <TableHead className="w-[100px]">#</TableHead>
             <TableHead>Karaoke</TableHead>
             <TableHead>Publication_date</TableHead>
-            <TableHead>Visibility</TableHead>
+            <TableHead className="text-center">Visibility</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -48,21 +75,17 @@ const KaraokesPage = () => {
                 </div>
             </TableCell>
             <TableCell>{karaoke.publication_date}</TableCell>
-            <TableCell>{karaoke.isPublished}</TableCell>
+            <TableCell className="text-center">{karaoke.isPublished}</TableCell>
             <TableCell className="text-right">
-                <span className="material-symbols-outlined m-auto text-muted-foreground text-xl mx-4">visibility</span>
-                <span className="material-symbols-outlined m-auto text-muted-foreground text-xl mx-4">edit</span>
-                <span className="material-symbols-outlined m-auto text-muted-foreground text-xl mx-4">delete</span>
+                <span onClick={()=>handleVisibility(karaoke.id!)}  className="material-symbols-outlined m-auto text-muted-foreground text-xl mx-4 cursor-pointer">visibility</span>
+                {/* <span className="material-symbols-outlined m-auto text-muted-foreground text-xl mx-4">edit</span> */}
+                <span onClick={()=>handleDelete(karaoke.id!)} className="material-symbols-outlined m-auto text-muted-foreground text-xl mx-4 cursor-pointer">delete</span>
             </TableCell>
           </TableRow>
         )): <TableRow><TableCell className="text-center" colSpan={5}>No data</TableCell></TableRow>}
         </TableBody>
-        <TableFooter>
-          {/* AQUI VA LA PAGINACION */}
-          <TableRow>
-          </TableRow>
-        </TableFooter>
     </Table>
+        <Toaster richColors />
         </Card>
     );
 };
