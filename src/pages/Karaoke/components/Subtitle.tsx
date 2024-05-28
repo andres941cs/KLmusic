@@ -144,7 +144,7 @@ function Subtitle() {
                         </SelectContent>
                     </Select>
 
-                    <span onClick={romanize} className="material-symbols-outlined  hover:text-red-700 cursor-pointer">translate</span>
+                    <button disabled={karaoke.lyric?false:true} onClick={romanize} className="material-symbols-outlined  hover:text-red-700 cursor-pointer disabled:opacity-50 disabled:hover:text-current disabled:cursor-not-allowed">translate</button>
                     <Button disabled={karaoke.lyric?false:true} type="submit">Save</Button>
                     <SearchSong onData={handleLyrics} isOpen={open} setIsOpen={setOpen} />
                 </StackLayout>

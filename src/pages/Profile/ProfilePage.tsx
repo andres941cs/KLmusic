@@ -74,11 +74,11 @@ const ProfilePage = () => {
     return (
         <Card className="flex flex-col m-0">
             {/* Card Header */}
-            <div className="bg-muted h-72 flex flex-col sm:flex-row items-center  gap-5 p-5">
+            <div className="bg-muted lg:h-72 flex flex-col sm:flex-row items-center  gap-5 p-5">
                     <img src={user?user.image:'Loading...'} alt="Profile" className="w-52 h-52 rounded-full"/>
                     <div className="flex flex-col justify-center gap-1 w-full">
                         <span>Profile</span>
-                        <h1 className="md:text-8xl sm:text-6xl text-xl font-bold text-foreground">{user?user.username:"Loading..."}</h1>
+                        <h1 className="md:text-7xl sm:text-6xl text-xl font-bold text-foreground">{user?user.username:"Loading..."}</h1>
                     </div>
                 </div>  
             {/* Card Body */}
