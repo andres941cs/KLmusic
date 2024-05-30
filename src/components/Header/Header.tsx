@@ -71,7 +71,7 @@ const Header = () => {
                             )}
                             {/* <!-- LOGIN / REGISTRO --> */}
                     {!isAuthenticated ? (
-                        <div className="hidden lg:flex gap-2 items-center lg:order-2">
+                        <div className="hidden sm:flex xl:hidden gap-2 items-center lg:order-2">
                             <NavLink to={'login'} className={({ isActive, isPending }) => 
                                 {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
                                 Log in
@@ -82,7 +82,7 @@ const Header = () => {
                             </NavLink>
                         </div>
                     ) : (
-                        <div className="hidden xl:flex gap-2 items-center lg:order-2">
+                        <div className="hidden sm:flex xl:hidden gap-2 items-center lg:order-2">
                             <NavLink to={'profile'} className={({ isActive, isPending }) => 
                                 {return isActive ? "text-red-600 font-semibold border-b border-red-600" : isPending ? "pending" : "hover:text-red-600";}}>
                                 Profile
