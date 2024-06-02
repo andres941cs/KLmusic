@@ -16,14 +16,13 @@ const Header = () => {
                 <div className="flex lg:flex-wrap justify-between lg:justify-center xl:justify-between items-center mx-auto max-w-screen-xl">
                     {/* <!-- LOGO --> */}
                     <a href="/" className="flex lg:hidden xl:flex items-center">
-                        {/* <img src="" className="mr-3 h-6 sm:h-9" alt="KLmusic Logo" /> */}
                         <span className="self-center text-xl font-semibold whitespace-nowrap ">KLmusic</span>
                     </a>
 
                     <div className="lg:hidden flex justify-around h-full w-full ">
                         <NavLink to={'songs'}  className="material-symbols-outlined text-xl hover:text-primary m-auto lg:hidden">music_note</NavLink>
-                        <NavLink to={'artist'} className="material-symbols-outlined m-auto hover:text-primary lg:hidden">artist</NavLink>
-                        <NavLink to={'album'} className="material-symbols-outlined m-auto hover:text-primary lg:hidden">album</NavLink>
+                        <NavLink to={'artists'} className="material-symbols-outlined m-auto hover:text-primary lg:hidden">artist</NavLink>
+                        <NavLink to={'albums'} className="material-symbols-outlined m-auto hover:text-primary lg:hidden">album</NavLink>
                         
                         <div className="flex gap-2">
                         {isAuthenticated ? (

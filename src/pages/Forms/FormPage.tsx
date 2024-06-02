@@ -8,14 +8,16 @@ import { useState } from "react";
 import FormSong from "./components/FormSong";
 import FormArtist from "./components/FormArtist";
 import { FormAlbum } from "./components/FormAlbum";
+import FormLyric from "./components/FormLyric";
 
 const FormPage = () => {
   return (
     <Tabs defaultValue="artists" className="w-[70%] md:w-[400px] m-auto overflow-auto">
-      <TabsList className="grid w-full grid-cols-3">
+      <TabsList className="grid w-full grid-cols-4">
         <TabsTrigger value="artists">Artists</TabsTrigger>
         <TabsTrigger value="albums">Albums</TabsTrigger>
         <TabsTrigger value="songs">Songs</TabsTrigger>
+        <TabsTrigger value="lyrics">Lyrics</TabsTrigger>
       </TabsList>
       <TabsContent value="artists">
         <FormArtist/>
@@ -25,6 +27,9 @@ const FormPage = () => {
       </TabsContent>
       <TabsContent value="songs">
         <FormSong/>
+      </TabsContent>
+      <TabsContent value="lyrics">
+        <FormLyric/>
       </TabsContent>
     </Tabs>
   )

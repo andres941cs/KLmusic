@@ -5,7 +5,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ({ className, variant, children, ...props }, ref) => {
     // Define base classes for button
     // let baseClasses = "px-4 py-2 rounded";
-    let baseClasses = "flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-foreground shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+    let baseClasses = "flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-foreground shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed "+className;
     /* COLORS => Backgroun - Hover - Focus Text  */
     switch (variant) {
       case "primary":

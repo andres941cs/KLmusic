@@ -41,3 +41,13 @@ export const searchSong = async (song:string) => {
         console.error(error);
     }
 }
+
+export const getLyricsByName = async (song:string,artist:string) => {
+    try {
+        const response = await axios.get(API_SERVICE_URL + 'lyric/search/'+ song+'/'+ artist);
+        return response.data;
+    }
+    catch (error) {
+        console.error(error);
+    }
+}

@@ -85,7 +85,6 @@ function Subtitle() {
         if (file) {
             const reader = new FileReader();
             reader.onload = (e) => {
-              // CREAR EL KARAOKE => PENDIENTE SELECT LYRICS Y USER
               const settings = e.target!.result as string;
 
               const Karaoke:Karaoke ={
@@ -99,8 +98,6 @@ function Subtitle() {
             // GUARDAR LOS DATOS EN LA BASE DE DATOS
             if(Karaoke.id_lyric === undefined) return toast.error('Select a Lyrics');
             saveKaraoke(Karaoke).then((data) => {
-                console.log(Karaoke)
-                console.log(data)
                 toast.success(data);
             })
 
@@ -121,7 +118,7 @@ function Subtitle() {
             }
 
             insertLyric(data).then((res) => {
-                console.log(res)
+                toast.success(res)
             })
         });
     }

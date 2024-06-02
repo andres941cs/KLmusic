@@ -13,7 +13,6 @@ export const getLyricsBySongId = async (songId: number) => {
 
 export const insertLyric = async (lyric: Lyric) => {
     try {
-        console.log(lyric);
         const response = await axios.post(`${API_URL}lyric`, lyric);
         return response.data;
     } catch (error) {
