@@ -64,42 +64,8 @@ export function putLyricsInPlace(subtitles: any ) {
         
 		if (line.texto) {
 			if ( line.number && subtitles.advance) {// CREO QUE SE PUEDE BORRAR
-                /* LOGICA PARA QUE FUNCIONES CON PALABRAS */
-				// for (let verseIndex = 0; verseIndex < subtitles.length; verseIndex++) {
-                //     // TOTAL DE PALABRAS
-				// 	const verse = line.texto[verseIndex];
-                //     console.log('LINE NUMBER: ',line.texto)
-				// 	// const duration = Math.max(
-				// 	// 	0.1,
-				// 	// 	(
-				// 	// 		subtitles[verseIndex + 1]?.startTime ||
-				// 	// 		(line.duration ? line.time! + line.duration! : undefined) ||
-				// 	// 		songdata.lyrics.lines![lineIndex + 1]?.time! ||
-				// 	// 		songdata.metadata.length
-				// 	// 	) - verse.start
-				// 	// );
-				// 	const duration = line.finishTime - line.startTime;
-				// 	const span = document.createElement("span");
-				// 	span.textContent = line.texto;
-				// 	span.style.setProperty("--word-duration", `${duration}s`);
 
-				// 	if (line.text.trim().length) {
-				// 		span.classList.add("word");
 
-				// 		if (
-				// 			!document.documentElement.classList.contains("no-clickable-lyrics") &&
-				// 			!document.documentElement.classList.contains("non-interactive")
-				// 		) {
-				// 			span.addEventListener("click", event => {
-				// 				event.stopPropagation();
-                //                 // LOGICA PARA REPRODUCIR LA CANCION DESDE EL VERSO SELECCIONADO
-				// 				// window.np.setPosition(verse.start);
-				// 			});
-				// 		}
-				// 	}
-
-				// 	elem.appendChild(span);
-                // }
 			} else
 				elem.textContent = line.texto;
 
@@ -148,32 +114,11 @@ export function updateActiveLyrics(elapsed: number, subtitles: any) {
 		}
 	}
 
-	const wasActiveBefore = container.children[lineIndex]?.classList?.contains("active");
+	//const wasActiveBefore = container.children[lineIndex]?.classList?.contains("active");
 
 	for (let i = 0; i < container.children.length; i++) {
 		const line = container.children[i] as HTMLElement;
 		if (i === lineIndex){
-
-			// if(config.karaoke){
-			// 	for (let i = 0; i < line.children.length; i++) {
-			// 		const word = line.children[i] as HTMLElement;
-			// 		if(i <= wordIndex){
-			// 			if (word.classList?.contains("word"))
-			// 				word.classList?.add("active");
-			// 		}else{
-			// 			if (word.classList?.contains("word"))
-			// 				word.classList?.remove("active");
-			// 		}
-			// 	}
-			// }
-
-			// if(line.classList.contains("empty")){
-			// 	// determine empty progress
-			// 	const emptyProgress = [...line.children].find(x => x.classList.contains("empty-progress")) as HTMLElement;
-
-			// 	const percentageToGo = (elapsed - subtitles![i].startTime!) / ((subtitles![i + 1]?.time) - subtitles![i].startTime!);// EN TEORIA DEBERIA SER TIME QUE NO EXISTE
-			// 	emptyProgress.style.setProperty("--waitTime", `${percentageToGo}`);
-			// }
 
 			line.removeAttribute("distance");
 			line.classList?.add("active");
@@ -181,26 +126,9 @@ export function updateActiveLyrics(elapsed: number, subtitles: any) {
 			const distance = Math.max(-4, Math.min(i - lineIndex, 4));
 			line.setAttribute("distance", `${distance}`);
 			line.classList?.remove("active");
-
-			// if(config.karaoke){
-			// 	for (let i = 0; i < line.children.length; i++) {
-			// 		const word = line.children[i] as HTMLElement;
-			// 		if(word.classList.contains("word"))
-			// 			word.classList?.remove("active");
-			// 	}
-			// }
 		}
 	}
 
-	// now we animate the active into view
-	if (!wasActiveBefore ) {//&& !isContainerHovered
-		// invalidate previous animation
-		// if(animateStatus)
-		// 	animateStatus.invalidated = true;
-
-		// call new animation
-		// animateStatus = animateScroll(container.children[lineIndex] as HTMLElement);
-	}
 }
 
 export function reCenter() {
@@ -216,10 +144,6 @@ export function reCenter() {
 // container.addEventListener("mouseleave", () => {
 // 	isContainerHovered = false;
 // 	reCenter();
-// });
-
-// window.np.registerLyricsCallback!(() => {
-// 	putLyricsInPlace();
 // });
 
 // ESTAS FUNCIONES PODRIAN IR EN UN ARCHIVO UTILS
@@ -257,7 +181,7 @@ export function animateScroll(element: HTMLElement, duration: number = 500) {
 
 		parent!.scrollTo({
 			top: target,
-			// @ts-ignore wtffff
+			// @ts-ignore
 			behavior: "instant"
 		});
 

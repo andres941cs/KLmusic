@@ -109,7 +109,7 @@ function Player({data}:{data:Karaoke}){
             <div ref={divLetraRef} id='lyrics'></div>
         </div>
             {/* PlayerController */}
-            <div className='flex items-center bg-background h-20 w-full gap-1'>
+            <div className='flex items-center bg-background h-20 w-full gap-1 z-50'>
             {/* <!-- Seekbar --> */}
             <span onClick={handlePlayPause} className="material-symbols-outlined cursor-pointer hover:text-primary">{playing ? 'pause' : 'play_arrow'}</span>
                 <span>{format(playedSeconds)}</span>

@@ -60,7 +60,7 @@ export const AutoComplete = ({ fecht, onClick,onData}:IAutoComplete) => {
         setSuggestions([])
     }
     return ( 
-        <div className="flex items-center relative overflow-auto">
+        <div className="flex items-center relative">
             <input className="w-full border rounded py-1 px-2 bg-muted" value={search} onChange={getSuggestions} type="text" placeholder="Search"/>
             {suggestions.length > 0 && 
                 <ul className="absolute h-40 top-full w-full bg-muted overflow-y-auto rounded-sm">
