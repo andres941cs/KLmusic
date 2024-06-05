@@ -80,7 +80,9 @@ function Player({data}:{data:Karaoke}){
       
     const  handleDuration = (duration:number) => {
         setDuration(duration)
-      }
+    }
+
+    const [video, setVideo] = useState<boolean>(false);
     
     return(
         <div className='flex flex-col h-full overflow-hidden relative puff-in-center'>
@@ -105,11 +107,11 @@ function Player({data}:{data:Karaoke}){
             onDuration={handleDuration}
             />
             {/* Lyrics */}
-        <div className='lyrics-container'>
+        <div className={`lyrics-container ${video&& '!bg-transparent'}`} >
             <div ref={divLetraRef} id='lyrics'></div>
         </div>
             {/* PlayerController */}
-            <div className='flex items-center bg-background h-20 w-full gap-1 z-50'>
+            <div className='flex items-center bg-background h-20 w-full gap-1 z-50  px-2'>
             {/* <!-- Seekbar --> */}
             <span onClick={handlePlayPause} className="material-symbols-outlined cursor-pointer hover:text-primary">{playing ? 'pause' : 'play_arrow'}</span>
                 <span>{format(playedSeconds)}</span>
@@ -117,6 +119,7 @@ function Player({data}:{data:Karaoke}){
                   <span>{format(duration-1)}</span>
                   <span onClick={handleToggleMuted} className="material-symbols-outlined cursor-pointer hover:text-primary">{muted ? 'no_sound' : 'volume_up'}</span>
                   <div className='w-24'><Slider min={0} max={100} step={1}  value={[volume*100]} onValueChange={handleVolumeChange}></Slider></div>
+                  <span onClick={()=>setVideo(!video)} className="material-symbols-outlined cursor-pointer hover:text-primary">movie</span>
             </div>
         </div>
     )
