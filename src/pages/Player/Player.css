@@ -1,0 +1,164 @@
+.lyrics-container {
+	z-index: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: ease .2s;
+	background-color: rgb(170, 170, 170);
+}
+
+#lyrics {
+	width: 75%;
+	height: 75%;
+	overflow-x: clip;
+	overflow-y: hidden;
+	display: flex;
+	gap: 16px;
+	flex-direction: column;
+	align-items: center;
+	color: #f2f2f2;
+	/* --mask-image: linear-gradient(
+		0deg,
+		rgba(0,0,0,0) 0%,
+		rgba(0,0,0,1) 25%,
+		rgba(0,0,0,1) 75%,
+		rgba(0,0,0,0) 100%
+	);
+	mask-image: var(--mask-image);
+	-webkit-mask-image: var(--mask-image); */
+	transition: ease .2s filter;
+	scroll-behavior: smooth;
+	scrollbar-gutter: stable both-edges;
+}
+
+#lyrics .line {
+	position: relative;
+	display: block;
+	text-align: center;
+	/* STYLE */
+	font-size: 36px;
+	opacity: 0.5;
+}
+
+#lyrics .line.empty,
+#lyrics.synchronized .line.empty {
+	margin: 8px;
+}
+
+#lyrics .line.active {
+	margin: 4px 0;
+	font-size: 36px;
+	opacity:1;
+	color: var(--primary);
+	font-weight: 500;
+}
+
+#lyrics .line:hover {
+	color: hsl(346.8 77.2% 49.8%);
+	-webkit-text-stroke-width: 1px;
+  	-webkit-text-stroke-color: hsl(347, 89%, 33%);
+}
+/* _____________________ MOVIL _____________________ */
+@media (max-width: 768px) {
+	#lyrics {
+		width: 85%;
+		height: 80%;
+	}
+
+	#lyrics .line {
+		font-size: 24px;
+	}
+
+	#lyrics .line.active {
+		margin: 4px 0;
+		font-size: 24px;
+		opacity:1;
+		/* color: gray */
+		font-weight: 500;
+	}
+}
+/* EFECTO DE DESVANECIMIENTO */
+#lyrics.synchronized .line:is([distance="-1"], [distance="1"]) {
+	opacity: 0.7;
+	filter: blur(2px);
+}
+
+#lyrics.synchronized .line:is([distance="-2"], [distance="2"]) {
+	opacity: 0.56;
+	filter: blur(4px);
+}
+
+
+#lyrics.synchronized .line:is([distance="-3"], [distance="3"]) {
+	opacity: 0.42;
+	filter: blur(8px);
+}
+
+#lyrics.synchronized .line:is([distance="-4"], [distance="4"]) {
+	opacity: 0;
+	visibility: hidden;
+}
+
+/* EFEECTO DE DESPLAZAMIENTO */
+#lyrics.synchronized:not(:hover) .line[distance="-4"] {
+	transform: scale(0.75) translateY(-32px);
+	transition: .2s ease;
+}
+
+#lyrics.synchronized:not(:hover) .line[distance="-3"] {
+	transform: scale(0.75) translateY(-24px);
+	transition: .2s ease;
+}
+
+#lyrics.synchronized:not(:hover) .line[distance="-2"] {
+	transform: scale(0.75) translateY(-16px);
+	transition: .2s ease;
+}
+
+#lyrics.synchronized:not(:hover) .line[distance="-1"] {
+	transform: scale(0.75) translateY(-8px);
+	transition: .2s ease;
+}
+
+#lyrics.synchronized:not(:hover) .line[distance="1"] {
+	transform: scale(0.75) translateY(24px);
+	transition: .2s ease,
+				1s ease-out transform;
+}
+
+#lyrics.synchronized:not(:hover) .line[distance="2"] {
+	transform: scale(0.75) translateY(48px);
+	transition: .2s ease,
+				1.2s ease-out transform;
+}
+
+#lyrics.synchronized:not(:hover) .line[distance="3"] {
+	transform: scale(0.75) translateY(96px);
+	transition: .2s ease,
+				1.4s ease-out transform;
+}
+
+#lyrics.synchronized:not(:hover) .line[distance="4"] {
+	transform: scale(0.75) translateY(192px);
+	transition: .2s ease,
+				1.6s ease-out transform;
+}
+
+/* DESACTIVAR EFECTO DE DESVANECIMIENTO */
+#lyrics.synchronized:hover .line:is(
+	[distance="-4"],
+	[distance="-3"],
+	[distance="-2"],
+	[distance="-1"],
+	[distance="1"],
+	[distance="2"],
+	[distance="3"],
+	[distance="4"]
+) {
+	opacity: 1;
+	filter: blur(0px);
+	visibility: visible;
+}

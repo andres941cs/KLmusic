@@ -1,0 +1,10 @@
+.dark body
+{
+    /* DARK BG BODY */
+    background-image: linear-gradient(180deg, #181818 0%, #212121 75%);
+}
+body
+{
+    /* LIGHT BG BODY */
+    background-image: linear-gradient(180deg, #ffffff 0%, #a3a3a3 75%);
+}
