@@ -33,7 +33,7 @@ function ArtistPage() {
                     <h1 className="lg:text-8xl md:text-6xl sm:text-4xl font-bold text-foreground">{artist.name}</h1>
                 </div>
             </div>
-            <div className="h-full w-full bg-gradient-to-b from-red-900 to-slate-900 overflow-auto">
+            <div className="h-full w-full bg-gradient-to-b from-primary dark:from-red-900 to-slate-50 dark:to-slate-900 overflow-auto">
                 {/* Canciones */}
                 <h2 className="text-foreground text-xl p-2">Songs</h2>
                 <div className="h-auto">{songs.length > 0 ? <TableSong data={songs}></TableSong> : <span className="text-foreground">No hay canciones</span>}</div>
@@ -41,7 +41,7 @@ function ArtistPage() {
                 <h2 className="text-foreground text-xl p-2">Albums</h2>
                 <div className="flex flex-wrap px-2">
                 {albums.map((album:Album) => (
-                    <div onClick={()=>navigateTo(album.id!)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-zinc-600">
+                    <div onClick={()=>navigateTo(album.id!)} key={album.id} className="flex flex-col max-w-[174px] p-3 hover:bg-muted/50">
                         <img src={album.image} alt={album.name}
                             className="w-[150px] h-[150px] rounded-sm object-cover m-auto"/>
                         <div className='flex flex-col text-foreground'>
