@@ -11,7 +11,7 @@ function SearchForm() {
     return ( 
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Input nameInput="searchInput" register={register}></Input>
+                <Input {...register('searchInput')}></Input>
                 <Button>Buscar Cancion</Button>
             </form>
         </>
