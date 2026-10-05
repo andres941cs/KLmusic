@@ -79,20 +79,6 @@ VITE_API_URL=http://localhost:3000
 
 > `TODO:` ajusta las variables de entorno a las que realmente use la aplicación.
 
-## 📁 Estructura del proyecto
-
-```
-KLmusic/
-├── public/              # Archivos estáticos
-├── src/                 # Código fuente de la aplicación
-├── index.html           # Punto de entrada HTML
-├── vite.config.ts       # Configuración de Vite
-├── tailwind.config.js   # Configuración de Tailwind CSS
-├── postcss.config.js    # Configuración de PostCSS
-├── tsconfig.json        # Configuración de TypeScript
-└── package.json         # Dependencias y scripts
-```
-
 ## 👤 Autor
 
 **andres941cs** · [GitHub](https://github.com/andres941cs)
